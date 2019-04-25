@@ -35,6 +35,11 @@
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/app/core/scss"
+              ]
+            },
             "scripts": [],
             "es5BrowserSupport": true
           },
