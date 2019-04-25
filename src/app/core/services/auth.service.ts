@@ -45,4 +45,8 @@ export class AuthService {
   isLoggedIn(): boolean {
     return this.m_bLoggedIn;
   }
+
+  getToken(): string {
+    return localStorage.getItem('jwt');
+  }
 }

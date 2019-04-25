@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedMaterialModule } from './shared-material.module';
+import { 
+  MatButtonModule 
+} from '@angular/material';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    SharedMaterialModule
+    MatButtonModule
   ],
   exports: [
-    SharedMaterialModule
+    MatButtonModule
   ]
 })
-export class SharedModule { }
+export class SharedMaterialModule { }

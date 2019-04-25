@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { IsSignedInGuard } from './core/guards/is-signed-in.guard';
 
 const routes: Routes = [
   {
@@ -9,19 +10,23 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: './modules/dashboard/dashboard.module#DashboardModule'
+    loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
+    canActivate: [IsSignedInGuard]
   },
   {
     path: 'notifications',
-    loadChildren: './modules/notifications/notifications.module#NotificationsModule'
+    loadChildren: './modules/notifications/notifications.module#NotificationsModule',
+    canActivate: [IsSignedInGuard]
   },
   {
     path: 'profile',
-    loadChildren: './modules/profile/profile.module#ProfileModule'
+    loadChildren: './modules/profile/profile.module#ProfileModule',
+    canActivate: [IsSignedInGuard]
   },
   {
     path: 'search',
-    loadChildren: './modules/search/search.module#SearchModule'
+    loadChildren: './modules/search/search.module#SearchModule',
+    canActivate: [IsSignedInGuard]
   },
   {
     path: 'login',

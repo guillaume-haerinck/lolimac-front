@@ -15,11 +15,4 @@ export class AppComponent {
             console.log(message);
         });
     }
-
-    loggin(): void {
-        this.m_authService.login('pseudo_test', 'mot_de_passe')
-            .subscribe(response => {
-                console.log(response);
-            });
-    }
 }
