@@ -5,11 +5,11 @@ import { IsSignedInGuard } from './core/guards/is-signed-in.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'tableau-de-bord',
     pathMatch: 'full'
   },
   {
-    path: 'dashboard',
+    path: 'tableau-de-bord',
     loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
     canActivate: [IsSignedInGuard]
   },
@@ -19,12 +19,12 @@ const routes: Routes = [
     canActivate: [IsSignedInGuard]
   },
   {
-    path: 'profile',
+    path: 'profil',
     loadChildren: './modules/profile/profile.module#ProfileModule',
     canActivate: [IsSignedInGuard]
   },
   {
-    path: 'search',
+    path: 'recherche',
     loadChildren: './modules/search/search.module#SearchModule',
     canActivate: [IsSignedInGuard]
   },
@@ -33,8 +33,16 @@ const routes: Routes = [
     loadChildren: './modules/login/login.module#LoginModule'
   },
   {
+    path: 'mentions-legales',
+    loadChildren: './modules/legals/legals.module#LegalsModule'
+  },
+  {
+    path: '404',
+    loadChildren: './modules/page-not-found/page-not-found.module#PageNotFoundModule'
+  },
+  {
     path: '**',
-    redirectTo: 'dashboard',
+    redirectTo: '404',
     pathMatch: 'full'
   },
 ];
