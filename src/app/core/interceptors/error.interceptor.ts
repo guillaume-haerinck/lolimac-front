@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 // 3rd party
 import { Observable, throwError } from 'rxjs';
@@ -12,7 +13,7 @@ import { AuthService } from '../services/auth.service';
     providedIn: 'root',
 })
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private m_authService: AuthService) { }
+    constructor(private m_authService: AuthService, private m_router: Router) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError(error => {
@@ -20,7 +21,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 // logout if token expired
                 this.m_authService.redirectUrl = location.origin;
                 this.m_authService.logout();
-                location.reload(true); // TODO redirect to login page from here
+                this.m_router.navigate(['/login']);
             }
             return throwError(error);
         }));

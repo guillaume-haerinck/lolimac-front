@@ -15,7 +15,11 @@ export class AuthService {
   redirectUrl = '';
   private m_bLoggedIn = false;
 
-  constructor(private m_http: HttpClient) { }
+  constructor(private m_http: HttpClient) {
+    if (localStorage.getItem('jwt')) {
+      this.m_bLoggedIn = true;
+    }
+  }
 
   login(username: string, password: string): Observable<any> {
     const URL = `${environment.backend.serverUrl}user/auth`;
