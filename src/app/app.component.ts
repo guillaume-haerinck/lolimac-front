@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { SwUpdate, SwPush } from '@angular/service-worker';
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { Router, RouterEvent } from '@angular/router';
 
 import { AuthService } from './core/services/auth.service';
+import { ResponsiveService } from './core/services/responsive.service';
 
 
 @Component({
@@ -15,9 +15,9 @@ export class AppComponent {
     bMobile = true;
     url = '/';
 
-    constructor(updates: SwUpdate,
-        push: SwPush, breakpointObserver: BreakpointObserver,
+    constructor(updates: SwUpdate, push: SwPush,
         private m_authService: AuthService,
+        private m_responsiveService: ResponsiveService,
         private m_router: Router) 
     {
         push.messages.subscribe(message => {
@@ -25,15 +25,13 @@ export class AppComponent {
             console.log(message);
         });
 
-        breakpointObserver.observe([
-            '(min-width: 800px)'
-          ]).subscribe(result => {
+        m_responsiveService.isMobile().subscribe(result => {
             if (result.matches) {
                 this.bMobile = false;
             } else {
                 this.bMobile = true;
             }
-          });
+        });
 
         m_router.events.subscribe((event: RouterEvent) => {
             if (event.url) {

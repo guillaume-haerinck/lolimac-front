@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { NotificationsComponent } from './notifications.component';
 import { NotificationsRoutingModule } from './notifications-routing.module';
+import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
   declarations: [NotificationsComponent],
   imports: [
     CommonModule,
 
-    NotificationsRoutingModule
+    NotificationsRoutingModule,
+    SharedModule
   ]
 })
 export class NotificationsModule { }
