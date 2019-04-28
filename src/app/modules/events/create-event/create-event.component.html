@@ -1,6 +1,23 @@
 <app-top-app-bar *ngIf="bMobile" [title]="'Création d\'évènement'">
 </app-top-app-bar>
 
-<p>
-  create-event works!
-</p>
+<div id="create-page">
+  <form [formGroup]="eventForm">
+    <mat-form-field>
+      <mat-label>Nom de l'évènement</mat-label>
+      <input matInput placeholder="Crous party" formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Image</mat-label>
+      <input matInput placeholder="Crous party" formControlName="imageSearch">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary"
+      aria-label="Créer l'évènement"
+      (click)="createEvent(eventForm.value.name, eventForm.value.imageUrl)"
+      [disabled]="!eventForm.valid">
+      Créer l'évènement
+    </button>
+  </form>
+</div>

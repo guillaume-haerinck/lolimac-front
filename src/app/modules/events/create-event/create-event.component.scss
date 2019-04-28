@@ -1,0 +1,18 @@
+#create-page {
+    display: grid;
+    grid-auto-flow: row;
+    justify-content: center;
+    align-content: stretch;
+    height: 100%;
+    grid-gap: 40px;
+    padding: 0px 20px;
+
+    form {
+        display: inline-grid;
+        align-content: center;
+
+        button {
+            margin-top: 40px;
+        }
+    }
+}
