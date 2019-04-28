@@ -9,5 +9,33 @@
     grid-auto-flow: column;
     justify-items: center;
     align-items: center;
-    background-color: var(--color-primary);
+    background-color: var(--color-background);
+    box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.25);
+
+    .nav-btn {
+        display: inline-grid;
+        width: 100%;
+        height: 100%;
+        align-content: center;
+        justify-items: center;
+
+        mat-icon {
+            color: var(--color-on-background);
+        }
+
+        &.nav-active {
+            mat-icon {
+                // color: var(--color-secondary);
+            }
+
+            &::after {
+                content: '';
+                display: inline-block;
+                width: 5px;
+                height: 5px;
+                border-radius: 5px;
+                background-color: var(--color-on-background);
+            }
+        }
+    }
 }
