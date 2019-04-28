@@ -1,3 +1,13 @@
-<p>
-  event-detail works!
-</p>
+<app-top-app-bar *ngIf="bMobile" [title]="'Détail de l\'évènement'">
+  todo remove on scroll
+  todo go back fleche
+</app-top-app-bar>
+
+<ng-container *ngIf="event$ | async as event; else loading">
+ <p>{{ event.title }}</p>
+ <img width="500px" src="{{ event.photo_url }}">
+</ng-container>
+
+<ng-template #loading>
+  <p>Chargement de l'évènement...</p>
+</ng-template>
