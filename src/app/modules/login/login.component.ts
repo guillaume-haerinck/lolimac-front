@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 // custom
 import { AuthService } from 'app/core/services/auth.service';
+import { SnackBarService } from 'app/core/services/snack-bar.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,11 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   bInvalid = false;
 
-  constructor(private m_formBuilder: FormBuilder, private m_authService: AuthService, private m_router: Router) {
+  constructor(private m_formBuilder: FormBuilder,
+    private m_authService: AuthService,
+    private m_router: Router,
+    private m_snackbar: SnackBarService) 
+  {
     this.loginForm = this.m_formBuilder.group({
       username: ['pseudo_test', Validators.required],
       password: ['mot_de_passe', Validators.required]
@@ -31,8 +37,11 @@ export class LoginComponent implements OnInit {
     this.m_authService.login(username, password)
       .subscribe(response => {
         this.m_router.navigate([this.m_authService.redirectUrl]);
-      }, error => {
+      }, (error: HttpErrorResponse) => {
         // TODO display error with the form field
+        if (error.status === 0) {
+          this.m_snackbar.open('Le serveur est déconnecté !', 'Oh, zut alors', 10000);
+        }
       });
   }
 

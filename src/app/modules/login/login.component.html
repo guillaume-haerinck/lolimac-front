@@ -1,21 +1,30 @@
-<div id="form-container">
-  <h2>Login</h2>
+<div id="login-page">
+  <h2>TODO LOLIMAC LOGO</h2>
   <form [formGroup]="loginForm">
-    <mat-form-field>
-      <input matInput placeholder="Pseudo" formControlName="username">
+    <mat-form-field appearance="outline">
+      <mat-label>Pseudo</mat-label>
+      <input matInput placeholder="CrousMan89" formControlName="username">
     </mat-form-field>
 
-    <mat-form-field>
-      <input matInput placeholder="Mot de passe" type="password" formControlName="password"
+    <mat-form-field appearance="outline">
+      <mat-label>Mot de passe</mat-label>
+      <input matInput placeholder="Blabla..." type="password" formControlName="password"
         (keyup.enter)="login(loginForm.value.username, loginForm.value.password)">
-        <mat-error>erreur</mat-error>
+      <mat-error>erreur</mat-error>
+      <mat-hint align="end">
+        <a href="">
+          Mot de passe oublié
+        </a>
+      </mat-hint>
     </mat-form-field>
+
+    <button mat-raised-button color="primary"
+      aria-label="Se connecter à lolimac"
+      (click)="login(loginForm.value.username, loginForm.value.password)"
+      [disabled]="!loginForm.valid">
+      Se connecter
+    </button>
   </form>
 
-  <button  mat-raised-button color="primary"
-    aria-label="Se logger"
-    (click)="login(loginForm.value.username, loginForm.value.password)"
-    [disabled]="!loginForm.valid">
-    Login
-  </button>
+  <a id="subscribe" href="">Pas de compte ? Demandez votre invitation</a>
 </div>

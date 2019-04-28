@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { SwUpdate, SwPush } from '@angular/service-worker';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Router, RouterEvent } from '@angular/router';
 
 import { AuthService } from './core/services/auth.service';
+
 
 @Component({
     selector: 'app-root',
@@ -11,8 +13,13 @@ import { AuthService } from './core/services/auth.service';
 })
 export class AppComponent {
     bMobile = true;
+    url = '/';
 
-    constructor(updates: SwUpdate, push: SwPush, breakpointObserver: BreakpointObserver, private m_authService: AuthService) {
+    constructor(updates: SwUpdate,
+        push: SwPush, breakpointObserver: BreakpointObserver,
+        private m_authService: AuthService,
+        private m_router: Router) 
+    {
         push.messages.subscribe(message => {
             console.info("New push message recieved !");
             console.log(message);
@@ -27,5 +34,11 @@ export class AppComponent {
                 this.bMobile = true;
             }
           });
+
+        m_router.events.subscribe((event: RouterEvent) => {
+            if (event.url) {
+                this.url = event.url;
+            }
+        });
     }
 }

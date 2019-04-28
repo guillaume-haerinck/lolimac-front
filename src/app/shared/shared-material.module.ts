@@ -8,7 +8,9 @@ import {
   MatChipsModule,
   MatSlideToggleModule,
   MatCheckboxModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatIconModule
 } from '@angular/material';
 
 @NgModule({
@@ -22,7 +24,9 @@ import {
     MatChipsModule,
     MatSlideToggleModule,
     MatCheckboxModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatIconModule
   ],
   exports: [
     MatFormFieldModule,
@@ -32,7 +36,9 @@ import {
     MatChipsModule,
     MatSlideToggleModule,
     MatCheckboxModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatIconModule
   ]
 })
 export class SharedMaterialModule { }
