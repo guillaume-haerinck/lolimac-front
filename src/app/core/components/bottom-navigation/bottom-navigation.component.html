@@ -1,3 +1,27 @@
-<p>
-  bottom-navigation works!
-</p>
+<nav id="bottom-nav">
+  <div>
+    <a routerLink="/tableau-de-bord" routerLinkActive="nav-active">
+      <mat-icon>calendar_today</mat-icon>
+    </a>
+  </div>
+  <div>
+    <a routerLink="/notifications" routerLinkActive="nav-active">
+      <mat-icon>notifications</mat-icon>
+    </a>
+  </div>
+  <div>
+    <button mat-stroked-button routerLink="/evenements/creation" routerLinkActive="nav-active">
+        <mat-icon >add</mat-icon>
+    </button>
+  </div>
+  <div>
+    <a routerLink="/profil" routerLinkActive="nav-active">
+      <mat-icon>person</mat-icon>
+    </a>
+  </div>
+  <div>
+    <a routerLink="/recherche" routerLinkActive="nav-active">
+      <mat-icon>search</mat-icon>
+    </a>
+  </div>
+</nav>

@@ -19,6 +19,11 @@ const routes: Routes = [
     canActivate: [IsSignedInGuard]
   },
   {
+    path: 'evenements',
+    loadChildren: './modules/events/events.module#EventsModule',
+    canActivate: [IsSignedInGuard]
+  },
+  {
     path: 'profil',
     loadChildren: './modules/profile/profile.module#ProfileModule',
     canActivate: [IsSignedInGuard]

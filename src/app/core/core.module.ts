@@ -1,6 +1,7 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { BottomNavigationComponent } from './components/bottom-navigation/bottom-navigation.component';
@@ -17,6 +18,7 @@ import { CoreMaterialModule } from './core-material.module';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     CoreMaterialModule
   ],
   providers: [

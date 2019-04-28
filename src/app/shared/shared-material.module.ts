@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { 
-  MatButtonModule,
+import {
   MatFormFieldModule,
   MatInputModule,
   MatDatepickerModule,
-  MatIconModule,
   MatBadgeModule,
   MatChipsModule,
   MatSlideToggleModule,
@@ -17,11 +15,9 @@ import {
   declarations: [],
   imports: [
     CommonModule,
-    MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatIconModule,
     MatBadgeModule,
     MatChipsModule,
     MatSlideToggleModule,
@@ -29,11 +25,9 @@ import {
     MatAutocompleteModule
   ],
   exports: [
-    MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatIconModule,
     MatBadgeModule,
     MatChipsModule,
     MatSlideToggleModule,

@@ -1,0 +1,13 @@
+@import "themes.scss";
+
+#bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 56px;
+    display: grid;
+    grid-auto-flow: column;
+    justify-items: center;
+    align-items: center;
+    background-color: var(--color-primary);
+}

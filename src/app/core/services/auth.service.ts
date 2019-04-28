@@ -22,13 +22,14 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<any> {
-    const URL = `${environment.backend.serverUrl}user/auth`;
+    const URL = `${environment.backend.serverUrl}login`;
     return this.m_http.post<any>(URL, {"pseudo": username, "pwd": password})
       .pipe(
         tap(
           data => { // logged-in
-            if (data.jwt) {
+            if ((data.jwt) && (data.id_user)) {
               localStorage.setItem('jwt', data.jwt);
+              localStorage.setItem('userId', data.id_user);
               this.m_bLoggedIn = true;
             } else {
               console.error('[Login] Mauvaise structure de la réponse');
@@ -52,5 +53,9 @@ export class AuthService {
 
   getToken(): string {
     return localStorage.getItem('jwt');
+  }
+
+  getUserId(): number {
+    return Number(localStorage.getItem('userId'));
   }
 }
