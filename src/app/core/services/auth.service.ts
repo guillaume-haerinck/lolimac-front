@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // 3rd party
@@ -7,6 +7,7 @@ import { tap } from 'rxjs/operators';
 
 // Custom
 import { environment } from 'environments/environment';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,11 @@ export class AuthService {
   redirectUrl = '';
   private m_bLoggedIn = false;
 
-  constructor(private m_http: HttpClient) {
-    if (localStorage.getItem('jwt')) {
-      this.m_bLoggedIn = true;
+  constructor(private m_http: HttpClient, @Inject(PLATFORM_ID) private m_platformId: Object) {
+    if (isPlatformBrowser(this.m_platformId)) {
+      if (localStorage.getItem('jwt')) {
+        this.m_bLoggedIn = true;
+      }
     }
   }
 
@@ -28,9 +31,13 @@ export class AuthService {
         tap(
           data => { // logged-in
             if ((data.jwt) && (data.id_user)) {
-              localStorage.setItem('jwt', data.jwt);
-              localStorage.setItem('userId', data.id_user);
-              this.m_bLoggedIn = true;
+              if (isPlatformBrowser(this.m_platformId)) {
+                localStorage.setItem('jwt', data.jwt);
+                localStorage.setItem('userId', data.id_user);
+                this.m_bLoggedIn = true;
+              } else {
+                console.error('[Login] Impossible de stocker token coté serveur');
+              }
             } else {
               console.error('[Login] Mauvaise structure de la réponse');
             }
@@ -43,7 +50,9 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('jwt');
+    if (isPlatformBrowser(this.m_platformId)) {
+      localStorage.removeItem('jwt');
+    }
     this.m_bLoggedIn = false;
   }
 
@@ -51,11 +60,19 @@ export class AuthService {
     return this.m_bLoggedIn;
   }
 
-  getToken(): string {
-    return localStorage.getItem('jwt');
+  getToken(): string | undefined {
+    if (isPlatformBrowser(this.m_platformId)) {
+      return localStorage.getItem('jwt');
+    } else {
+      return undefined;
+    }
   }
 
-  getUserId(): number {
-    return Number(localStorage.getItem('userId'));
+  getUserId(): number | undefined {
+    if (isPlatformBrowser(this.m_platformId)) {
+      return Number(localStorage.getItem('userId'));
+    } else {
+      return undefined;
+    }
   }
 }
