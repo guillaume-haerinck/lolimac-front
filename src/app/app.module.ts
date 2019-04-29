@@ -15,7 +15,7 @@ import { CoreModule } from './core/core.module';
     imports: [
         // Angular
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-        BrowserModule,
+        BrowserModule.withServerTransition({ appId: 'serverApp' }),
         BrowserAnimationsModule,
 
         // Custom
