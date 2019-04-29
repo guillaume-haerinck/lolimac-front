@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { CreateEventComponent } from './create-event.component';
+import { SharedModule } from 'app/shared/shared.module';
+
 @NgModule({
-  declarations: [],
+  declarations: [CreateEventComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ]
 })
 export class CreateEventModule { }

@@ -1,22 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CreateEventComponent } from './create-event/create-event.component';
-import { EventDetailComponent } from './event-detail/event-detail.component';
-import { EditEventComponent } from './edit-event/edit-event.component';
-
 const routes: Routes = [
     {
       path: 'creation',
-      component: CreateEventComponent,
+      loadChildren: './create-event/create-event.module#CreateEventModule'
     },
     {
       path: 'detail/:id',
-      component: EventDetailComponent
+      loadChildren: './event-detail/event-detail.module#EventDetailModule'
     },
     {
       path: 'edition/:id',
-      component: EditEventComponent
+      loadChildren: './edit-event/edit-event.module#EditEventModule'
     },
     {
       path: '404',
