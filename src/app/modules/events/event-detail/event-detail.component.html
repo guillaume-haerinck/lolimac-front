@@ -1,6 +1,4 @@
-<app-top-app-bar *ngIf="bMobile" [title]="'Détail de l\'évènement'">
-  todo remove on scroll
-  todo go back fleche
+<app-top-app-bar *ngIf="bMobile" [bReturn]="true" [title]="'Détail de l\'évènement'" (return)="goTo('tableau-de-bord')">
 </app-top-app-bar>
 
 <ng-container *ngIf="event$ | async as event; else loading">

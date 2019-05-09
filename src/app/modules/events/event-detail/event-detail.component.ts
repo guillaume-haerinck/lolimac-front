@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { EventDetail } from 'app/shared/models/event-detail';
@@ -17,6 +17,7 @@ export class EventDetailComponent implements OnInit {
 
   constructor(private m_eventService: EventService,
     private m_route: ActivatedRoute,
+    private m_router: Router,
     responsiveService: ResponsiveService)
   {
     this.event$ = this.m_eventService.getEventById(Number(this.m_route.snapshot.paramMap.get('id')));
@@ -32,4 +33,7 @@ export class EventDetailComponent implements OnInit {
 
   ngOnInit() {}
 
+  goTo(url: string) {
+    this.m_router.navigateByUrl(url);
+  }
 }

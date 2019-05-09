@@ -40,9 +40,9 @@ export class CreateEventComponent implements OnInit {
     });
 
     this.eventForm = this.m_formBuilder.group({
-      name: ['', Validators.required],
-      imageSearch: [''],
-      imageUrl: ['']
+      title: ['', Validators.required],
+      photo_url: ['', Validators.required],
+      place: ['']
     });
   }
 

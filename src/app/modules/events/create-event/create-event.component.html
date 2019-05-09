@@ -9,13 +9,21 @@
     <ng-container *ngIf="currentStep == formStep.Minimal">
       <mat-form-field>
         <mat-label>Nom de l'évènement</mat-label>
-        <input matInput placeholder="Crous party" formControlName="name">
+        <input matInput placeholder="Crous party" formControlName="title">
       </mat-form-field>
-  
+
       <mat-form-field>
         <mat-label>Image</mat-label>
-        <input matInput placeholder="Crous party" formControlName="imageSearch">
+        <mat-select placeholder="Type d'évènement" formControlName="photo_url">
+          <mat-option value="https://images.unsplash.com/photo-1504564321107-4aa3efddb5bd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80">
+            Barbecue
+          </mat-option>
+        </mat-select>
       </mat-form-field>
+
+      <div id="banner" *ngIf="eventForm.value.photo_url != ''">
+        <img src="{{ eventForm.value.photo_url }}">
+      </div>
 
       <button mat-stroked-button
         [disabled]="!eventForm.valid"
@@ -41,5 +49,7 @@
         Créer l'évènement
       </button>
     </ng-container>
+
+    <a (click)="previousStep()" *ngIf="currentStep != formStep.Minimal && !bMobile">Retour</a>
   </form>
 </div>
