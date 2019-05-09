@@ -1,9 +1,39 @@
-@import "~@angular/material/prebuilt-themes/purple-green.css";
+@import '~@angular/material/theming';
+@include mat-core(); // Be sure that you only ever include this mixin once
 
+/* -------------------- Angular material Theme -------------------- */
+
+// Available color palettes: https://material.io/design/color/
+// https://material.io/tools/color/#!/?view.left=0&view.right=0&primary.color=ECEFF1&secondary.color=00E676
+$default-app-primary: mat-palette($mat-blue-grey, 50);
+$default-app-accent:  mat-palette($mat-teal, A400);
+$default-app-warn:    mat-palette($mat-red);
+$default-app-theme:   mat-light-theme($default-app-primary, $default-app-accent, $default-app-warn);
+
+/* ---------------------- Personnal Theme ----------------------- */
+:root,
+.default {
+    @include angular-material-theme($default-app-theme);
+
+    --color-primary: #eceff1;
+    --color-primary-lighter: #ffffff;
+    --color-primary-darker: #babdbe;
+    --color-on-primary: black;
+
+    --color-accent: #00e676;
+    --color-accent-lighter: #66ffa6;
+    --color-accent-darker: #00b248;
+    --color-on-accent: black;
+
+    --color-warn: red;
+    --color-on-warn: white;
+}
+
+/* ------------------------- Fonts ---------------------------- */
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-color: var(--color-background);
+    background-color: var(--color-primary-lighter);
 }
 
 a {
@@ -13,25 +43,4 @@ a {
     &:hover {
         text-decoration: underline;
     }
-}
-
-/* Themes */
-:root,
-.default {
-    --color-primary: red;
-    --color-primary-variant: orange;
-    --color-on-primary: white;
-
-    --color-secondary: green;
-    --color-secondary-variant: green;
-    --color-on-secondary: white;
-
-    --color-background: #F7F7F7;
-    --color-on-background: #4F4F4F;
-
-    --color-surface: white;
-    --color-on-surface: black;
-
-    --color-error: red;
-    --color-on-error: white;
 }

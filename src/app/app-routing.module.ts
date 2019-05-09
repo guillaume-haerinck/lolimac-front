@@ -34,8 +34,8 @@ const routes: Routes = [
     canActivate: [IsSignedInGuard]
   },
   {
-    path: 'login',
-    loadChildren: './modules/login/login.module#LoginModule'
+    path: 'visiteur',
+    loadChildren: './modules/visitor/visitor.module#VisitorModule'
   },
   {
     path: 'mentions-legales',

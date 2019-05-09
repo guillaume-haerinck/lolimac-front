@@ -13,7 +13,7 @@ import { ResponsiveService } from './core/services/responsive.service';
 })
 export class AppComponent {
     bMobile = true;
-    url = '/';
+    bVisitor = true;
 
     constructor(updates: SwUpdate, push: SwPush,
         private m_authService: AuthService,
@@ -35,7 +35,11 @@ export class AppComponent {
 
         m_router.events.subscribe((event: RouterEvent) => {
             if (event.url) {
-                this.url = event.url;
+                if (event.url.search("visiteur") != -1 || event.url.search("404") != -1) {
+                    this.bVisitor = true;
+                } else {
+                    this.bVisitor = false;
+                }
             }
         });
     }

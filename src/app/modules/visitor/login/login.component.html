@@ -18,7 +18,7 @@
       </mat-hint>
     </mat-form-field>
 
-    <button mat-raised-button color="primary"
+    <button mat-raised-button color="accent"
       aria-label="Se connecter à lolimac"
       (click)="login(loginForm.value.username, loginForm.value.password)"
       [disabled]="!loginForm.valid">
@@ -26,5 +26,5 @@
     </button>
   </form>
 
-  <a id="subscribe" href="">Pas de compte ? Demandez votre invitation</a>
+  <a id="subscribe" routerLink="/visiteur/invitation">Pas de compte ? Demandez votre invitation</a>
 </div>
