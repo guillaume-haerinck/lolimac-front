@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-top-app-bar',
@@ -7,10 +7,17 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TopAppBarComponent implements OnInit {
   @Input() title: String;
+  @Input() bReturn: Boolean;
+
+  @Output() return = new EventEmitter<any>()
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onReturn(event: any): void {
+    this.return.emit(undefined);
   }
 
 }

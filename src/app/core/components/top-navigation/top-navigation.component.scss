@@ -5,7 +5,7 @@
     grid-auto-flow: column;
     //justify-content: end;
     align-items: center;
-    background-color: var(--color-background);
+    background-color: var(--color-primary-lighter);
     box-shadow: inset 0px -1px 2px rgba(0, 0, 0, 0.25);
 
     .nav-btn {
@@ -17,7 +17,7 @@
         justify-items: center;
 
         mat-icon {
-            color: var(--color-on-background);
+            color: var(--color-on-primary);
         }
 
         &.nav-active {
@@ -25,7 +25,7 @@
         }
 
         &:hover {
-            color: var(--color-on-background);
+            color: var(--color-primary-darker);
             cursor: pointer;
 
             a {

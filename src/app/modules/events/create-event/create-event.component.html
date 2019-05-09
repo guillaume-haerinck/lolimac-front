@@ -1,23 +1,45 @@
-<app-top-app-bar *ngIf="bMobile" [title]="'Création d\'évènement'">
+<app-top-app-bar *ngIf="bMobile" 
+  [title]="topBarTitle"
+  [bReturn]="currentStep != formStep.Minimal ? true : false"
+  (return)="previousStep(); updateTitle()">
 </app-top-app-bar>
 
 <div id="create-page">
   <form [formGroup]="eventForm">
-    <mat-form-field>
-      <mat-label>Nom de l'évènement</mat-label>
-      <input matInput placeholder="Crous party" formControlName="name">
-    </mat-form-field>
+    <ng-container *ngIf="currentStep == formStep.Minimal">
+      <mat-form-field>
+        <mat-label>Nom de l'évènement</mat-label>
+        <input matInput placeholder="Crous party" formControlName="name">
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Image</mat-label>
+        <input matInput placeholder="Crous party" formControlName="imageSearch">
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Image</mat-label>
-      <input matInput placeholder="Crous party" formControlName="imageSearch">
-    </mat-form-field>
+      <button mat-stroked-button
+        [disabled]="!eventForm.valid"
+        (click)="currentStep = formStep.Places; updateTitle()">
+        Ajouter des détails
+      </button>
+  
+      <button mat-raised-button color="accent"
+        aria-label="Créer l'évènement"
+        (click)="createEvent()"
+        [disabled]="!eventForm.valid">
+        Créer l'évènement
+      </button>
+    </ng-container>
 
-    <button mat-raised-button color="primary"
-      aria-label="Créer l'évènement"
-      (click)="createEvent(eventForm.value.name, eventForm.value.imageUrl)"
-      [disabled]="!eventForm.valid">
-      Créer l'évènement
-    </button>
+    <ng-container *ngIf="currentStep == formStep.Places">
+      <p>Places works !</p>
+
+      <button mat-raised-button color="accent"
+        aria-label="Créer l'évènement"
+        (click)="createEvent()"
+        [disabled]="!eventForm.valid">
+        Créer l'évènement
+      </button>
+    </ng-container>
   </form>
 </div>

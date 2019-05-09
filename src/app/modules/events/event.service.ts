@@ -10,9 +10,9 @@ export class EventService {
 
   constructor(private m_http: HttpClient) {}
 
-  createSimpleEvent(name: string, imageUrl: string): Observable<any> {
+  createEvent(form: JSON): Observable<any> {
     const URL = `${environment.backend.serverUrl}events`;
-    return this.m_http.post<any>(URL, {"title": name, "photo_url": imageUrl});
+    return this.m_http.post<any>(URL, JSON.stringify(form));
   }
 
   getEventById(id: number): Observable<any> {
