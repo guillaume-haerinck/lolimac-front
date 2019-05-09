@@ -1,6 +1,9 @@
 <app-top-app-bar *ngIf="bMobile" [title]="'Tableau de bord'">
 </app-top-app-bar>
 
-<p>
-  dashboard works!
-</p>
+<cdk-virtual-scroll-viewport itemSize="50" id="scroll-container">
+  <div *cdkVirtualFor="let event of events">
+    {{ event.type }}
+    <img src="{{ event.photo_url }}">
+  </div>
+</cdk-virtual-scroll-viewport>
