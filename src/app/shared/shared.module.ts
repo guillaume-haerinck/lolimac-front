@@ -4,9 +4,13 @@ import { SharedMaterialModule } from './shared-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { TopAppBarComponent } from './components/top-app-bar/top-app-bar.component';
+import { EventCardComponent } from './components/event-card/event-card.component';
 
 @NgModule({
-  declarations: [TopAppBarComponent],
+  declarations: [
+    TopAppBarComponent,
+    EventCardComponent
+  ],
   imports: [
     CommonModule,
     SharedMaterialModule,
@@ -15,7 +19,8 @@ import { TopAppBarComponent } from './components/top-app-bar/top-app-bar.compone
   exports: [
     SharedMaterialModule,
     ReactiveFormsModule,
-    TopAppBarComponent
+    TopAppBarComponent,
+    EventCardComponent
   ]
 })
 export class SharedModule { }

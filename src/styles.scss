@@ -33,7 +33,7 @@ $default-app-theme:   mat-light-theme($default-app-primary, $default-app-accent,
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-color: var(--color-primary-lighter);
+    background-color: var(--color-primary);
 }
 
 a {
