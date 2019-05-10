@@ -1,8 +1,10 @@
 
-#scroll-container {
-    height: calc(100vh - 58px);
+#dashboard-page {
+    #scroll-container {
+        height: calc(100vh - 58px);
 
-    img {
-        width: 500px;
-    }
+        .event-item {
+            padding: var(--padding-page);
+        }
+    }    
 }

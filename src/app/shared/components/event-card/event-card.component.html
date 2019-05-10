@@ -1,9 +1,15 @@
 <div class="event-card">
   <div class="banner">
-    <img src="{{ event.photo_url }}">
+    <img alt="photo d'illustration de l'évènement" src="{{ event.photo_url }}" (click)="goTo('/evenements/detail/' + event.id_event)">
   </div>
 
   <div class="description">
-
+    <div class="texte">
+        <h2 (click)="goTo('/evenements/detail/' + event.id_event)">{{ event.title }}</h2>
+        <p>{{ event.place.name }}</p>
+        <p>{{ event.date_start | date }}</p>
+    </div>
+    
+    <button mat-raised-button color="accent">Participer</button>
   </div>
 </div>

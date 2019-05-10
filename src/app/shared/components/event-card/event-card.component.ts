@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Event } from 'app/shared/models/event';
 
 @Component({
@@ -9,9 +11,12 @@ import { Event } from 'app/shared/models/event';
 export class EventCardComponent implements OnInit {
   @Input() event: Event;
 
-  constructor() { }
+  constructor(private m_router: Router) { }
 
   ngOnInit() {
   }
 
+  goTo(url: string) {
+    this.m_router.navigateByUrl(url);
+  }
 }

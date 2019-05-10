@@ -29,6 +29,13 @@ $default-app-theme:   mat-light-theme($default-app-primary, $default-app-accent,
     --color-on-warn: white;
 }
 
+/* ------------------------ Global variables --------------------- */
+
+:root {
+    --padding-page: 0px 25px;
+    --item-margin: 25px 0px; 
+}
+
 /* ------------------------- Fonts ---------------------------- */
 body {
     margin: 0;
