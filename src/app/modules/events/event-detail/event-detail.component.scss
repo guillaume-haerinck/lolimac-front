@@ -1,0 +1,24 @@
+
+#banner {
+    height: 250px;
+    overflow: hidden;
+
+    img {
+        width: 100vw;
+    }
+}
+
+#event-detail-page {
+    padding: var(--padding-page);
+
+    #bloc-accroche {
+        display: grid;
+        grid-auto-flow: column;
+        
+        #bloc-createur {
+            display: grid;
+            grid-auto-flow: column;
+        }
+    }
+    
+}

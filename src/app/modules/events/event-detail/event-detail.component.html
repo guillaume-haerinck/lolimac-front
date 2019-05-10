@@ -2,10 +2,37 @@
 </app-top-app-bar>
 
 <ng-container *ngIf="event$ | async as event; else loading">
- <p>{{ event.title }}</p>
- <img width="500px" src="{{ event.photo_url }}">
+  <div id="banner">
+    <img alt="Photo d'illustration de l'évènement" src="{{ event.photo_url }}">
+  </div>
+  <div id="event-detail-page">
+    <h2>{{ event.title }}</h2>
+    <div id="bloc-accroche">
+      <div id="bloc-createur">
+        <div class="avatar">
+          <img alt="avatar créateur de l'évènement" src="{{ event.creator.photo_url }}">
+        </div>
+        <div>
+          <p>Organisé par</p>
+          <p>{{ event.creator.firstname }}</p>
+        </div>
+      </div>
+
+      <button mat-button>Participer</button>
+    </div>
+
+    <h3>Description</h3>
+    <p>{{ event.description }}</p>
+
+    <h3>Participants ({{ event.joined.length }})</h3>
+    <div *ngFor="let participant of event.joined">
+      {{ participant.firstname }}
+    </div>
+    
+  </div>
 </ng-container>
 
 <ng-template #loading>
   <p>Chargement de l'évènement...</p>
 </ng-template>
+
