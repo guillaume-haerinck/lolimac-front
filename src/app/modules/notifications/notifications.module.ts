@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NotificationsComponent } from './notifications.component';
 import { NotificationsRoutingModule } from './notifications-routing.module';
 import { SharedModule } from 'app/shared/shared.module';
+import { NotificationsService } from './notifications.service';
 
 @NgModule({
   declarations: [NotificationsComponent],
@@ -12,6 +13,9 @@ import { SharedModule } from 'app/shared/shared.module';
 
     NotificationsRoutingModule,
     SharedModule
+  ],
+  providers: [
+    NotificationsService
   ]
 })
 export class NotificationsModule { }

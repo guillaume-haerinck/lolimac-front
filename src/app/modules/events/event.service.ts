@@ -30,4 +30,7 @@ export class EventService {
     return this.m_http.get<any>(URL);
   }
 
+  // TODO Join
+  // TODO leave
+
 }
