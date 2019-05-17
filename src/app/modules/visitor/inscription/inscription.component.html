@@ -1,3 +1,53 @@
-<p>
-  inscription works!
-</p>
+<div id="inscription-page">
+  <h2>Inscription sur Lolimac</h2>
+
+  <form [formGroup]="inscriptionForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Nom</mat-label>
+      <input matInput placeholder="CrousMan89" formControlName="firstname">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Prénom</mat-label>
+      <input matInput placeholder="CrousMan89" formControlName="lastname">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="CrousMan89" type="email" formControlName="email">
+      <mat-error>T'as cru qu'on autorisait les fakes ici ?</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Promotion</mat-label>
+      <mat-select placeholder="Promotion" formControlName="year_promotion">
+        <mat-option value="2021">2021</mat-option>
+        <mat-option value="2020">2020</mat-option>
+        <mat-option value="2019">2019</mat-option>
+        <mat-option value="2018">2018</mat-option>
+        <mat-option value="2017">2017</mat-option>
+        <mat-option value="2016">2016</mat-option>
+        <mat-option value="autre">Autre</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Mot de passe</mat-label>
+      <input matInput type="password" formControlName="pwd">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Confirmation du mot de passe</mat-label>
+      <input matInput type="password" formControlName="pwd">
+    </mat-form-field>
+
+    <button mat-raised-button color="accent"
+      aria-label="S'inscrire sur lolimac"
+      (click)="sendForm()"
+      [disabled]="!inscriptionForm.valid">
+      S'inscrire
+    </button>
+  </form>
+
+  <a id="subscribe" routerLink="/visiteur/login">Changement d'avis ? Retour à la page login</a>
+</div>
