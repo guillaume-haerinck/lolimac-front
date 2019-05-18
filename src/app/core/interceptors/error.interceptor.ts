@@ -17,15 +17,19 @@ export class ErrorInterceptor implements HttpInterceptor {
     constructor(private m_authService: AuthService, private m_router: Router, private m_snackbar: SnackBarService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(request).pipe(catchError(error => {
-          console.error(error);
-          switch(error.status) {
+        return next.handle(request).pipe(catchError(err => {
+          console.error(err);
+          switch(err.status) {
               case 0:
-                this.m_snackbar.open('Le serveur est déconnecté !', 'Oh, zut alors', 10000);
+                this.m_snackbar.open('[Erreur] Le serveur est déconnecté !', 'Oh, zut alors', 10000);
                 break;
 
               case 400:
-                this.m_snackbar.open('La requête envoyée au serveur est invalide !', 'Oh, zut alors', 10000);
+                if (err.error.message) {
+                  this.m_snackbar.open('[Erreur] ' + err.error.message, 'Oh, zut alors', 10000);
+                } else {
+                  this.m_snackbar.open('[Erreur] La requête envoyée au serveur est invalide !', 'Oh, zut alors', 10000);
+                }
                 break;
 
               case 401:
@@ -36,20 +40,20 @@ export class ErrorInterceptor implements HttpInterceptor {
                   break;
 
               case 500:
-                this.m_snackbar.open('Erreur interne coté serveur !', 'Oh, zut alors', 10000);
+                this.m_snackbar.open('[Erreur] Problème interne coté serveur !', 'Oh, zut alors', 10000);
                 break;
 
               case 504:
-                this.m_snackbar.open('Le serveur a mit trop de temps à répondre, veuillez réessayer plus tard !', 'Oh, zut alors', 10000);
+                this.m_snackbar.open('[Erreur] Le serveur a mit trop de temps à répondre, veuillez réessayer plus tard !', 'Oh, zut alors', 10000);
                 break;
             
               default:
-                if (error.message.search("Http failure during parsing") == 0) {
-                  this.m_snackbar.open('La réponse formulée par le serveur est incorrecte !', 'Oh, zut alors', 10000);
+                if (err.message.search("Http failure during parsing") == 0) {
+                  this.m_snackbar.open('[Erreur] La réponse formulée par le serveur est incorrecte !', 'Oh, zut alors', 10000);
                 }
                 break;
             }
-          return throwError(error);
+          return throwError(err);
         }));
     }
 }

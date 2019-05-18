@@ -41,21 +41,23 @@ export class CreateEventComponent implements OnInit {
 
     this.eventForm = this.m_formBuilder.group({
       title: ['', Validators.required],
-      photo_url: ['', Validators.required],
-      place: ['']
+      photo_url: ['', Validators.required]
     });
   }
 
   ngOnInit() {
   }
 
-  createEvent(): void {
+  submitForm(): void {
     this.m_eventService.createEvent(this.eventForm.value)
       .subscribe(response => {
-        this.m_router.navigate([`/evenements/detail/${response.id_event}`]);
+        if (response.id_event) {
+          this.m_router.navigate([`/evenements/detail/${response.id_event}`]);
+        } else {
+          this.m_router.navigate([`/tableau-de-bord`]);
+        }
       }, (error: HttpErrorResponse) => {
         // TODO display error with the form field
-          this.m_snackbar.open('Problème coté serveur !', 'Facebook c\'est mieux', 10000);
       });
   }
 

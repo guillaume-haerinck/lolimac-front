@@ -6,8 +6,6 @@
   <div class="description">
     <div class="texte">
         <h2 (click)="goTo('/evenements/detail/' + event.id_event)">{{ event.title }}</h2>
-        <p>{{ event.place.name }}</p>
-        <p>{{ event.date_start | date }}</p>
     </div>
     
     <button mat-raised-button color="accent">Participer</button>

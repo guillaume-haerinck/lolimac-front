@@ -20,7 +20,7 @@ export class InscriptionComponent implements OnInit {
     private m_userService: UserService,
     private m_router: Router) {
     this.inscriptionForm = this.m_formBuilder.group({
-      identity: this.m_formBuilder.group({
+      page1: this.m_formBuilder.group({
         pseudo: ['', Validators.required],
         mail: ['', Validators.compose([
           Validators.required,
@@ -28,7 +28,7 @@ export class InscriptionComponent implements OnInit {
         ])],
         year_promotion: ['', Validators.required]
       }),
-      optionnel: this.m_formBuilder.group({
+      page2: this.m_formBuilder.group({
         phone: '',
         firstname: '',
         lastname: '',
@@ -36,7 +36,7 @@ export class InscriptionComponent implements OnInit {
       }, {
         validators: ImageUrl('photo_url')
       }),
-      validation: this.m_formBuilder.group({
+      page3: this.m_formBuilder.group({
         pwd: ['', Validators.compose([
           Validators.required,
           Validators.minLength(4)
@@ -53,11 +53,10 @@ export class InscriptionComponent implements OnInit {
 
   ngOnInit() {}
 
-  sendForm(): void {
+  submitForm(): void {
     // Prepare form
-    const form = Object.assign({}, this.inscriptionForm.value.identity, this.inscriptionForm.value.contact, this.inscriptionForm.value.validation);
+    const form = Object.assign({}, this.inscriptionForm.value.page1, this.inscriptionForm.value.page2, this.inscriptionForm.value.page3);
     delete form.confirm_pwd;
-    form.phone = "00 00 00 00 00";
 
     // Send form
     this.m_userService.create(form).subscribe(response => {

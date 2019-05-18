@@ -21,7 +21,7 @@ export class EventService {
   }
 
   getEventList(from: number, limit: number): Observable<any[]> {
-    const URL = `${environment.backend.serverUrl}events/?from=${from}&limit=${limit}`;
+    const URL = `${environment.backend.serverUrl}events?from=${from}&limit=${limit}`;
     return this.m_http.get<any>(URL);
   }
 
