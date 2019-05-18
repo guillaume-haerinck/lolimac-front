@@ -29,7 +29,7 @@ export class InscriptionComponent implements OnInit {
         phone: '',
         mail: ['', Validators.compose([
           Validators.required,
-          Validators.email
+          Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
         ])],
         photo_url: ''
       }),
@@ -51,8 +51,13 @@ export class InscriptionComponent implements OnInit {
   ngOnInit() {}
 
   sendForm(): void {
+    // Prepare form
     const form = Object.assign({}, this.inscriptionForm.value.identity, this.inscriptionForm.value.contact, this.inscriptionForm.value.validation);
     delete form.confirm_pwd;
+    form.pseudo = form.firstname +  form.lastname[0] + Math.floor(Math.random() * Math.floor(100));
+    form.phone = "00 00 00 00 00";
+
+    // Send form
     this.m_userService.create(form).subscribe(response => {
       this.bInscriptionDone = true;
 
@@ -60,6 +65,7 @@ export class InscriptionComponent implements OnInit {
         this.m_router.navigate(['/visiteur/login]']);
       }, 2500);
     }, (error: HttpErrorResponse) => {
+      // TODO handles error
     });
   }
 }
