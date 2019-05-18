@@ -1,0 +1,24 @@
+
+#inscription-page {
+    display: grid;
+    grid-auto-flow: row;
+    justify-content: center;
+    align-content: stretch;
+    height: 100vh;
+    grid-gap: 10px;
+    padding: 0px 20px;
+
+    form {
+        display: inline-grid;
+        align-content: center;
+
+        button {
+            margin-top: 40px;
+            justify-self: end;
+        }
+    }
+
+    a {
+        text-align: center;
+    }
+}

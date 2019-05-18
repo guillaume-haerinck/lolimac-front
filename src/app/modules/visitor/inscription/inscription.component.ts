@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PasswordMatch } from 'app/shared/validators/password-match';
 
 @Component({
   selector: 'app-inscription',
@@ -13,8 +14,8 @@ export class InscriptionComponent implements OnInit {
     this.inscriptionForm = this.m_formBuilder.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
-      pseudo: ['', Validators.required], // former du nom et du prénom
-      phone: ['xxxx', Validators.required], // TODO pas obligatoire
+      pseudo: '',
+      phone: '',
       mail: ['', Validators.compose([
         Validators.required,
         Validators.email
@@ -23,8 +24,14 @@ export class InscriptionComponent implements OnInit {
         Validators.required,
         Validators.minLength(4)
       ])],
-      photo_url: ['', Validators.required],
+      confirm_pwd: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(4)
+      ])],
+      photo_url: '',
       year_promotion: ['', Validators.required]
+    }, {
+      validators: PasswordMatch('pwd','confirm_pwd')
     });
   }
 
