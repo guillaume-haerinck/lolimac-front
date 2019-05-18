@@ -1,30 +1,24 @@
 <div id="inscription-page">
   <h2>Inscription sur Lolimac</h2>
 
-  <form [formGroup]="inscriptionForm">
-    <mat-horizontal-stepper>
-      <mat-step label="Step 1">
+  <mat-horizontal-stepper  [linear]="true">
+    <mat-step label="Identité" [stepControl]="inscriptionForm.get('identity')">
+      <form [formGroup]="inscriptionForm.get('identity')">
         <mat-form-field appearance="outline">
           <mat-label>Nom</mat-label>
-          <input matInput placeholder="CrousMan89" formControlName="firstname">
+          <input matInput placeholder="CrousMan89" formControlName="firstname" required>
+          <mat-error>Il faut remplir votre nom</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Prénom</mat-label>
-          <input matInput placeholder="CrousMan89" formControlName="lastname">
+          <input matInput placeholder="CrousMan89" formControlName="lastname" required>
+          <mat-error>Il faut remplir votre prénom</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input matInput placeholder="CrousMan89" type="email" formControlName="mail">
-          <mat-error>T'as cru qu'on autorisait les fakes ici ?</mat-error>
-        </mat-form-field>
-      </mat-step>
-
-      <mat-step label="Step 2">
         <mat-form-field appearance="outline">
           <mat-label>Promotion</mat-label>
-          <mat-select placeholder="Promotion" formControlName="year_promotion">
+          <mat-select placeholder="Promotion" formControlName="year_promotion" required>
             <mat-option value="2021">2021</mat-option>
             <mat-option value="2020">2020</mat-option>
             <mat-option value="2019">2019</mat-option>
@@ -35,6 +29,24 @@
           </mat-select>
         </mat-form-field>
 
+        <button mat-button matStepperNext [disabled]="!inscriptionForm.get('identity').valid">Suite</button>
+      </form>
+    </mat-step>
+
+    <mat-step label="Contact">
+      <form [formGroup]="inscriptionForm.get('contact')">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="CrousMan89" type="email" formControlName="mail">
+          <mat-error>Email invalide !</mat-error>
+        </mat-form-field>
+      </form>
+
+      <button mat-button matStepperNext [disabled]="!inscriptionForm.get('contact').valid">Suite</button>
+    </mat-step>
+
+    <mat-step label="Validation">
+      <form [formGroup]="inscriptionForm.get('validation')">
         <mat-form-field appearance="outline">
           <mat-label>Mot de passe</mat-label>
           <input matInput type="password" formControlName="pwd">
@@ -45,18 +57,16 @@
           <input matInput type="password" formControlName="confirm_pwd">
           <mat-error>Les mots de passe ne sont pas équivalents</mat-error>  
         </mat-form-field>
-      </mat-step>
 
-      <mat-step label="Done">
         <button mat-raised-button color="accent"
           aria-label="S'inscrire sur lolimac"
           (click)="sendForm()"
           [disabled]="!inscriptionForm.valid">
           S'inscrire
         </button>
-      </mat-step>
-    </mat-horizontal-stepper>
-  </form>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
 
   <a id="subscribe" routerLink="/visiteur/login">Changement d'avis ? Retour à la page login</a>
 </div>

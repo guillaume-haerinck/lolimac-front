@@ -12,26 +12,32 @@ export class InscriptionComponent implements OnInit {
 
   constructor(private m_formBuilder: FormBuilder) {
     this.inscriptionForm = this.m_formBuilder.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      pseudo: '',
-      phone: '',
-      mail: ['', Validators.compose([
-        Validators.required,
-        Validators.email
-      ])],
-      pwd: ['', Validators.compose([
-        Validators.required,
-        Validators.minLength(4)
-      ])],
-      confirm_pwd: ['', Validators.compose([
-        Validators.required,
-        Validators.minLength(4)
-      ])],
-      photo_url: '',
-      year_promotion: ['', Validators.required]
+      identity: this.m_formBuilder.group({
+        firstname: ['', Validators.required],
+        lastname: ['', Validators.required],
+        pseudo: '',
+        year_promotion: ['', Validators.required]
+      }),
+      contact: this.m_formBuilder.group({
+        phone: '',
+        mail: ['', Validators.compose([
+          Validators.required,
+          Validators.email
+        ])],
+        photo_url: ''
+      }),
+      validation: this.m_formBuilder.group({
+        pwd: ['', Validators.compose([
+          Validators.required,
+          Validators.minLength(4)
+        ])],
+        confirm_pwd: ['', Validators.compose([
+          Validators.required,
+          Validators.minLength(4)
+        ])]
+      })
     }, {
-      validators: PasswordMatch('pwd','confirm_pwd')
+      //validators: PasswordMatch('pwd','confirm_pwd')
     });
   }
 
