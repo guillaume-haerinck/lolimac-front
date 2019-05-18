@@ -5,13 +5,40 @@
     justify-content: center;
     align-content: stretch;
     height: 100vh;
+    grid-gap: 10px;
+
+    mat-horizontal-stepper, .success {
+        border-radius: var(--border-radius);
+        align-self: center;
+        overflow: hidden;
+    }
+
+    .success {
+        display: grid;
+        padding: 24px;
+        grid-auto-flow: row;
+        justify-items: center;
+        text-align: center;
+        background-color: var(--color-primary-lighter);
+
+        .success-icon {
+            font-size: 55px;
+            background-color: var(--color-accent);
+            border-radius: 50px; 
+            height: 70px;
+            width: 70px;
+            line-height: 70px;
+            display: flex;
+            justify-content: center;
+        }
+    }
 
     form {
         display: grid;
         grid-auto-flow: row;
 
-        mat-horizontal-stepper {
-            border-radius: var(--border-radius);
+        button {
+            margin-top: 5px; 
         }
     }
 

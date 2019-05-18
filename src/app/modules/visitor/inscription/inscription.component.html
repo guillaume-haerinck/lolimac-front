@@ -1,19 +1,19 @@
 <div id="inscription-page">
   <h2>Inscription sur Lolimac</h2>
 
-  <mat-horizontal-stepper  [linear]="true">
+  <mat-horizontal-stepper  [linear]="false" *ngIf="!bInscriptionDone; else success">
     <mat-step label="Identité" [stepControl]="inscriptionForm.get('identity')">
       <form [formGroup]="inscriptionForm.get('identity')">
         <mat-form-field appearance="outline">
-          <mat-label>Nom</mat-label>
-          <input matInput placeholder="CrousMan89" formControlName="firstname" required>
-          <mat-error>Il faut remplir votre nom</mat-error>
+          <mat-label>Prénom</mat-label>
+          <input matInput placeholder="CrousMan89" formControlName="lastname" required>
+          <mat-error>Veuillez indiquer votre prénom</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Prénom</mat-label>
-          <input matInput placeholder="CrousMan89" formControlName="lastname" required>
-          <mat-error>Il faut remplir votre prénom</mat-error>
+          <mat-label>Nom</mat-label>
+          <input matInput placeholder="CrousMan89" formControlName="firstname" required>
+          <mat-error>Veuillez indiquer votre nom</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -27,6 +27,7 @@
             <mat-option value="2016">2016</mat-option>
             <mat-option value="autre">Autre</mat-option>
           </mat-select>
+          <mat-error>Veuillez indiquer votre promotion</mat-error>
         </mat-form-field>
 
         <button mat-button matStepperNext [disabled]="!inscriptionForm.get('identity').valid">Suite</button>
@@ -37,12 +38,12 @@
       <form [formGroup]="inscriptionForm.get('contact')">
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
-          <input matInput placeholder="CrousMan89" type="email" formControlName="mail">
+          <input matInput placeholder="CrousMan89" type="email" formControlName="mail" required>
           <mat-error>Email invalide !</mat-error>
         </mat-form-field>
-      </form>
 
-      <button mat-button matStepperNext [disabled]="!inscriptionForm.get('contact').valid">Suite</button>
+        <button mat-button matStepperNext [disabled]="!inscriptionForm.get('contact').valid">Suite</button>
+      </form>
     </mat-step>
 
     <mat-step label="Validation">
@@ -67,6 +68,14 @@
       </form>
     </mat-step>
   </mat-horizontal-stepper>
+
+  <ng-template #success>
+    <div class="success">
+      <mat-icon class="success-icon">done</mat-icon>
+      <h3>Inscription validée !</h3>
+      <p>Vous allez être redirigé à la page de login pour vous authentifier</p>
+    </div>
+  </ng-template>
 
   <a id="subscribe" routerLink="/visiteur/login">Changement d'avis ? Retour à la page login</a>
 </div>
