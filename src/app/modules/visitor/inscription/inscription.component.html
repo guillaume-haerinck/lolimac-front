@@ -1,19 +1,18 @@
 <div id="inscription-page">
   <h2>Inscription sur Lolimac</h2>
 
-  <mat-horizontal-stepper  [linear]="true" *ngIf="!bInscriptionDone; else success">
+  <mat-horizontal-stepper  [linear]="false" *ngIf="!bInscriptionDone; else success">
     <mat-step label="Identité" [stepControl]="inscriptionForm.get('identity')">
       <form [formGroup]="inscriptionForm.get('identity')">
         <mat-form-field appearance="outline">
-          <mat-label>Prénom</mat-label>
-          <input matInput placeholder="CrousMan89" formControlName="lastname" required>
-          <mat-error>Veuillez indiquer votre prénom</mat-error>
+          <mat-label>Pseudo</mat-label>
+          <input matInput placeholder="CrousMan" formControlName="pseudo" required>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Nom</mat-label>
-          <input matInput placeholder="CrousMan89" formControlName="firstname" required>
-          <mat-error>Veuillez indiquer votre nom</mat-error>
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="jesuisleroi@dumonde.com" type="email" formControlName="mail" required>
+          <mat-error>Email invalide !</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -34,15 +33,34 @@
       </form>
     </mat-step>
 
-    <mat-step label="Contact">
-      <form [formGroup]="inscriptionForm.get('contact')">
+    <mat-step label="Optionnel">
+      <form [formGroup]="inscriptionForm.get('optionnel')">
+        <div class="avatar">
+          <img src="{{ inscriptionForm.get('optionnel').value.photo_url }}">          
+        </div>
+
         <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input matInput placeholder="CrousMan89" type="email" formControlName="mail" required>
-          <mat-error>Email invalide !</mat-error>
+          <mat-label>Avatar</mat-label>
+          <input matInput type="url" formControlName="photo_url">
+          <mat-error>Vous devez spécifier une url d'image</mat-error>
         </mat-form-field>
 
-        <button mat-button matStepperNext [disabled]="!inscriptionForm.get('contact').valid">Suite</button>
+        <mat-form-field appearance="outline">
+          <mat-label>Prénom</mat-label>
+          <input matInput placeholder="George" formControlName="lastname">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nom</mat-label>
+          <input matInput placeholder="Brassens" formControlName="firstname">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Téléphone</mat-label>
+          <input matInput type="tel" formControlName="phone">
+        </mat-form-field>
+  
+        <button mat-button matStepperNext [disabled]="!inscriptionForm.get('optionnel').valid">Suite</button>
       </form>
     </mat-step>
 

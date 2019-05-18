@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { PasswordMatch } from 'app/shared/validators/password-match';
 import { UserService } from '../user.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ImageUrl } from 'app/shared/validators/image-url';
 
 @Component({
   selector: 'app-inscription',
@@ -20,18 +21,20 @@ export class InscriptionComponent implements OnInit {
     private m_router: Router) {
     this.inscriptionForm = this.m_formBuilder.group({
       identity: this.m_formBuilder.group({
-        firstname: ['', Validators.required],
-        lastname: ['', Validators.required],
-        pseudo: '',
-        year_promotion: ['', Validators.required]
-      }),
-      contact: this.m_formBuilder.group({
-        phone: '',
+        pseudo: ['', Validators.required],
         mail: ['', Validators.compose([
           Validators.required,
           Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
         ])],
-        photo_url: ''
+        year_promotion: ['', Validators.required]
+      }),
+      optionnel: this.m_formBuilder.group({
+        phone: '',
+        firstname: '',
+        lastname: '',
+        photo_url: ['https://i2.wp.com/rouelibrenmaine.fr/wp-content/uploads/2018/10/empty-avatar.png', Validators.required]
+      }, {
+        validators: ImageUrl('photo_url')
       }),
       validation: this.m_formBuilder.group({
         pwd: ['', Validators.compose([
@@ -54,7 +57,6 @@ export class InscriptionComponent implements OnInit {
     // Prepare form
     const form = Object.assign({}, this.inscriptionForm.value.identity, this.inscriptionForm.value.contact, this.inscriptionForm.value.validation);
     delete form.confirm_pwd;
-    form.pseudo = form.firstname +  form.lastname[0] + Math.floor(Math.random() * Math.floor(100));
     form.phone = "00 00 00 00 00";
 
     // Send form
