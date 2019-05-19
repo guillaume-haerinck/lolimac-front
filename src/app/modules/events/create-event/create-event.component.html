@@ -1,15 +1,16 @@
 <app-top-app-bar *ngIf="bMobile" 
   [title]="topBarTitle"
-  [bReturn]="currentStep != formStep.Minimal ? true : false"
+  [bReturn]="currentStep != formStep.Page1 ? true : false"
   (return)="previousStep(); updateTitle()">
 </app-top-app-bar>
 
 <div id="create-page" [style.background-image]="'url(' + eventForm.value.photo_url + ')'">
   <form [formGroup]="eventForm">
-    <ng-container *ngIf="currentStep == formStep.Minimal">
+  <!-- Page 1 -->
+    <ng-container *ngIf="currentStep == formStep.Page1">
       <mat-form-field appearance="fill">
         <mat-label>Nom de l'évènement</mat-label>
-        <input matInput placeholder="Crous party" formControlName="title">
+        <input matInput placeholder="Concert au Crous" formControlName="title">
       </mat-form-field>
 
       <mat-form-field appearance="fill">
@@ -32,29 +33,46 @@
 
       <button mat-raised-button
         [disabled]="!eventForm.valid"
-        (click)="currentStep = formStep.Places; updateTitle()">
-        Ajouter des détails
-      </button>
-  
-      <button mat-raised-button color="accent"
-        aria-label="Créer l'évènement"
-        (click)="submitForm()"
-        [disabled]="!eventForm.valid">
-        Créer l'évènement
+        (click)="currentStep = formStep.Page2; updateTitle()">
+        Préciser le lieu
       </button>
     </ng-container>
 
-    <ng-container *ngIf="currentStep == formStep.Places">
-      <p>Places works !</p>
+    <!-- Page 2 -->
+    <ng-container *ngIf="currentStep == formStep.Page2">
+      <mat-form-field appearance="fill">
+        <mat-label>Date de l'évènement</mat-label>
+        <input matInput [matDatepicker]="datePicker" placeholder="17/05/2022" [min]="minDate" formControlName="date_start">
+        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datePicker startView="month"></mat-datepicker>
+      </mat-form-field>
 
-      <button mat-raised-button color="accent"
-        aria-label="Créer l'évènement"
-        (click)="submitForm()"
-        [disabled]="!eventForm.valid">
-        Créer l'évènement
+      <mat-form-field appearance="fill" formGroupName="place">
+        <mat-label>Nom du point de rencontre</mat-label>
+        <input matInput placeholder="Copernic" formControlName="name">
+      </mat-form-field>
+
+      <button mat-raised-button
+        [disabled]="!eventForm.valid"
+        (click)="currentStep = formStep.Page3; updateTitle()">
+        Ajouter des précisions
       </button>
     </ng-container>
 
-    <a (click)="previousStep()" *ngIf="currentStep != formStep.Minimal && !bMobile">Retour</a>
+    <!-- Page 3 -->
+    <ng-container *ngIf="currentStep == formStep.Page3">
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput placeholder="..." formControlName="description"></textarea>
+      </mat-form-field>
+    </ng-container>
+
+    <button mat-raised-button (click)="previousStep()" *ngIf="currentStep != formStep.Page1 && !bMobile">Retour</button>
+    <button mat-raised-button color="accent"
+      aria-label="Créer l'évènement"
+      (click)="submitForm()"
+      [disabled]="!eventForm.valid">
+      Créer l'évènement
+    </button>
   </form>
 </div>

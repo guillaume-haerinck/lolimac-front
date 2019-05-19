@@ -7,9 +7,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 enum FormStep {
-  Minimal,
-  Places,
-  Modules
+  Page1,
+  Page2,
+  Page3
 };
 
 @Component({
@@ -20,9 +20,10 @@ enum FormStep {
 export class CreateEventComponent implements OnInit {
   bMobile = true;
   eventForm: FormGroup;
-  currentStep = FormStep.Minimal;
+  currentStep = FormStep.Page1;
   formStep = FormStep;
   topBarTitle = "Création d'évènement";
+  minDate = new Date();
 
   constructor(responsiveService: ResponsiveService,
     private m_formBuilder: FormBuilder,
@@ -39,7 +40,16 @@ export class CreateEventComponent implements OnInit {
 
     this.eventForm = this.m_formBuilder.group({
       title: ['', Validators.required],
-      photo_url: ['https://images.unsplash.com/photo-1470753937643-efeb931202a9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80', Validators.required]
+      photo_url: ['https://images.unsplash.com/photo-1470753937643-efeb931202a9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80', Validators.required],
+      description: '',
+      date_start: '',
+      date_end: '',
+      place: this.m_formBuilder.group({
+        name: '',
+        street: '',
+        number: '',
+        city: ''
+      })
     });
   }
 
@@ -67,16 +77,16 @@ export class CreateEventComponent implements OnInit {
 
   updateTitle(): void {
     switch(this.currentStep) {
-      case FormStep.Minimal:
+      case FormStep.Page1:
         this.topBarTitle = "Création d'évènement";
         break;
 
-      case FormStep.Places:
-        this.topBarTitle = "Précision du lieu";
+      case FormStep.Page2:
+        this.topBarTitle = "Lieu et Date";
         break;
 
-      case FormStep.Modules:
-        this.topBarTitle = "Ajout de modules";
+      case FormStep.Page3:
+        this.topBarTitle = "Précisions";
         break;
     }
   }
