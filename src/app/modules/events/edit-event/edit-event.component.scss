@@ -1,0 +1,16 @@
+#edit-event-page {
+    align-content: center;
+    justify-content: stretch;
+    grid-gap: 20px;
+    min-height: calc(100vh - var(--height-topbar));
+
+    mat-vertical-stepper {
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        background-color: unset;
+
+        mat-form-field {
+            width: 100%;
+        }
+    }
+}

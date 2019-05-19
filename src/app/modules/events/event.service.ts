@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
-import { removeEmptyProperties } from 'app/shared/utility/removes-empty-properties';
+import { removeEmptyProperties } from 'app/shared/utility/change-objects';
 
 @Injectable({
   providedIn: 'root'

@@ -4,7 +4,7 @@
 <div id="inscription-page" class="full-page">
   <h2 *ngIf="!bMobile">Inscription sur Lolimac</h2>
 
-  <mat-horizontal-stepper  [linear]="false" *ngIf="!bInscriptionDone; else success">
+  <mat-horizontal-stepper  [linear]="true" *ngIf="!bInscriptionDone; else success">
     <mat-step label="Identité" [stepControl]="inscriptionForm.get('page1')">
       <form [formGroup]="inscriptionForm.get('page1')">
         <mat-form-field appearance="fill">
