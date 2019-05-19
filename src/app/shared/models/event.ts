@@ -14,4 +14,5 @@ export interface Event {
     place?: Place;
     posts?: Post[];
     participants?: User[];
+    type_edit?: string;
 }

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
+import { Observable } from 'rxjs';
+
+import { Notification } from 'app/shared/models/notification';
 import { ResponsiveService } from 'app/core/services/responsive.service';
 import { NotificationsService } from './notifications.service';
 
@@ -9,6 +13,7 @@ import { NotificationsService } from './notifications.service';
 })
 export class NotificationsComponent implements OnInit {
   bMobile = true;
+  notification$: Observable<Notification>;
 
   constructor(responsiveService: ResponsiveService,
     private m_notificationService: NotificationsService) {
@@ -19,15 +24,11 @@ export class NotificationsComponent implements OnInit {
           this.bMobile = true;
       }
     });
+
+    this.notification$ = this.m_notificationService.getAll();
   }
 
   ngOnInit() {
-    this.m_notificationService.getAll().subscribe(result => {
-      console.log("Notifications checked");
-      console.log(result);
-    }, error => {
-
-    });
   }
 
 }

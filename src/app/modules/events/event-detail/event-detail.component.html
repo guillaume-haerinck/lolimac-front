@@ -31,7 +31,7 @@
     </ng-container>
 
     <h3>Posts</h3>
-    <app-post-list [posts]="event.posts" [eventId]="eventId"></app-post-list>
+    <app-post-list [posts]="event.posts" [eventId]="eventId" (updated)="reloadPosts()"></app-post-list>
 
   </div>
 </ng-container>

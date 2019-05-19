@@ -4,7 +4,7 @@
         <p>{{ post.content }}</p>
     </div>
     
-    <app-comment-list [comments]="post.comments" [eventId]="eventId" [postId]="post.id"></app-comment-list>
+    <app-comment-list [comments]="post.comments" [eventId]="eventId" [postId]="post.id" (updated)="reloadComments()"></app-comment-list>
 </div>
 
 <a *ngIf="bCreate == false" (click)="bCreate = true">Ajouter un post</a>

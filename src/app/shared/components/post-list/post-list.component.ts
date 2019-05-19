@@ -55,4 +55,8 @@ export class PostListComponent implements OnInit {
     });
   }
 
+  reloadComments(): void {
+    this.updated.emit(undefined);
+  }
+
 }
