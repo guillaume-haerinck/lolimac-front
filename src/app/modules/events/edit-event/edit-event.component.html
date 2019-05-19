@@ -54,5 +54,5 @@
     </mat-vertical-stepper>
   </form>
 
-  <button mat-raised-button color="accent" [disabled]="!eventForm.valid">Valider</button>
+  <button mat-raised-button color="accent" [disabled]="!eventForm.valid" (click)="submitForm()">Modifier</button>
 </div>

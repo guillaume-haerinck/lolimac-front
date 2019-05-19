@@ -2,9 +2,13 @@
 </app-top-app-bar>
 
 <div id="notification-page" class="full-page">
-  <ng-container *ngIf="notification$ | async as notification">
+  <ng-container *ngIf="notification$ | async as notification; else empty">
     <div *ngFor="let event of notification.events">
         <p>{{ event.title }}</p>
     </div>
   </ng-container>
 </div>
+
+<ng-template #empty>
+    <p>Pas de notifications !</p>
+</ng-template>

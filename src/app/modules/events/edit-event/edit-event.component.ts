@@ -65,4 +65,12 @@ export class EditEventComponent implements OnInit {
   goTo(url: string) {
     this.m_router.navigateByUrl(url);
   }
+
+  submitForm(): void {
+    this.m_eventService.update(this.eventId, this.eventForm.value).subscribe(result => {
+      this.m_router.navigate(['/evenements/detail/' + this.eventId]);
+    }, error => {
+
+    });
+  }
 }

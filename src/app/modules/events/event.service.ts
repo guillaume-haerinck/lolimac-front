@@ -33,7 +33,7 @@ export class EventService {
     return this.m_http.get<any>(URL);
   }
 
-  update(id: number, form: Object, removeEmptyFields?: boolean): Observable<any> {
+  update(id: number, form: Object): Observable<any> {
     form = removeEmptyProperties(form);
     const URL = `${environment.backend.serverUrl}events/${id}`;
     return this.m_http.patch<any>(URL, JSON.stringify(form));
