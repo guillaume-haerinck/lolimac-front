@@ -46,7 +46,7 @@ export class EventService {
 
   leave(id: number): Observable<any> {
     const URL = `${environment.backend.serverUrl}events/${id}/leave`;
-    return this.m_http.post<any>(URL, undefined);
+    return this.m_http.delete<any>(URL, undefined);
   }
 
   delete(id: number): Observable<any> {
