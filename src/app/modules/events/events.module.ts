@@ -3,12 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { EventsRoutingModule } from './events-routing.module';
 import { EventService } from './event.service';
-import { PostsService } from './posts.service';
-import { PostListComponent } from './post-list/post-list.component';
-import { CommentComponent } from './post-list/comment/comment.component';
+import { PostService } from './post.service';
 
 @NgModule({
-  declarations: [PostListComponent, CommentComponent],
+  declarations: [],
   imports: [
     CommonModule,
 
@@ -16,7 +14,7 @@ import { CommentComponent } from './post-list/comment/comment.component';
   ],
   providers: [
     EventService,
-    PostsService
+    PostService
   ]
 })
 export class EventsModule { }

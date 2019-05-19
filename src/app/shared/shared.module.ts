@@ -5,13 +5,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedMaterialModule } from './modules/shared-material.module';
 import { TopAppBarComponent } from './components/top-app-bar/top-app-bar.component';
 import { EventCardComponent } from './components/event-card/event-card.component';
-import { PostComponent } from './components/post/post.component';
+import { PostListComponent } from './components/post-list/post-list.component';
+import { CommentListComponent } from './components/comment-list/comment-list.component';
 
 @NgModule({
   declarations: [
     TopAppBarComponent,
     EventCardComponent,
-    PostComponent
+    PostListComponent,
+    CommentListComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { PostComponent } from './components/post/post.component';
     ReactiveFormsModule,
     TopAppBarComponent,
     EventCardComponent,
-    PostComponent
+    PostListComponent,
+    CommentListComponent
   ]
 })
 export class SharedModule { }

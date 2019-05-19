@@ -10,6 +10,7 @@
 
 #event-detail-page {
     padding: var(--padding-page);
+    min-height: 150vh;
 
     #bloc-accroche {
         display: grid;
@@ -19,6 +20,11 @@
             display: grid;
             grid-auto-flow: column;
         }
+    }
+
+    #postForm {
+        display: grid;
+        grid-auto-flow: row;
     }
     
 }

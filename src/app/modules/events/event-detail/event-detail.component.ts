@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { Event } from 'app/shared/models/event';
 import { EventService } from '../event.service';
 import { ResponsiveService } from 'app/core/services/responsive.service';
+import { PostService } from '../post.service';
 
 @Component({
   selector: 'app-event-detail',
@@ -14,13 +16,19 @@ import { ResponsiveService } from 'app/core/services/responsive.service';
 export class EventDetailComponent implements OnInit {
   event$: Observable<Event>
   bMobile = true;
+  postForm: FormGroup;
+  eventId: number;
+  bForm = false;
 
   constructor(private m_eventService: EventService,
     route: ActivatedRoute,
     private m_router: Router,
-    responsiveService: ResponsiveService)
+    responsiveService: ResponsiveService,
+    private m_formBuilder: FormBuilder,
+    private m_postService: PostService)
   {
-    this.event$ = this.m_eventService.getEventById(Number(route.snapshot.paramMap.get('id')));
+    this.eventId = Number(route.snapshot.paramMap.get('id'));
+    this.event$ = this.m_eventService.getEventById(this.eventId);
 
     responsiveService.isMobile().subscribe(result => {
       if (result.matches) {
@@ -28,6 +36,11 @@ export class EventDetailComponent implements OnInit {
       } else {
           this.bMobile = true;
       }
+    });
+
+    this.postForm = this.m_formBuilder.group({
+      title: ['', Validators.required],
+      content: ['', Validators.required]
     });
   }
 
@@ -51,5 +64,14 @@ export class EventDetailComponent implements OnInit {
     }, error => {
       console.log(error);
     })
+  }
+
+  submitForm(): void {
+    this.m_postService.createPost(this.eventId, this.postForm.value).subscribe(result => {
+      this.bForm = false;
+      this.event$ = this.m_eventService.getEventById(this.eventId);
+    }, error => {
+
+    });
   }
 }

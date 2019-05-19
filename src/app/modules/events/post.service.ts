@@ -7,7 +7,7 @@ import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class PostsService {
+export class PostService {
 
   constructor(private m_http: HttpClient) { }
 

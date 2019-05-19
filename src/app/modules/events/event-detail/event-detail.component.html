@@ -31,7 +31,30 @@
     </ng-container>
 
     <h3>Posts</h3>
+    <app-post-list [posts]="event.posts"></app-post-list>
 
+    <a *ngIf="bForm == false" (click)="bForm = true">Ajouter un post</a>
+
+    <form [formGroup]="postForm" id="postForm" *ngIf="bForm == true">
+      <mat-form-field appearance="fill">
+        <mat-label>Titre du post</mat-label>
+        <input matInput placeholder="Concert au Crous" formControlName="title">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Contenu du post</mat-label>
+        <input matInput placeholder="Concert au Crous" formControlName="content">
+      </mat-form-field>
+
+      <button mat-raised-button color="accent" (click)="submitForm()"
+        [disabled]="!postForm.valid">
+        Poster
+      </button>
+
+      <button mat-button (click)="bForm = false">
+        Annuler
+      </button>
+    </form>
 
   </div>
 </ng-container>
