@@ -52,6 +52,7 @@ export class AuthService {
   logout(): void {
     if (isPlatformBrowser(this.m_platformId)) {
       localStorage.removeItem('jwt');
+      localStorage.removeItem('userId');
     }
     this.m_bLoggedIn = false;
   }

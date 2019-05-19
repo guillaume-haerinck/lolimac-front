@@ -1,21 +1,24 @@
+<app-top-app-bar *ngIf="bMobile" [title]="'Inscription'" [bReturn]="true" (return)="goTo('/visiteur/login')">
+</app-top-app-bar>
+
 <div id="inscription-page">
-  <h2>Inscription sur Lolimac</h2>
+  <h2 *ngIf="!bMobile">Inscription sur Lolimac</h2>
 
   <mat-horizontal-stepper  [linear]="false" *ngIf="!bInscriptionDone; else success">
     <mat-step label="Identité" [stepControl]="inscriptionForm.get('page1')">
       <form [formGroup]="inscriptionForm.get('page1')">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Pseudo</mat-label>
           <input matInput placeholder="CrousMan" formControlName="pseudo" required>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
           <input matInput placeholder="jesuisleroi@dumonde.com" type="email" formControlName="mail" required>
           <mat-error>Email invalide !</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Promotion</mat-label>
           <mat-select placeholder="Promotion" formControlName="year_promotion" required>
             <mat-option value="2021">2021</mat-option>
@@ -39,23 +42,23 @@
           <img src="{{ inscriptionForm.get('page2').value.photo_url }}">          
         </div>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Avatar</mat-label>
           <input matInput type="url" formControlName="photo_url">
           <mat-error>Vous devez spécifier une url d'image</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Prénom</mat-label>
           <input matInput placeholder="George" formControlName="lastname">
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Nom</mat-label>
           <input matInput placeholder="Brassens" formControlName="firstname">
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Téléphone</mat-label>
           <input matInput type="tel" formControlName="phone">
         </mat-form-field>
@@ -66,14 +69,14 @@
 
     <mat-step label="Validation">
       <form [formGroup]="inscriptionForm.get('page3')">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Mot de passe</mat-label>
-          <input matInput type="password" formControlName="pwd">
+          <input matInput type="password" formControlName="pwd" required>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Confirmation du mot de passe</mat-label>
-          <input matInput type="password" formControlName="confirm_pwd">
+          <input matInput type="password" formControlName="confirm_pwd" required>
           <mat-error>Les mots de passe ne sont pas équivalents</mat-error>  
         </mat-form-field>
 
@@ -95,5 +98,5 @@
     </div>
   </ng-template>
 
-  <a id="subscribe" routerLink="/visiteur/login">Changement d'avis ? Retour à la page login</a>
+  <a id="subscribe" routerLink="/visiteur/login" *ngIf="!bMobile">Changement d'avis ? Retour à la page login</a>
 </div>

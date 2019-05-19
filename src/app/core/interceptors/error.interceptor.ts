@@ -36,7 +36,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                   // logout if token expired
                   this.m_authService.redirectUrl = location.origin;
                   this.m_authService.logout();
-                  this.m_router.navigate(['/login']);
+                  this.m_router.navigate(['/visiteur/login']);
                   break;
 
               case 500:

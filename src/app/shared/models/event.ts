@@ -1,11 +1,14 @@
 import { Place } from './place';
+import { Post } from './post';
 
 export interface Event {
     id_event?: number;
-    type?: string;
     title?: string;
-    date_end?: Date;
+    description?: string;
     date_start?: Date;
-    place?: Place;
+    date_end?: Date;
     photo_url?: string;
+    participation: number;
+    place?: Place;
+    posts?: Post[];
 }

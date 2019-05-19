@@ -37,6 +37,7 @@
     form {
         display: grid;
         grid-auto-flow: row;
+        grid-gap: 5px;
 
         button {
             margin-top: 5px; 

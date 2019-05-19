@@ -10,29 +10,32 @@
     <div id="bloc-accroche">
       <div id="bloc-createur">
         <div class="avatar">
-          <img alt="avatar créateur de l'évènement" src="{{ event.creator.photo_url }}">
+
         </div>
         <div>
           <p>Organisé par</p>
-          <p>{{ event.creator.firstname }}</p>
+          <p></p>
         </div>
       </div>
 
-      <button mat-button>Participer</button>
+      <ng-container [ngSwitch]="event.participation">
+        <button *ngSwitchCase="0" mat-button>Participer</button>
+        <button *ngSwitchCase="1" mat-button>Modifier</button>
+        <button *ngSwitchDefault mat-button>Participer</button>
+      </ng-container>
     </div>
 
-    <h3>Description</h3>
-    <p>{{ event.description }}</p>
+    <ng-container *ngIf="event.description">
+      <h3>Description</h3>
+      <p>{{ event.description }}</p>
+    </ng-container>
 
-    <h3>Participants ({{ event.joined.length }})</h3>
-    <div *ngFor="let participant of event.joined">
-      {{ participant.firstname }}
-    </div>
-    
+    <h3>Posts</h3>
+
+
   </div>
 </ng-container>
 
 <ng-template #loading>
   <p>Chargement de l'évènement...</p>
 </ng-template>
-

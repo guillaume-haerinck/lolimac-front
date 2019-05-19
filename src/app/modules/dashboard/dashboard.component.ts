@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ResponsiveService } from 'app/core/services/responsive.service';
 
 import { Event } from 'app/shared/models/event';
 import { EventService } from '../events/event.service';
+import { AuthService } from 'app/core/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,7 @@ export class DashboardComponent implements OnInit {
   events: Event[] = [];
   bMobile = true;
 
-  constructor(responsiveService: ResponsiveService, private m_eventService: EventService) { 
+  constructor(responsiveService: ResponsiveService, private m_eventService: EventService, private m_authService: AuthService) { 
     responsiveService.isMobile().subscribe(result => {
       if (result.matches) {
           this.bMobile = false;
@@ -29,6 +30,7 @@ export class DashboardComponent implements OnInit {
     }, error => {
 
     });
+    
   }
 
 }

@@ -6,6 +6,7 @@ import { PasswordMatch } from 'app/shared/validators/password-match';
 import { UserService } from '../user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ImageUrl } from 'app/shared/validators/image-url';
+import { ResponsiveService } from 'app/core/services/responsive.service';
 
 @Component({
   selector: 'app-inscription',
@@ -15,10 +16,20 @@ import { ImageUrl } from 'app/shared/validators/image-url';
 export class InscriptionComponent implements OnInit {
   inscriptionForm: FormGroup;
   bInscriptionDone = false;
+  bMobile = true;
 
   constructor(private m_formBuilder: FormBuilder,
     private m_userService: UserService,
-    private m_router: Router) {
+    private m_router: Router,
+    responsiveService: ResponsiveService) {
+    responsiveService.isMobile().subscribe(result => {
+      if (result.matches) {
+          this.bMobile = false;
+      } else {
+          this.bMobile = true;
+      }
+    });
+
     this.inscriptionForm = this.m_formBuilder.group({
       page1: this.m_formBuilder.group({
         pseudo: ['', Validators.required],
@@ -68,5 +79,9 @@ export class InscriptionComponent implements OnInit {
     }, (error: HttpErrorResponse) => {
       // TODO handles error
     });
+  }
+
+  goTo(url: string): void {
+    this.m_router.navigate([url]);
   }
 }
