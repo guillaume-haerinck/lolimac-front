@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ResponsiveService } from 'app/core/services/responsive.service';
+import { NotificationsService } from './notifications.service';
 
 @Component({
   selector: 'app-notifications',
@@ -9,7 +10,8 @@ import { ResponsiveService } from 'app/core/services/responsive.service';
 export class NotificationsComponent implements OnInit {
   bMobile = true;
 
-  constructor(responsiveService: ResponsiveService) {
+  constructor(responsiveService: ResponsiveService,
+    private m_notificationService: NotificationsService) {
     responsiveService.isMobile().subscribe(result => {
       if (result.matches) {
           this.bMobile = false;
@@ -20,6 +22,12 @@ export class NotificationsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.m_notificationService.getAll().subscribe(result => {
+      console.log("Notifications checked");
+      console.log(result);
+    }, error => {
+
+    });
   }
 
 }
