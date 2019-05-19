@@ -2,5 +2,12 @@
 </app-top-app-bar>
 
 <div id="profile-page" class="full-page">
-    <button mat-button (click)="logOut()">Se déconnecter</button>
+    <ng-container *ngIf="user$ | async as user; else loading">
+        <p>{{ user.pseudo }}</p>
+    </ng-container>
+    <button mat-button (click)="logout()">Se déconnecter</button>
 </div>
+
+<ng-template #loading>
+    <p>Chargement...</p>
+</ng-template>

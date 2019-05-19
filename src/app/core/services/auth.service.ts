@@ -50,10 +50,8 @@ export class AuthService {
   }
 
   logout(): void {
-    if (isPlatformBrowser(this.m_platformId)) {
-      localStorage.removeItem('jwt');
-      localStorage.removeItem('userId');
-    }
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('userId');
     this.m_bLoggedIn = false;
   }
 
@@ -61,19 +59,11 @@ export class AuthService {
     return this.m_bLoggedIn;
   }
 
-  getToken(): string | undefined {
-    if (isPlatformBrowser(this.m_platformId)) {
-      return localStorage.getItem('jwt');
-    } else {
-      return undefined;
-    }
+  getToken(): string {
+    return localStorage.getItem('jwt');
   }
 
-  getUserId(): number | undefined {
-    if (isPlatformBrowser(this.m_platformId)) {
-      return Number(localStorage.getItem('userId'));
-    } else {
-      return undefined;
-    }
+  getUserId(): number {
+    return Number(localStorage.getItem('userId'));
   }
 }

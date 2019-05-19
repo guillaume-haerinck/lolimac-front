@@ -13,12 +13,12 @@ export class PostsService {
 
   // POSTS
 
-  createPost(eventId: number, form: JSON): Observable<any> {
+  createPost(eventId: number, form: Object): Observable<any> {
     const URL = `${environment.backend.serverUrl}events/${eventId}/posts`;
     return this.m_http.post<any>(URL, JSON.stringify(form));
   }
 
-  updatePost(eventId: number, postId: number, form: JSON): Observable<any> {
+  updatePost(eventId: number, postId: number, form: Object): Observable<any> {
     const URL = `${environment.backend.serverUrl}events/${eventId}/posts/${postId}`;
     return this.m_http.patch<any>(URL, JSON.stringify(form));
   }
@@ -30,12 +30,12 @@ export class PostsService {
 
   // COMMENTS
 
-  createComment(eventId: number, postId: number, form: JSON): Observable<any> {
+  createComment(eventId: number, postId: number, form: Object): Observable<any> {
     const URL = `${environment.backend.serverUrl}events/${eventId}/posts/${postId}`;
     return this.m_http.post<any>(URL, JSON.stringify(form));
   }
 
-  updateComment(eventId: number, postId: number, commentId: number, form: JSON): Observable<any> {
+  updateComment(eventId: number, postId: number, commentId: number, form: Object): Observable<any> {
     const URL = `${environment.backend.serverUrl}events/${eventId}/posts/${postId}/comments/${commentId}`;
     return this.m_http.patch<any>(URL, JSON.stringify(form));
   }

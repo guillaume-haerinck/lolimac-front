@@ -5,6 +5,6 @@ export interface User {
     photo_url?: string;
     mail?: string;
     phone?: string;
-    year_promotion?: string;
+    year_promotion?: number;
     status?: number;
 }
