@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { Event } from 'app/shared/models/event';
 import { EventService } from '../event.service';
 import { ResponsiveService } from 'app/core/services/responsive.service';
-import { PostService } from '../post.service';
 
 @Component({
   selector: 'app-event-detail',
@@ -16,16 +14,12 @@ import { PostService } from '../post.service';
 export class EventDetailComponent implements OnInit {
   event$: Observable<Event>
   bMobile = true;
-  postForm: FormGroup;
   eventId: number;
-  bForm = false;
 
   constructor(private m_eventService: EventService,
     route: ActivatedRoute,
     private m_router: Router,
-    responsiveService: ResponsiveService,
-    private m_formBuilder: FormBuilder,
-    private m_postService: PostService)
+    responsiveService: ResponsiveService)
   {
     this.eventId = Number(route.snapshot.paramMap.get('id'));
     this.event$ = this.m_eventService.getEventById(this.eventId);
@@ -36,11 +30,6 @@ export class EventDetailComponent implements OnInit {
       } else {
           this.bMobile = true;
       }
-    });
-
-    this.postForm = this.m_formBuilder.group({
-      title: ['', Validators.required],
-      content: ['', Validators.required]
     });
   }
 
@@ -66,12 +55,7 @@ export class EventDetailComponent implements OnInit {
     })
   }
 
-  submitForm(): void {
-    this.m_postService.createPost(this.eventId, this.postForm.value).subscribe(result => {
-      this.bForm = false;
-      this.event$ = this.m_eventService.getEventById(this.eventId);
-    }, error => {
-
-    });
+  reloadPosts(): void {
+    this.event$ = this.m_eventService.getEventById(this.eventId);
   }
 }

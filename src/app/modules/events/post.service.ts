@@ -31,7 +31,7 @@ export class PostService {
   // COMMENTS
 
   createComment(eventId: number, postId: number, form: Object): Observable<any> {
-    const URL = `${environment.backend.serverUrl}events/${eventId}/posts/${postId}`;
+    const URL = `${environment.backend.serverUrl}events/${eventId}/posts/${postId}/comments`;
     return this.m_http.post<any>(URL, JSON.stringify(form));
   }
 

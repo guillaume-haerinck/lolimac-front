@@ -1,3 +1,21 @@
-<p>
-  comment-list works!
-</p>
+<div *ngFor="let comment of comments">
+  <p>{{ comment.content }}</p>
+</div>
+
+<a *ngIf="bCreate == false" (click)="bCreate = true">Ajouter un commentaire</a>
+
+<form [formGroup]="commentForm" id="commentForm" *ngIf="bCreate == true">
+    <mat-form-field appearance="fill">
+    <mat-label>Commentaire</mat-label>
+    <input matInput placeholder="Concert au Crous" formControlName="content">
+    </mat-form-field>
+
+    <button mat-raised-button color="accent" (click)="submitCreateForm()"
+    [disabled]="!commentForm.valid">
+    Poster
+    </button>
+
+    <button mat-button (click)="bCreate = false">
+    Annuler
+    </button>
+</form>
