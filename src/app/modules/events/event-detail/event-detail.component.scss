@@ -10,16 +10,26 @@
 
 #event-detail-page {
     padding: var(--padding-page);
-    min-height: 150vh;
 
     #bloc-accroche {
         display: grid;
         grid-auto-flow: column;
+        justify-content: space-between;
+        align-items: center;
         
         #bloc-createur {
             display: grid;
             grid-auto-flow: column;
+            grid-gap: 15px;
         }
+    }
+
+    .detail-line {
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: start;
+        align-items: center;
+        grid-gap: 10px;
     }
 
     #postForm {
@@ -27,4 +37,10 @@
         grid-auto-flow: row;
     }
     
+}
+
+@media screen and (max-width: 799px) {
+    #event-detail-page {
+        margin-bottom: var(--height-bottom-bar);
+    }
 }

@@ -5,17 +5,22 @@
   <div id="banner">
     <img alt="Photo d'illustration de l'évènement" src="{{ event.photo_url }}">
   </div>
+
   <div id="event-detail-page">
     <h2>{{ event.title }}</h2>
     <div id="bloc-accroche">
       <div id="bloc-createur">
-        <div class="avatar">
-
-        </div>
-        <div>
-          <p>Organisé par</p>
-          <p></p>
-        </div>
+        <ng-container *ngFor="let user of event.participants">
+          <ng-container *ngIf="user.participation == 1">
+            <div class="avatar">
+              <img src="{{ user.photo_url }}" alt="avatar">
+            </div>
+            <div>
+              <p>Organisé par</p>
+              <p>{{ user.pseudo }}</p>
+            </div>
+          </ng-container>
+        </ng-container>
       </div>
 
       <ng-container [ngSwitch]="event.participation">
@@ -25,12 +30,31 @@
       </ng-container>
     </div>
 
-    <ng-container *ngIf="event.description">
-      <h3>Description</h3>
+    <div class="separator"></div>
+
+    <div class="detail-line">
+      <mat-icon>access_time</mat-icon>
+      <p *ngIf="event.date_start; else noDate">{{ event.date_start | date:'medium' }}</p>
+      <ng-template #noDate><p>Jour à définir</p></ng-template>
+    </div>
+    <div class="detail-line">
+      <mat-icon>location_on</mat-icon>
+      <ng-container *ngIf="event.place; else noPlace">
+          <p *ngIf="event.place.name">{{ event.place.name }}</p>
+      </ng-container>
+      <ng-template #noPlace><p>Lieu à définir</p></ng-template>
+    </div>
+
+    <h3>Description</h3>
+    <ng-container *ngIf="event.description; else noDescription">
       <p>{{ event.description }}</p>
     </ng-container>
+    <ng-template #noDescription>
+      <p>Pas de description pour le moment.</p>
+    </ng-template>
 
-    <h3>Posts</h3>
+    <h3 *ngIf="event.posts; else noPost">Posts ({{ event.posts.length }})</h3>
+    <ng-template #noPost><h3>Posts</h3></ng-template>
     <app-post-list [posts]="event.posts" [eventId]="eventId" (updated)="reloadPosts()"></app-post-list>
 
   </div>
