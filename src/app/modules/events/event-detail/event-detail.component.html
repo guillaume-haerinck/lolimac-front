@@ -20,7 +20,7 @@
 
       <ng-container [ngSwitch]="event.participation">
         <button *ngSwitchCase="0" mat-button>Participer</button>
-        <button *ngSwitchCase="1" mat-button>Modifier</button>
+        <button *ngSwitchCase="1" mat-button (click)="goTo('/evenements/edition/' + event.id_event)">Modifier</button>
         <button *ngSwitchDefault mat-button>Participer</button>
       </ng-container>
     </div>

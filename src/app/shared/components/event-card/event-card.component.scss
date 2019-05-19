@@ -1,6 +1,7 @@
 
 .event-card {
     width: 100%;
+    max-width: 600px;
     margin: var(--item-margin);
     border-radius: 10px;
     background-color: var(--color-primary-lighter);

@@ -3,8 +3,10 @@
     #scroll-container {
         height: calc(100vh - 58px);
 
-        .event-item {
+        .event-container {
             padding: var(--padding-page);
+            display: grid;
+            justify-content: center;
         }
     }    
 }

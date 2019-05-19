@@ -5,7 +5,6 @@ import { ResponsiveService } from 'app/core/services/responsive.service';
 import { EventService } from '../event.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { SnackBarService } from 'app/core/services/snack-bar.service';
 
 enum FormStep {
   Minimal,
@@ -28,8 +27,7 @@ export class CreateEventComponent implements OnInit {
   constructor(responsiveService: ResponsiveService,
     private m_formBuilder: FormBuilder,
     private m_eventService: EventService,
-    private m_router: Router,
-    private m_snackbar: SnackBarService)
+    private m_router: Router)
   {
     responsiveService.isMobile().subscribe(result => {
       if (result.matches) {
@@ -41,7 +39,7 @@ export class CreateEventComponent implements OnInit {
 
     this.eventForm = this.m_formBuilder.group({
       title: ['', Validators.required],
-      photo_url: ['', Validators.required]
+      photo_url: ['https://images.unsplash.com/photo-1470753937643-efeb931202a9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80', Validators.required]
     });
   }
 

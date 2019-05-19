@@ -37,6 +37,8 @@ $default-app-theme:   mat-light-theme($default-app-primary, $default-app-accent,
     --border-radius: 10px;
     --size-avatar: 80px;
     --height-topbar: 56px;
+    --height-bottom-bar: 56px;
+    --mobile-page-min-height: calc(100vh - calc(var(--height-topbar) + var(--height-bottom-bar)));
 }
 
 /* ------------------------- Fonts ---------------------------- */
