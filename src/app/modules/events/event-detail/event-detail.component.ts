@@ -41,17 +41,13 @@ export class EventDetailComponent implements OnInit {
 
   joinEvent(id: number) {
     this.m_eventService.join(id).subscribe(result => {
-      console.log("joined !");
     }, error => {
-      console.log(error);
     })
   }
 
   leaveEvent(id: number) {
     this.m_eventService.leave(id).subscribe(result => {
-      console.log("leaved !");
     }, error => {
-      console.log(error);
     })
   }
 

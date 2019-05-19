@@ -2,13 +2,9 @@
 </app-top-app-bar>
 
 <div id="dashboard-page">
-  <ng-container *ngIf="events.length > 0; else loading">
-    <cdk-virtual-scroll-viewport itemSize="300" id="scroll-container">
-      <div *cdkVirtualFor="let event of events" class="event-container">
-        <app-event-card [event]="event"></app-event-card>
-      </div>
-    </cdk-virtual-scroll-viewport>
-  </ng-container>
+  <div *ngIf="events.length > 0; else loading" class="events-container">
+    <app-event-card *ngFor="let event of events" [event]="event"></app-event-card>
+  </div>
 
   <ng-template #loading>
     <p>Chargement des évènements...</p>

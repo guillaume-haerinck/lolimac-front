@@ -32,10 +32,10 @@ $default-app-theme:   mat-light-theme($default-app-primary, $default-app-accent,
 /* ------------------------ Global variables --------------------- */
 
 :root {
-    --padding-page: 0px 25px;
-    --item-margin: 25px 0px;
+    --padding-page: 0px 20px;
     --border-radius: 5px;
     --size-avatar: 80px;
+    --size-avatar-small: 30px;
     --height-topbar: 56px;
     --height-bottom-bar: 56px;
     --mobile-page-min-height: calc(100vh - calc(var(--height-topbar) + var(--height-bottom-bar)));

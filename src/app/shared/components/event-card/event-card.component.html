@@ -7,12 +7,26 @@
   <div class="description">
     <div class="texte">
       <h2 (click)="goTo('/evenements/detail/' + event.id_event)">{{ event.title }}</h2>
+
+      <ng-container *ngIf="event.place; else noPlace">
+        <p *ngIf="event.place.name">{{ event.place.name }}</p>
+      </ng-container>
+      <ng-template #noPlace>
+        <p>Lieu à déterminer</p>
+      </ng-template>
+
+      <ng-container *ngIf="event.date_start; else noTime">
+        <p>{{ event.date_start | date:'medium' }}</p>
+      </ng-container>
+      <ng-template #noTime>
+        <p>Jour à déterminer</p>
+      </ng-template>
     </div>
 
     <ng-container [ngSwitch]="event.participation">
-      <button *ngSwitchCase="0" mat-button>Participer</button>
-      <button *ngSwitchCase="1" mat-button (click)="goTo('/evenements/edition/' + event.id_event)">Modifier</button>
-      <button *ngSwitchDefault mat-button>Participer</button>
+      <button *ngSwitchCase="0" mat-raised-button color="accent">Participer</button>
+      <button *ngSwitchCase="1" mat-raised-button (click)="goTo('/evenements/edition/' + event.id_event)">Modifier</button>
+      <button *ngSwitchCase="2" mat-stroked-button (click)="leaveEvent(event.id_event)">Ne plus participer</button>
     </ng-container>
   </div>
 </div>
