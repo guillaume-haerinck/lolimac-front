@@ -16,11 +16,11 @@ export class EventDetailComponent implements OnInit {
   bMobile = true;
 
   constructor(private m_eventService: EventService,
-    private m_route: ActivatedRoute,
+    route: ActivatedRoute,
     private m_router: Router,
     responsiveService: ResponsiveService)
   {
-    this.event$ = this.m_eventService.getEventById(Number(this.m_route.snapshot.paramMap.get('id')));
+    this.event$ = this.m_eventService.getEventById(Number(route.snapshot.paramMap.get('id')));
 
     responsiveService.isMobile().subscribe(result => {
       if (result.matches) {

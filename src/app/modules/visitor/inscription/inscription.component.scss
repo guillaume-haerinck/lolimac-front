@@ -1,10 +1,6 @@
 
 #inscription-page {
-    display: grid;
-    grid-auto-flow: row;
-    justify-content: center;
     align-content: stretch;
-    min-height: 100vh;
     grid-gap: 10px;
 
     mat-horizontal-stepper, .success {

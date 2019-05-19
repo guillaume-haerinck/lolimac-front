@@ -63,6 +63,7 @@ export class CreateEventComponent implements OnInit {
           this.m_router.navigate([`/evenements/detail/${response.id_event}`]);
         } else {
           this.m_router.navigate([`/tableau-de-bord`]);
+          console.error("Le back n'a pas indiqué l'ID de l'event crée");
         }
       }, (error: HttpErrorResponse) => {
         // TODO display error with the form field

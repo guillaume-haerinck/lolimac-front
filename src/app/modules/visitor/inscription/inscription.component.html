@@ -1,7 +1,7 @@
 <app-top-app-bar *ngIf="bMobile" [title]="'Inscription'" [bReturn]="true" (return)="goTo('/visiteur/login')">
 </app-top-app-bar>
 
-<div id="inscription-page">
+<div id="inscription-page" class="full-page">
   <h2 *ngIf="!bMobile">Inscription sur Lolimac</h2>
 
   <mat-horizontal-stepper  [linear]="false" *ngIf="!bInscriptionDone; else success">

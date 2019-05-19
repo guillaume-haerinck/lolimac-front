@@ -1,7 +1,7 @@
 <app-top-app-bar *ngIf="bMobile" [title]="'Demande d\'invitation'" [bReturn]="true" (return)="goTo('/visiteur/login')">
 </app-top-app-bar>
 
-<div id="invitation-page">
+<div id="invitation-page" class="full-page">
   <h2 *ngIf="!bMobile">Demande d'invitation sur le meilleur site au monde</h2>
 
   <form [formGroup]="invitationForm">

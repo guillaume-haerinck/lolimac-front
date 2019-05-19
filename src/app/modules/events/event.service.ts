@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { removeEmptyProperties } from 'app/shared/utility/removes-empty-properties';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,8 @@ export class EventService {
 
   constructor(private m_http: HttpClient) {}
 
-  createEvent(form: JSON): Observable<any> {
+  createEvent(form: Object): Observable<any> {
+    form = removeEmptyProperties(form);
     const URL = `${environment.backend.serverUrl}events`;
     return this.m_http.post<any>(URL, JSON.stringify(form));
   }
@@ -30,10 +33,8 @@ export class EventService {
     return this.m_http.get<any>(URL);
   }
 
-  update(id: number, form: JSON, removeEmptyFields?: boolean): Observable<any> {
-    // TODO remove empty fields
-    // https://stackoverflow.com/questions/286141/remove-blank-attributes-from-an-object-in-javascript
-
+  update(id: number, form: Object, removeEmptyFields?: boolean): Observable<any> {
+    form = removeEmptyProperties(form);
     const URL = `${environment.backend.serverUrl}events/${id}`;
     return this.m_http.patch<any>(URL, JSON.stringify(form));
   }

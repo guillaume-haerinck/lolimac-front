@@ -1,3 +1,7 @@
-<p>
-  edit-event works!
-</p>
+<app-top-app-bar *ngIf="bMobile" 
+  [title]="'Édition d\'évènement'"
+  [bReturn]="true"
+  (return)="goTo('/evenements/detail/' + eventId)">
+</app-top-app-bar>
+
+<div class="full-page" id="edit-event-page"></div>
