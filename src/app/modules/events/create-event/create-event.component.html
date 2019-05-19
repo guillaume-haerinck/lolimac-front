@@ -7,12 +7,12 @@
 <div id="create-page">
   <form [formGroup]="eventForm">
     <ng-container *ngIf="currentStep == formStep.Minimal">
-      <mat-form-field>
+      <mat-form-field appearance="fill">
         <mat-label>Nom de l'évènement</mat-label>
         <input matInput placeholder="Crous party" formControlName="title">
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field appearance="fill">
         <mat-label>Image</mat-label>
         <mat-select placeholder="Type d'évènement" formControlName="photo_url">
           <mat-option value="https://images.unsplash.com/photo-1504564321107-4aa3efddb5bd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80">

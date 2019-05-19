@@ -9,7 +9,7 @@ import { TopNavigationComponent } from './components/top-navigation/top-navigati
 import { AuthService } from './services/auth.service';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
-import { CoreMaterialModule } from './core-material.module';
+import { CoreMaterialModule } from './modules/core-material.module';
 import { ResponsiveService } from './services/responsive.service';
 
 @NgModule({

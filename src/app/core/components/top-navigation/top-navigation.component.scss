@@ -1,6 +1,6 @@
 
 #top-nav {
-    height: 56px;
+    height: var(--height-topbar);
     display: grid;
     grid-auto-flow: column;
     //justify-content: end;
