@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ResponsiveService } from 'app/core/services/responsive.service';
 
 import { Event } from 'app/shared/models/event';

@@ -1,10 +1,11 @@
-<div id="search-page">
-  <form [formGroup]="searchForm">
-    <mat-form-field>
-      <input matInput placeholder="Recherche" formControlName="terms" (keyup)="search(searchForm.value.terms)">
-    </mat-form-field>
-  </form>
+<form [formGroup]="searchForm" id="search-form">
+  <mat-form-field appearance="fill">
+    <mat-label>Recherche</mat-label>
+    <input matInput placeholder="Crous" formControlName="terms" (keyup)="search(searchForm.value.terms)">
+  </mat-form-field>
+</form>
 
+<div id="search-page">
   <ng-container *ngFor="let event of searchResults$ | async">
     <app-event-card [event]="event" class="item"></app-event-card>
   </ng-container>

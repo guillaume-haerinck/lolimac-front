@@ -1,7 +1,9 @@
 
+#search-form {
+    display: grid;
+    justify-content: stretch;
+}
+
 #search-page {
     padding: var(--padding-page);
-
-    form {
-    }
 }
