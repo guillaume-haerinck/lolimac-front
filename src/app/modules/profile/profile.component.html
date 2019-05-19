@@ -3,9 +3,12 @@
 
 <div id="profile-page" class="full-page">
     <ng-container *ngIf="user$ | async as user; else loading">
+        <div class="avatar">
+            <img src="{{ user.photo_url }}" alt="avatar">
+        </div>
         <p>{{ user.pseudo }}</p>
     </ng-container>
-    <button mat-button (click)="logout()">Se déconnecter</button>
+    <button mat-raised-button (click)="logout()" color="secondary">Se déconnecter</button>
 </div>
 
 <ng-template #loading>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { EventDetail } from 'app/shared/models/event-detail';
+import { Event } from 'app/shared/models/event';
 import { EventService } from '../event.service';
 import { ResponsiveService } from 'app/core/services/responsive.service';
 
@@ -12,7 +12,7 @@ import { ResponsiveService } from 'app/core/services/responsive.service';
   styleUrls: ['./event-detail.component.scss']
 })
 export class EventDetailComponent implements OnInit {
-  event$: Observable<EventDetail>
+  event$: Observable<Event>
   bMobile = true;
 
   constructor(private m_eventService: EventService,

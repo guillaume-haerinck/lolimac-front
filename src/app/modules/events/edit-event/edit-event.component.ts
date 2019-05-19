@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { ResponsiveService } from 'app/core/services/responsive.service';
 import { EventService } from '../event.service';
-import { Event } from 'app/shared/models/event';
 import { fillUndefinedProperties } from 'app/shared/utility/change-objects';
 
 @Component({
