@@ -15,6 +15,7 @@ export class EditEventComponent implements OnInit {
   bMobile: boolean;
   eventId: number;
   eventForm: FormGroup;
+  minDate = new Date();
 
   constructor(responsiveService: ResponsiveService,
     private m_router: Router,
