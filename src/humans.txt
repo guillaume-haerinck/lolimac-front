@@ -1,24 +1,18 @@
 /* TEAM */            
-Your title: Your name.
-Site: email, link to a contact form, etc.       
-Twitter: your Twitter username.
-Location: City, Country.
+Front-end Developer / Designer: Guillaume Haerinck.
+Site: https://www.linkedin.com/in/guillaumehaerinck/.       
+Location: Paris, France.
 
-Your title: Your name.
-Site: email, link to a contact form, etc.   
-Twitter: your Twitter username.                            
-Location: City, Country.
+Back-end Developer: Nicolas Lienart.
+Site: https://www.linkedin.com/in/nicolas-lienart/.                           
+Location: Paris, France.
 
-Your title: Your name.
-Site: email, link to a contact form, etc.                 
-Twitter: your Twitter username.                            
-Location: City, Country.
-
-/* THANKS */
-Name: name or url
+Back-end Developer: Antoine Libert.
+Site: https://www.linkedin.com/in/antoine-libert-ab28b0107/.                                            
+Location: Paris, France.
 
 /* SITE */ 
-Last update: YYYY/MM/DD      
+Last update: 2019/05/21      
 Standards: HTML5, CSS3
-Components: Modernizr, jQuery, etc.   
-Software: Software used for the development
+Components: Angular 
+Software: VSCode
