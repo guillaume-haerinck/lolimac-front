@@ -1,7 +1,9 @@
-
-
 export function removeEmptyProperties(obj: Object, parent?: Object, key?: string): Object {
     Object.keys(obj).forEach(key => {
+        if (obj[key] instanceof Date) {
+            obj[key] = dateToPhp(obj[key]);
+        }
+        
         if (obj[key] && typeof obj[key] === 'object') {
             removeEmptyProperties(obj[key], obj, key);
         } else if (obj[key] === '' || obj[key] === undefined) {
@@ -36,4 +38,8 @@ function isEmpty(obj: Object): boolean {
         }
     }
     return true;
+}
+
+function dateToPhp(date: Date): string {
+    return `${date.getFullYear()}-${date.getMonth().toLocaleString(undefined, {minimumIntegerDigits: 2})}-${date.getDate().toLocaleString(undefined, {minimumIntegerDigits: 2})} ${date.getHours().toLocaleString(undefined, {minimumIntegerDigits: 2})}:${date.getMinutes().toLocaleString(undefined, {minimumIntegerDigits: 2})}:${date.getSeconds().toLocaleString(undefined, {minimumIntegerDigits: 2})}`;
 }

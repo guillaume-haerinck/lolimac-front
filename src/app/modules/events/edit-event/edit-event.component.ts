@@ -54,8 +54,8 @@ export class EditEventComponent implements OnInit {
         title: result.title,
         photo_url: result.photo_url,
         description: result.description,
-        date_start: result.date_start,
-        date_end: result.date_end,
+        date_start: new Date(result.date_start),
+        date_end: new Date(result.date_end),
         place: result.place
       });
     }, error => {

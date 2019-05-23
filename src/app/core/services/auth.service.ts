@@ -13,7 +13,7 @@ import { isPlatformBrowser } from '@angular/common';
   providedIn: 'root'
 })
 export class AuthService {
-  redirectUrl = '';
+  redirectUrl = '/tableau-de-bord';
   private m_bLoggedIn = false;
 
   constructor(private m_http: HttpClient, @Inject(PLATFORM_ID) private m_platformId: Object) {
