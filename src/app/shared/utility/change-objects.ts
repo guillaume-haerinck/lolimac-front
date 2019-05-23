@@ -9,7 +9,6 @@ export function removeEmptyProperties(obj: Object, parent?: Object, key?: string
         }
     });
     if (isEmpty(obj)) {
-        // Delete empty object
         delete parent[key];
     } else {
         return obj;
@@ -28,9 +27,13 @@ export function fillUndefinedProperties(obj: Object): Object {
 }
 
 function isEmpty(obj: Object): boolean {
-    for (let key in obj) {
-        if(obj.hasOwnProperty(key))
-            return false;
+    if (obj instanceof Date) {
+        return false;
+    } else {
+        for (let key in obj) {
+            if(obj.hasOwnProperty(key))
+                return false;
+        }
     }
     return true;
 }
