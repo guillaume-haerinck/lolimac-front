@@ -74,4 +74,12 @@ export class EditEventComponent implements OnInit {
 
     });
   }
+
+  deleteEvent(): void {
+    this.m_eventService.delete(this.eventId).subscribe(result => {
+      this.m_router.navigate(['/tableau-de-bord']);
+    }, error => {
+
+    });
+  }
 }
