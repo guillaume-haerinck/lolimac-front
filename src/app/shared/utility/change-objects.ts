@@ -41,5 +41,10 @@ function isEmpty(obj: Object): boolean {
 }
 
 function dateToPhp(date: Date): string {
-    return `${date.getFullYear()}-${date.getMonth().toLocaleString(undefined, {minimumIntegerDigits: 2})}-${date.getDate().toLocaleString(undefined, {minimumIntegerDigits: 2})} ${date.getHours().toLocaleString(undefined, {minimumIntegerDigits: 2})}:${date.getMinutes().toLocaleString(undefined, {minimumIntegerDigits: 2})}:${date.getSeconds().toLocaleString(undefined, {minimumIntegerDigits: 2})}`;
+    if (!isNaN(date.getTime())) {
+        let month = date.getMonth() + 1;
+        return `${date.getFullYear()}-${month.toLocaleString(undefined, {minimumIntegerDigits: 2})}-${date.getDate().toLocaleString(undefined, {minimumIntegerDigits: 2})} ${date.getHours().toLocaleString(undefined, {minimumIntegerDigits: 2})}:${date.getMinutes().toLocaleString(undefined, {minimumIntegerDigits: 2})}:${date.getSeconds().toLocaleString(undefined, {minimumIntegerDigits: 2})}`;
+    } else {
+        return '';
+    }
 }
