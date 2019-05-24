@@ -37,6 +37,8 @@ export class EditEventComponent implements OnInit {
       photo_url: ['https://images.unsplash.com/photo-1470753937643-efeb931202a9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80', Validators.required],
       description: '',
       date_start: '',
+      date_start_hour: '',
+      date_start_minute: '',
       date_end: '',
       place: this.m_formBuilder.group({
         name: '',
@@ -50,11 +52,16 @@ export class EditEventComponent implements OnInit {
   ngOnInit() {
     this.m_eventService.getEventById(this.eventId).subscribe((result) => {
       result = fillUndefinedProperties(result);
+      const dateStart = new Date(result.date_start);
+      console.log(dateStart.getHours());
+
       this.eventForm.patchValue({
         title: result.title,
         photo_url: result.photo_url,
         description: result.description,
-        date_start: new Date(result.date_start),
+        date_start: dateStart,
+        date_start_hour: dateStart.getHours().toString(),
+        date_start_minute: dateStart.getMinutes().toString(),
         date_end: new Date(result.date_end),
         place: result.place
       });
@@ -68,7 +75,14 @@ export class EditEventComponent implements OnInit {
   }
 
   submitForm(): void {
-    this.m_eventService.update(this.eventId, this.eventForm.value).subscribe(result => {
+    let form = this.eventForm.value;
+    if (form.date_start != '') {
+      form.date_start.setHours(form.date_start_hour, form.date_start_minute);
+      delete form.date_start_hour;
+      delete form.date_start_minute;
+    }
+
+    this.m_eventService.update(this.eventId, form).subscribe(result => {
       this.m_router.navigate(['/evenements/detail/' + this.eventId]);
     }, error => {
 

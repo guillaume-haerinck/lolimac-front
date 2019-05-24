@@ -34,6 +34,14 @@
           </mat-select>
         </mat-form-field>
 
+        <mat-form-field appearance="fill" formGroupName="place">
+          <mat-label>Nom du point de rencontre</mat-label>
+          <input matInput placeholder="Copernic" formControlName="name">
+        </mat-form-field>
+      </mat-step>
+
+      <!-- Step 2 -->
+      <mat-step label="Date et Heure">
         <mat-form-field appearance="fill">
           <mat-label>Date de l'évènement</mat-label>
           <input matInput [matDatepicker]="datePicker" placeholder="17/05/2022" [min]="minDate"
@@ -42,14 +50,51 @@
           <mat-datepicker #datePicker startView="month"></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" formGroupName="place">
-          <mat-label>Nom du point de rencontre</mat-label>
-          <input matInput placeholder="Copernic" formControlName="name">
+        <mat-form-field appearance="fill" class="first-item">
+          <mat-label>Heure</mat-label>
+          <mat-select placeholder="14h" formControlName="date_start_hour">
+            <mat-option value="0">Indéfini</mat-option>
+            <mat-option value="6">6h</mat-option>
+            <mat-option value="7">7h</mat-option>
+            <mat-option value="8">8h</mat-option>
+            <mat-option value="9">9h</mat-option>
+            <mat-option value="10">10h</mat-option>
+            <mat-option value="11">11h</mat-option>
+            <mat-option value="12">12h</mat-option>
+            <mat-option value="13">13h</mat-option>
+            <mat-option value="14">14h</mat-option>
+            <mat-option value="15">15h</mat-option>
+            <mat-option value="16">16h</mat-option>
+            <mat-option value="17">17h</mat-option>
+            <mat-option value="18">18h</mat-option>
+            <mat-option value="19">19h</mat-option>
+            <mat-option value="20">20h</mat-option>
+            <mat-option value="21">21h</mat-option>
+            <mat-option value="22">22h</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Minute</mat-label>
+          <mat-select placeholder="30" formControlName="date_start_minute">
+            <mat-option value="0">00</mat-option>
+            <mat-option value="10">10</mat-option>
+            <mat-option value="20">20</mat-option>
+            <mat-option value="30">30</mat-option>
+            <mat-option value="40">40</mat-option>
+            <mat-option value="50">50</mat-option>
+          </mat-select>
         </mat-form-field>
       </mat-step>
 
-      <!-- Step 2 -->
       <mat-step label="Détails">
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput rows="10" placeholder="..." formControlName="description"></textarea>
+        </mat-form-field>
+      </mat-step>
+
+      <mat-step label="Zone dangereuse">
         <button mat-raised-button (click)="deleteEvent()" color="warn">Supprimer l'évènement</button>
       </mat-step>
     </mat-vertical-stepper>

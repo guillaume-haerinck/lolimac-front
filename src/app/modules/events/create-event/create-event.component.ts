@@ -20,7 +20,7 @@ enum FormStep {
 export class CreateEventComponent implements OnInit {
   bMobile = true;
   eventForm: FormGroup;
-  currentStep = FormStep.Page2;
+  currentStep = FormStep.Page1;
   formStep = FormStep;
   topBarTitle = "Création d'évènement";
   minDate = new Date();
