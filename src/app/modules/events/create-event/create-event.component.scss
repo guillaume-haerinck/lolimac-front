@@ -18,11 +18,34 @@
                 height: auto;
             }
         }
+
+        .flex-row {
+            display: flex;
+            flex-wrap: wrap;
+
+            .first-item {
+                margin-right: 20px;
+            }
+        }
     }
 }
 
 @media screen and (max-width: 799px) {
     #create-page {
         min-height: var(--mobile-page-min-height);
+    }
+}
+
+@media screen and (max-width: 466px) {
+    #create-page {
+        form {
+            .flex-row {
+                flex-direction: column;
+
+                .first-item {
+                    margin: unset;
+                }
+            }
+        }
     }
 }

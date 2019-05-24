@@ -34,7 +34,7 @@
       <button mat-raised-button
         [disabled]="!eventForm.valid"
         (click)="currentStep = formStep.Page2; updateTitle()">
-        Indiquer le lieu
+        Indiquer le lieu et l'heure
       </button>
     </ng-container>
 
@@ -46,6 +46,44 @@
         <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
         <mat-datepicker #datePicker startView="month"></mat-datepicker>
       </mat-form-field>
+
+      <div class="flex-row">
+        <mat-form-field appearance="fill" class="first-item">
+          <mat-label>Heure</mat-label>
+          <mat-select placeholder="14h" formControlName="date_start_hour">
+            <mat-option value="0">Indéfini</mat-option>
+            <mat-option value="6">6h</mat-option>
+            <mat-option value="7">7h</mat-option>
+            <mat-option value="8">8h</mat-option>
+            <mat-option value="9">9h</mat-option>
+            <mat-option value="10">10h</mat-option>
+            <mat-option value="11">11h</mat-option>
+            <mat-option value="12">12h</mat-option>
+            <mat-option value="13">13h</mat-option>
+            <mat-option value="14">14h</mat-option>
+            <mat-option value="15">15h</mat-option>
+            <mat-option value="16">16h</mat-option>
+            <mat-option value="17">17h</mat-option>
+            <mat-option value="18">18h</mat-option>
+            <mat-option value="19">19h</mat-option>
+            <mat-option value="20">20h</mat-option>
+            <mat-option value="21">21h</mat-option>
+            <mat-option value="22">22h</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Minute</mat-label>
+          <mat-select placeholder="30" formControlName="date_start_minute">
+            <mat-option value="0">00</mat-option>
+            <mat-option value="10">10</mat-option>
+            <mat-option value="20">20</mat-option>
+            <mat-option value="30">30</mat-option>
+            <mat-option value="40">40</mat-option>
+            <mat-option value="50">50</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
       <mat-form-field appearance="fill" formGroupName="place">
         <mat-label>Nom du point de rencontre</mat-label>

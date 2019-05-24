@@ -20,7 +20,7 @@ enum FormStep {
 export class CreateEventComponent implements OnInit {
   bMobile = true;
   eventForm: FormGroup;
-  currentStep = FormStep.Page1;
+  currentStep = FormStep.Page2;
   formStep = FormStep;
   topBarTitle = "Création d'évènement";
   minDate = new Date();
@@ -43,6 +43,8 @@ export class CreateEventComponent implements OnInit {
       photo_url: ['https://images.unsplash.com/photo-1470753937643-efeb931202a9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80', Validators.required],
       description: '',
       date_start: '',
+      date_start_hour: '0',
+      date_start_minute: '0',
       date_end: '',
       place: this.m_formBuilder.group({
         name: '',
@@ -57,7 +59,14 @@ export class CreateEventComponent implements OnInit {
   }
 
   submitForm(): void {
-    this.m_eventService.createEvent(this.eventForm.value)
+    let form = this.eventForm.value;
+    if (form.date_start != '') {
+      form.date_start.setHours(form.date_start_hour, form.date_start_minute);
+      delete form.date_start_hour;
+      delete form.date_start_minute;
+    }
+
+    this.m_eventService.createEvent(form)
       .subscribe(response => {
         if (response.id_event) {
           this.m_router.navigate([`/evenements/detail/${response.id_event}`]);
