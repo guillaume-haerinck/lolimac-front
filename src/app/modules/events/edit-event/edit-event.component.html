@@ -33,11 +33,6 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-
-        <mat-form-field appearance="fill" formGroupName="place">
-          <mat-label>Nom du point de rencontre</mat-label>
-          <input matInput placeholder="Copernic" formControlName="name">
-        </mat-form-field>
       </mat-step>
 
       <!-- Step 2 -->
@@ -51,7 +46,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="first-item">
-          <mat-label>Heure</mat-label>
+          <mat-label>Heure de début</mat-label>
           <mat-select placeholder="14h" formControlName="date_start_hour">
             <mat-option value="0">Indéfinie</mat-option>
             <mat-option value="6">6h</mat-option>
@@ -86,9 +81,10 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" *ngIf="bEndDetailControl">
           <mat-label>Durée</mat-label>
-          <mat-select placeholder="30" formControlName="date_end_offset" (valueChange)="onDateEndDropChange($event)">
+          <mat-select placeholder="30" formControlName="date_end_offset"
+            (valueChange)="onDateEndDropChange($event)">
             <mat-option value="0">Indéfinie</mat-option>
             <mat-option value="1">1h</mat-option>
             <mat-option value="2">2h</mat-option>
@@ -99,7 +95,7 @@
           </mat-select>
         </mat-form-field>
 
-        <ng-container *ngIf="bEndDetail == true">
+        <ng-container *ngIf="bEndDetail">
           <mat-form-field appearance="fill">
             <mat-label>Date de fin</mat-label>
             <input matInput [matDatepicker]="datePicker" placeholder="17/05/2022" [min]="minDate"
@@ -111,6 +107,7 @@
           <mat-form-field appearance="fill" class="first-item">
             <mat-label>Heure de fin</mat-label>
             <mat-select placeholder="14h" formControlName="date_end_hour">
+              <mat-option value="0">Indéfinie</mat-option>
               <mat-option value="9">9h</mat-option>
               <mat-option value="10">10h</mat-option>
               <mat-option value="11">11h</mat-option>
@@ -138,6 +135,28 @@
         </ng-container>
       </mat-step>
 
+      <mat-step label="Lieu de rencontre">
+        <mat-form-field appearance="fill" formGroupName="place">
+          <mat-label>Nom du point de rencontre</mat-label>
+          <input matInput placeholder="Copernic" formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" formGroupName="place">
+          <mat-label>Numéro de rue</mat-label>
+          <input matInput type="number" placeholder="23" formControlName="number">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" formGroupName="place">
+          <mat-label>Nom de rue</mat-label>
+          <input matInput placeholder="Rue de la pinte" formControlName="street">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" formGroupName="place">
+          <mat-label>Ville</mat-label>
+          <input matInput placeholder="Paris XVIe" formControlName="city">
+        </mat-form-field>
+      </mat-step>
+
       <mat-step label="Détails">
         <mat-form-field appearance="fill">
           <mat-label>Description</mat-label>
@@ -151,5 +170,8 @@
     </mat-vertical-stepper>
   </form>
 
-  <button mat-raised-button color="accent" [disabled]="!eventForm.valid" (click)="submitForm()">Modifier</button>
+  <div class="grid-justify-space">
+    <button mat-raised-button *ngIf="!bMobile" (click)="goTo('/evenements/detail/' + eventId)">Retour</button>
+    <button mat-raised-button color="accent" [disabled]="!eventForm.valid" (click)="submitForm()">Modifier</button>
+  </div>
 </div>

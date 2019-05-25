@@ -17,6 +17,7 @@ export class EditEventComponent implements OnInit {
   eventForm: FormGroup;
   minDate = new Date();
   bEndDetail = false;
+  bEndDetailControl = true;
 
   constructor(responsiveService: ResponsiveService,
     private m_router: Router,
@@ -54,6 +55,8 @@ export class EditEventComponent implements OnInit {
 
   ngOnInit() {
     this.m_eventService.getEventById(this.eventId).subscribe((result) => {
+      // TODO store result as oldform, and remove matching terms
+
       result = fillUndefinedProperties(result);
       if (result.date_start != '') {
         const dateStart = new Date(result.date_start);
@@ -66,6 +69,7 @@ export class EditEventComponent implements OnInit {
 
       if (result.date_end != '') {
         this.bEndDetail = true;
+        this.bEndDetailControl = false;
         const dateEnd = new Date(result.date_end);
         this.eventForm.patchValue({
           date_end: dateEnd,
@@ -90,21 +94,23 @@ export class EditEventComponent implements OnInit {
 
   submitForm(): void {
     const form = this.eventForm.value;
-    if (form.date_start != '') {
+    if (form.date_start_hour && form.date_start_minute) {
       form.date_start.setHours(form.date_start_hour, form.date_start_minute); 
     }
-    if (form.date_end != '') {
-      if (this.bEndDetail == true) {
-        form.date_end.setHours(form.date_end_hour);
+    if (!this.bEndDetail) {
+      form.date_end = new Date(form.date_start);
+      if (form.date_end_offset === 24) {
+        form.date_end = form.date_start;
+        form.date_end.setHours(23);
       } else {
-        if (form.date_end_hour === 24) {
-          form.date_end = form.date_start;
-          form.date_end.setHours(23);
-        } else {
-          form.date_end.setHours(form.date_start.getHours() + form.date_end_offset);
-        }
+        form.date_end.setHours(form.date_end.getHours() + Number(form.date_end_offset), 0);
+      }
+    } else {
+      if (form.date_end && form.date_end_hour) {
+        form.date_end.setHours(form.date_end_hour);
       }
     }
+
     delete form.date_start_hour;
     delete form.date_start_minute;
     delete form.date_end_hour;

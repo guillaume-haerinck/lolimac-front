@@ -1,8 +1,9 @@
 #edit-event-page {
+    display: grid;
+    grid-auto-flow: row;
     align-content: center;
     justify-content: stretch;
     grid-gap: 20px;
-    min-height: calc(100vh - var(--height-topbar));
 
     mat-vertical-stepper {
         border-radius: var(--border-radius);
@@ -12,5 +13,17 @@
         mat-form-field {
             width: 100%;
         }
+    }
+
+    .grid-justify-space {
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: space-around;
+    }
+}
+
+@media screen and (max-width: 799px) {
+    #edit-event-page {
+        margin-bottom: var(--height-bottom-bar);
     }
 }
