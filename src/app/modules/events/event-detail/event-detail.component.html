@@ -24,9 +24,9 @@
       </div>
 
       <ng-container [ngSwitch]="event.participation">
-        <button *ngSwitchCase="0" mat-raised-button (click)="joinEvent(event.id_event)">Participer</button>
+        <button *ngSwitchCase="0" mat-raised-button (click)="joinEvent(event.id_event); event.participation = 2">Participer</button>
         <button *ngSwitchCase="1" mat-raised-button (click)="goTo('/evenements/edition/' + event.id_event)">Modifier</button>
-        <button *ngSwitchCase="2" mat-stroked-button (click)="leaveEvent(event.id_event)">Ne plus participer</button>
+        <button *ngSwitchCase="2" mat-stroked-button (click)="leaveEvent(event.id_event); event.participation = 0">Ne plus participer</button>
       </ng-container>
     </div>
 

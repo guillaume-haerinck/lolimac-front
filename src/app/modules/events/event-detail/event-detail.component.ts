@@ -19,21 +19,20 @@ export class EventDetailComponent implements OnInit {
   constructor(private m_eventService: EventService,
     route: ActivatedRoute,
     private m_router: Router,
-    responsiveService: ResponsiveService)
-  {
+    responsiveService: ResponsiveService) {
     this.eventId = Number(route.snapshot.paramMap.get('id'));
     this.event$ = this.m_eventService.getEventById(this.eventId);
 
     responsiveService.isMobile().subscribe(result => {
       if (result.matches) {
-          this.bMobile = false;
+        this.bMobile = false;
       } else {
-          this.bMobile = true;
+        this.bMobile = true;
       }
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   goTo(url: string) {
     this.m_router.navigateByUrl(url);
