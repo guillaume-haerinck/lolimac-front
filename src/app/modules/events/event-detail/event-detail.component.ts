@@ -52,6 +52,11 @@ export class EventDetailComponent implements OnInit {
   }
 
   reloadPosts(): void {
+    // TODO reload only posts
     this.event$ = this.m_eventService.getEventById(this.eventId);
+  }
+
+  getIcsLink(id: number): void {
+
   }
 }

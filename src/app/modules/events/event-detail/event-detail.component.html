@@ -34,7 +34,11 @@
 
     <div class="detail-line">
       <mat-icon>access_time</mat-icon>
-      <p *ngIf="event.date_start; else noDate">{{ event.date_start | date:'medium' }}</p>
+      <div *ngIf="event.date_start; else noDate">
+        <p>{{ event.date_start | date:'medium' }}</p>
+        <a (click)="getIcsLink(event.id_event)">Exporter le calendrier ></a>
+      </div>
+      
       <ng-template #noDate><p>Jour à définir</p></ng-template>
     </div>
     <div class="detail-line">

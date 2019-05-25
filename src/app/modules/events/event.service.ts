@@ -28,6 +28,11 @@ export class EventService {
     return this.m_http.get<any>(URL);
   }
 
+  getIcsLink(id: number) {
+    const URL = `${environment.backend.serverUrl}events/${id}`;
+    return this.m_http.get<any>(URL);
+  }
+
   search(terms: string): Observable<any[]> {
     const URL = `${environment.backend.serverUrl}events/search/?q=${terms}`;
     return this.m_http.get<any>(URL);
