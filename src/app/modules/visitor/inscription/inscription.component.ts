@@ -41,8 +41,8 @@ export class InscriptionComponent implements OnInit {
       }),
       page2: this.m_formBuilder.group({
         phone: '',
-        firstname: '',
-        lastname: '',
+        firstname: ['', Validators.required],
+        lastname: ['', Validators.required],
         photo_url: ['https://i2.wp.com/rouelibrenmaine.fr/wp-content/uploads/2018/10/empty-avatar.png', Validators.required]
       }, {
         validators: ImageUrl('photo_url')

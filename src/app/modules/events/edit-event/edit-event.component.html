@@ -53,7 +53,7 @@
         <mat-form-field appearance="fill" class="first-item">
           <mat-label>Heure</mat-label>
           <mat-select placeholder="14h" formControlName="date_start_hour">
-            <mat-option value="0">Indéfini</mat-option>
+            <mat-option value="0">Indéfinie</mat-option>
             <mat-option value="6">6h</mat-option>
             <mat-option value="7">7h</mat-option>
             <mat-option value="8">8h</mat-option>
@@ -85,6 +85,57 @@
             <mat-option value="50">50</mat-option>
           </mat-select>
         </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Durée</mat-label>
+          <mat-select placeholder="30" formControlName="date_end_offset" (valueChange)="onDateEndDropChange($event)">
+            <mat-option value="0">Indéfinie</mat-option>
+            <mat-option value="1">1h</mat-option>
+            <mat-option value="2">2h</mat-option>
+            <mat-option value="3">3h</mat-option>
+            <mat-option value="4">4h</mat-option>
+            <mat-option value="24">Toute la journée</mat-option>
+            <mat-option value="more">Autre</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <ng-container *ngIf="bEndDetail == true">
+          <mat-form-field appearance="fill">
+            <mat-label>Date de fin</mat-label>
+            <input matInput [matDatepicker]="datePicker" placeholder="17/05/2022" [min]="minDate"
+              formControlName="date_end">
+            <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+            <mat-datepicker #datePicker startView="month"></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="first-item">
+            <mat-label>Heure de fin</mat-label>
+            <mat-select placeholder="14h" formControlName="date_end_hour">
+              <mat-option value="9">9h</mat-option>
+              <mat-option value="10">10h</mat-option>
+              <mat-option value="11">11h</mat-option>
+              <mat-option value="12">12h</mat-option>
+              <mat-option value="13">13h</mat-option>
+              <mat-option value="14">14h</mat-option>
+              <mat-option value="15">15h</mat-option>
+              <mat-option value="16">16h</mat-option>
+              <mat-option value="17">17h</mat-option>
+              <mat-option value="18">18h</mat-option>
+              <mat-option value="19">19h</mat-option>
+              <mat-option value="20">20h</mat-option>
+              <mat-option value="21">21h</mat-option>
+              <mat-option value="22">22h</mat-option>
+              <mat-option value="23">23h</mat-option>
+              <mat-option value="24">Minuit</mat-option>
+              <mat-option value="1">1h</mat-option>
+              <mat-option value="2">2h</mat-option>
+              <mat-option value="3">3h</mat-option>
+              <mat-option value="4">4h</mat-option>
+              <mat-option value="5">5h</mat-option>
+              <mat-option value="6">6h</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
       </mat-step>
 
       <mat-step label="Détails">
