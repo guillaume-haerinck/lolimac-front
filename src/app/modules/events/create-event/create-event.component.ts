@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 enum FormStep {
   Page1,
   Page2,
-  Page3
+  Page3,
+  Page4
 };
 
 @Component({
@@ -46,6 +47,7 @@ export class CreateEventComponent implements OnInit {
       date_start_hour: '0',
       date_start_minute: '0',
       date_end: '',
+      date_end_offset: '',
       place: this.m_formBuilder.group({
         name: '',
         street: '',
@@ -62,8 +64,17 @@ export class CreateEventComponent implements OnInit {
     let form = this.eventForm.value;
     if (form.date_start != '') {
       form.date_start.setHours(form.date_start_hour, form.date_start_minute);
+      form.date_end = new Date(form.date_start);
+
+      if (form.date_end_offset != '') {
+        form.date_end.setHours(form.date_end.getHours() + Number(form.date_end_offset), 0);
+      } else {
+        form.date_end.setHours(0, 0);
+      }
+
       delete form.date_start_hour;
       delete form.date_start_minute;
+      delete form.date_end_offset;
     }
 
     this.m_eventService.createEvent(form)
@@ -98,6 +109,10 @@ export class CreateEventComponent implements OnInit {
 
       case FormStep.Page3:
         this.topBarTitle = "Précisions";
+        break;
+
+      case FormStep.Page4:
+        this.topBarTitle = "Adresse";
         break;
     }
   }

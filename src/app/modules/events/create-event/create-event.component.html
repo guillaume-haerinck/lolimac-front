@@ -1,12 +1,10 @@
-<app-top-app-bar *ngIf="bMobile" 
-  [title]="topBarTitle"
-  [bReturn]="currentStep != formStep.Page1 ? true : false"
+<app-top-app-bar *ngIf="bMobile" [title]="topBarTitle" [bReturn]="currentStep != formStep.Page1 ? true : false"
   (return)="previousStep(); updateTitle()">
 </app-top-app-bar>
 
 <div class="full-page" id="create-page" [style.background-image]="'url(' + eventForm.value.photo_url + ')'">
   <form [formGroup]="eventForm">
-  <!-- Page 1 -->
+    <!-- Page 1 -->
     <ng-container *ngIf="currentStep == formStep.Page1">
       <mat-form-field appearance="fill">
         <mat-label>Nom de l'évènement</mat-label>
@@ -16,24 +14,26 @@
       <mat-form-field appearance="fill">
         <mat-label>Catégorie</mat-label>
         <mat-select placeholder="Type d'évènement" formControlName="photo_url">
-          <mat-option value="https://images.unsplash.com/photo-1470753937643-efeb931202a9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80">
+          <mat-option
+            value="https://images.unsplash.com/photo-1470753937643-efeb931202a9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80">
             Soirée
           </mat-option>
-          <mat-option value="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80">
+          <mat-option
+            value="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80">
             Révision
           </mat-option>
-          <mat-option value="https://images.unsplash.com/photo-1485518994577-6cd6324ade8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=944&q=80">
+          <mat-option
+            value="https://images.unsplash.com/photo-1485518994577-6cd6324ade8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=944&q=80">
             Sortie
           </mat-option>
-          <mat-option value="https://images.unsplash.com/photo-1509994196812-897f5a6ab49c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80">
+          <mat-option
+            value="https://images.unsplash.com/photo-1509994196812-897f5a6ab49c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80">
             Mystère
           </mat-option>
         </mat-select>
       </mat-form-field>
 
-      <button mat-raised-button
-        [disabled]="!eventForm.valid"
-        (click)="currentStep = formStep.Page2; updateTitle()">
+      <button mat-raised-button [disabled]="!eventForm.valid" (click)="currentStep = formStep.Page2; updateTitle()">
         Indiquer le lieu et l'heure
       </button>
     </ng-container>
@@ -42,7 +42,8 @@
     <ng-container *ngIf="currentStep == formStep.Page2">
       <mat-form-field appearance="fill">
         <mat-label>Date de l'évènement</mat-label>
-        <input matInput [matDatepicker]="datePicker" placeholder="17/05/2022" [min]="minDate" formControlName="date_start">
+        <input matInput [matDatepicker]="datePicker" placeholder="17/05/2022" [min]="minDate"
+          formControlName="date_start">
         <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
         <mat-datepicker #datePicker startView="month"></mat-datepicker>
       </mat-form-field>
@@ -51,7 +52,7 @@
         <mat-form-field appearance="fill" class="first-item">
           <mat-label>Heure</mat-label>
           <mat-select placeholder="14h" formControlName="date_start_hour">
-            <mat-option value="0">Indéfini</mat-option>
+            <mat-option value="0">Indéfinie</mat-option>
             <mat-option value="6">6h</mat-option>
             <mat-option value="7">7h</mat-option>
             <mat-option value="8">8h</mat-option>
@@ -90,9 +91,7 @@
         <input matInput placeholder="Copernic" formControlName="name">
       </mat-form-field>
 
-      <button mat-raised-button
-        [disabled]="!eventForm.valid"
-        (click)="currentStep = formStep.Page3; updateTitle()">
+      <button mat-raised-button [disabled]="!eventForm.valid" (click)="currentStep = formStep.Page3; updateTitle()">
         Ajouter des précisions
       </button>
     </ng-container>
@@ -100,15 +99,47 @@
     <!-- Page 3 -->
     <ng-container *ngIf="currentStep == formStep.Page3">
       <mat-form-field appearance="fill">
+        <mat-label>Durée de l'évènement</mat-label>
+        <mat-select placeholder="30" formControlName="date_end_offset">
+          <mat-option value="0">Indéfinie</mat-option>
+          <mat-option value="1">1h</mat-option>
+          <mat-option value="2">2h</mat-option>
+          <mat-option value="3">3h</mat-option>
+          <mat-option value="4">4h</mat-option>
+          <mat-option value="24">Toute la journée</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
         <mat-label>Description</mat-label>
         <textarea matInput rows="10" placeholder="..." formControlName="description"></textarea>
+      </mat-form-field>
+
+      <button mat-raised-button [disabled]="!eventForm.valid" (click)="currentStep = formStep.Page4; updateTitle()">
+        Préciser l'adresse
+      </button>
+    </ng-container>
+
+    <!-- Page 4 -->
+    <ng-container *ngIf="currentStep == formStep.Page4">
+      <mat-form-field appearance="fill" formGroupName="place">
+        <mat-label>Numéro de rue</mat-label>
+        <input matInput type="number" placeholder="23" formControlName="number">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" formGroupName="place">
+        <mat-label>Nom de rue</mat-label>
+        <input matInput placeholder="Rue de la pinte" formControlName="street">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" formGroupName="place">
+        <mat-label>Ville</mat-label>
+        <input matInput placeholder="Paris XVIe" formControlName="city">
       </mat-form-field>
     </ng-container>
 
     <button mat-raised-button (click)="previousStep()" *ngIf="currentStep != formStep.Page1 && !bMobile">Retour</button>
-    <button mat-raised-button color="accent"
-      aria-label="Créer l'évènement"
-      (click)="submitForm()"
+    <button mat-raised-button color="accent" aria-label="Créer l'évènement" (click)="submitForm()"
       [disabled]="!eventForm.valid">
       Créer l'évènement
     </button>
