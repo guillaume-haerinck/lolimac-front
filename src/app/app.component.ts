@@ -16,16 +16,16 @@ export class AppComponent {
     bVisitor = true;
 
     constructor(updates: SwUpdate, push: SwPush,
-        private m_authService: AuthService,
-        private m_responsiveService: ResponsiveService,
-        private m_router: Router) 
+        authService: AuthService,
+        responsiveService: ResponsiveService,
+        router: Router) 
     {
         push.messages.subscribe(message => {
             console.info("New push message recieved !");
             console.log(message);
         });
 
-        m_responsiveService.isMobile().subscribe(result => {
+        responsiveService.isMobile().subscribe(result => {
             if (result.matches) {
                 this.bMobile = false;
             } else {
@@ -33,7 +33,7 @@ export class AppComponent {
             }
         });
 
-        m_router.events.subscribe((event: RouterEvent) => {
+        router.events.subscribe((event: RouterEvent) => {
             if (event.url) {
                 if (event.url.search("visiteur") != -1 || event.url.search("404") != -1) {
                     this.bVisitor = true;

@@ -29,7 +29,7 @@ export class EventService {
   }
 
   getIcsLink(id: number) {
-    const URL = `${environment.backend.serverUrl}events/${id}`;
+    const URL = `${environment.backend.serverUrl}events/export/${id}`;
     return this.m_http.get<any>(URL);
   }
 

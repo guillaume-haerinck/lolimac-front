@@ -20,7 +20,7 @@ export class AuthService {
     if (isPlatformBrowser(this.m_platformId)) {
       if (localStorage.getItem('jwt')) {
         this.m_bLoggedIn = true;
-        // TODO test token
+        // TODO test token and renew it
       }
     }
   }

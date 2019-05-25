@@ -1,7 +1,7 @@
 <app-top-app-bar *ngIf="bMobile" [bReturn]="true" [title]="'Détail de l\'évènement'" (return)="goTo('tableau-de-bord')">
 </app-top-app-bar>
 
-<ng-container *ngIf="event$ | async as event; else loading">
+<ng-container *ngIf="event; else loading">
   <div id="banner">
     <img alt="Photo d'illustration de l'évènement" src="{{ event.photo_url }}">
   </div>
@@ -24,9 +24,9 @@
       </div>
 
       <ng-container [ngSwitch]="event.participation">
-        <button *ngSwitchCase="0" mat-raised-button (click)="joinEvent(event.id_event); event.participation = 2">Participer</button>
+        <button *ngSwitchCase="0" mat-raised-button color="accent" (click)="joinEvent(); event.participation = 2">Participer</button>
         <button *ngSwitchCase="1" mat-raised-button (click)="goTo('/evenements/edition/' + event.id_event)">Modifier</button>
-        <button *ngSwitchCase="2" mat-stroked-button (click)="leaveEvent(event.id_event); event.participation = 0">Ne plus participer</button>
+        <button *ngSwitchCase="2" mat-stroked-button (click)="leaveEvent(); event.participation = 0">Ne plus participer</button>
       </ng-container>
     </div>
 
@@ -36,7 +36,8 @@
       <mat-icon>access_time</mat-icon>
       <div *ngIf="event.date_start; else noDate">
         <p>{{ event.date_start | date:'medium' }}</p>
-        <a (click)="getIcsLink(event.id_event)">Exporter le calendrier ></a>
+        <a (click)="getIcsLink()">Exporter le calendrier ></a>
+        <a *ngIf="ics != ''" href="{{ics}}">{{ics}}</a>
       </div>
       
       <ng-template #noDate><p>Jour à définir</p></ng-template>

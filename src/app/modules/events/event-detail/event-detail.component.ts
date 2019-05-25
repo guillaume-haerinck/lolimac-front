@@ -12,16 +12,16 @@ import { ResponsiveService } from 'app/core/services/responsive.service';
   styleUrls: ['./event-detail.component.scss']
 })
 export class EventDetailComponent implements OnInit {
-  event$: Observable<Event>
+  event: Event;
   bMobile = true;
   eventId: number;
+  ics = '';
 
   constructor(private m_eventService: EventService,
     route: ActivatedRoute,
     private m_router: Router,
     responsiveService: ResponsiveService) {
     this.eventId = Number(route.snapshot.paramMap.get('id'));
-    this.event$ = this.m_eventService.getEventById(this.eventId);
 
     responsiveService.isMobile().subscribe(result => {
       if (result.matches) {
@@ -32,30 +32,44 @@ export class EventDetailComponent implements OnInit {
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.m_eventService.getEventById(this.eventId).subscribe(result => {
+      this.event = result;
+    }, error => {
+
+    });
+  }
 
   goTo(url: string) {
     this.m_router.navigateByUrl(url);
   }
 
-  joinEvent(id: number) {
-    this.m_eventService.join(id).subscribe(result => {
+  joinEvent() {
+    this.m_eventService.join(this.eventId).subscribe(result => {
     }, error => {
     })
   }
 
-  leaveEvent(id: number) {
-    this.m_eventService.leave(id).subscribe(result => {
+  leaveEvent() {
+    this.m_eventService.leave(this.eventId).subscribe(result => {
     }, error => {
     })
   }
 
   reloadPosts(): void {
-    // TODO reload only posts
-    this.event$ = this.m_eventService.getEventById(this.eventId);
+    this.m_eventService.getEventById(this.eventId).subscribe(result => {
+      this.event.posts = result.posts;
+    }, error => {
+
+    });
   }
 
-  getIcsLink(id: number): void {
+  getIcsLink(): void {
+    this.m_eventService.getIcsLink(this.eventId).subscribe(result => {
+      console.log(result);
+      this.ics = result.url;
+    }, error => {
 
+    });
   }
 }
