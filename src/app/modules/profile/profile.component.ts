@@ -38,4 +38,8 @@ export class ProfileComponent implements OnInit {
     this.m_authService.logout();
     this.m_router.navigate(['/visiteur/login']);
   }
+
+  goTo(url: string): void {
+    this.m_router.navigate([url]);
+  }
 }
