@@ -77,6 +77,13 @@ export class CreateEventComponent implements OnInit {
       delete form.date_end_offset;
     }
 
+    // FIXME temp fix for api that refuses a place without name
+    if (form.place.street != '' || form.place.number != '' || form.place.city != '') {
+      if (form.place.name === '') {
+        form.place.name = ' ';
+      }
+    }
+
     this.m_eventService.createEvent(form)
       .subscribe(response => {
         if (response.id_event) {
