@@ -6,7 +6,7 @@ export function removeEmptyProperties(obj: Object, parent?: Object, key?: string
         
         if (obj[key] && typeof obj[key] === 'object') {
             removeEmptyProperties(obj[key], obj, key);
-        } else if (obj[key] === '' || obj[key] === undefined) {
+        } else if (obj[key] === '' || obj[key] === undefined || obj[key] === null) {
             delete obj[key];
         }
     });
