@@ -25,6 +25,7 @@ export class CreateEventComponent implements OnInit {
   formStep = FormStep;
   topBarTitle = "Création d'évènement";
   minDate = new Date();
+  bEndDetail = false;
 
   constructor(responsiveService: ResponsiveService,
     private m_formBuilder: FormBuilder,
@@ -48,6 +49,7 @@ export class CreateEventComponent implements OnInit {
       date_start_minute: '0',
       date_end: '',
       date_end_offset: '',
+      date_end_hour: '0',
       place: this.m_formBuilder.group({
         name: '',
         street: '',
@@ -66,10 +68,14 @@ export class CreateEventComponent implements OnInit {
       form.date_start.setHours(form.date_start_hour, form.date_start_minute);
       form.date_end = new Date(form.date_start);
 
-      if (form.date_end_offset != '') {
-        form.date_end.setHours(form.date_end.getHours() + Number(form.date_end_offset), 0);
+      if (this.bEndDetail) {
+        form.date_end.setHours(form.date_end_hour);
       } else {
-        form.date_end.setHours(0, 0);
+        if (form.date_end_offset != '') {
+          form.date_end.setHours(form.date_end.getHours() + Number(form.date_end_offset), 0);
+        } else {
+          form.date_end.setHours(0, 0);
+        }
       }
 
       delete form.date_start_hour;
@@ -121,6 +127,17 @@ export class CreateEventComponent implements OnInit {
       case FormStep.Page4:
         this.topBarTitle = "Adresse";
         break;
+    }
+  }
+
+  onDateEndDropChange(event: any): void {
+    if (event === 'more') {
+      this.bEndDetail = true;
+      this.eventForm.patchValue({
+        date_end: this.eventForm.value.date_start
+      });
+    } else {
+      this.bEndDetail = false;
     }
   }
 }
