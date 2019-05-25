@@ -30,12 +30,6 @@
     }
 }
 
-@media screen and (max-width: 799px) {
-    #create-page {
-        min-height: var(--mobile-page-min-height);
-    }
-}
-
 @media screen and (max-width: 466px) {
     #create-page {
         form {

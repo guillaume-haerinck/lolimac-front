@@ -44,9 +44,3 @@
         text-align: center;
     }
 }
-
-@media screen and (max-width: 799px) {
-    #inscription-page {
-        min-height: calc(100vh - var(--height-topbar));
-    }
-}
