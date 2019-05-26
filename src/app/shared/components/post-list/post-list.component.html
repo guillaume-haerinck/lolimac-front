@@ -18,12 +18,11 @@
     </app-comment-list>
 </div>
 
-<a *ngIf="currentState == postState.Read" (click)="currentState = postState.Create">Ajouter un post</a>
+<button mat-raised-button *ngIf="currentState == postState.Read" (click)="currentState = postState.Create">Ajouter un post</button>
 
 <ng-container *ngIf="currentState == postState.Create">
     <ng-container *ngTemplateOutlet="form"></ng-container>
 </ng-container>
-
 
 <ng-template #form>
     <form [formGroup]="postForm" id="postForm">
