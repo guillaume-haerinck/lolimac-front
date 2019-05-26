@@ -8,6 +8,7 @@
         </div>
 
         <p>{{ post.content }}</p>
+        <p *ngIf="post.user">par {{ post.user.firstname }}</p>
     </div>
 
     <div class="post" *ngIf="postIdToUpdate == post.id">

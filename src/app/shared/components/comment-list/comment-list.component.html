@@ -5,6 +5,7 @@
 <div *ngFor="let comment of comments">
   <ng-container *ngIf="commentIdToUpdate != comment.id">
     <p>{{ comment.content }}</p>
+    <p *ngIf="comment.user">par {{ comment.user.firstname }}</p>
     <button mat-raised-button *ngIf="comment.id_user == userId"
       (click)="bEdit = true; commentIdToUpdate = comment.id; patchForm(comment)">
       Modifier

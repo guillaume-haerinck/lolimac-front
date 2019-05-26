@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export interface Comment {
     id?: number;
     content?: string;
@@ -5,4 +7,5 @@ export interface Comment {
     date_edited?: Date;
     id_user?: number;
     id_post?: number;
+    user?: User;
 }

@@ -3,12 +3,15 @@
 
 <div id="notification-page" class="full-page">
   <ng-container *ngIf="notification$ | async as notification; else empty">
+    <h2>Évènements modifiés ({{ notification.events.length }})</h2>
     <div *ngFor="let event of notification.events">
-        <p>{{ event.title }}</p>
+      <a (click)="goTo('/evenements/detail/' + event.id_event)">{{ event.title }}</a>
+      <p>Type d'édition : {{ event.type_edit }}</p>
+      <p>Le: {{ event.date_edit | date }}</p>
     </div>
   </ng-container>
 </div>
 
 <ng-template #empty>
-    <p>Pas de notification !</p>
+  <p>Pas de notification !</p>
 </ng-template>
