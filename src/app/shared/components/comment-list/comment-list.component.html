@@ -30,8 +30,11 @@
       </button>
 
       <ng-container *ngSwitchCase="true">
-        <button mat-raised-button color="accent" (click)="submitCreateForm()" [disabled]="!commentForm.valid">
+        <button mat-raised-button color="accent" (click)="submitEditForm()" [disabled]="!commentForm.valid">
           Valider
+        </button>
+        <button mat-raised-button (click)="deleteComment()" color="warn">
+          Supprimer
         </button>
         <button mat-raised-button (click)="commentIdToUpdate = undefined; bEdit = false; patchForm(undefined)">
           Annuler

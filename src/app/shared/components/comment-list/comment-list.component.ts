@@ -42,17 +42,20 @@ export class CommentListComponent implements OnInit {
     });
   }
 
-  submitEditForm(commentId: number): void {
-    this.m_postService.updateComment(this.eventId, this.postId, commentId, this.commentForm.value).subscribe(result => {
+  submitEditForm(): void {
+    this.m_postService.updateComment(this.eventId, this.postId, this.commentIdToUpdate, this.commentForm.value).subscribe(result => {
       this.bEdit = false;
+      this.commentIdToUpdate = undefined;
       this.updated.emit(undefined);
     }, error => {
 
     });
   }
 
-  deleteComment(commentId: number): void {
-    this.m_postService.deleteComment(this.eventId, this.postId, commentId).subscribe(result => {
+  deleteComment(): void {
+    this.m_postService.deleteComment(this.eventId, this.postId, this.commentIdToUpdate).subscribe(result => {
+      this.bEdit = false;
+      this.commentIdToUpdate = undefined;
       this.updated.emit(undefined);
     }, error => {
 
