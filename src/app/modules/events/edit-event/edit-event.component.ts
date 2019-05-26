@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { ResponsiveService } from 'app/core/services/responsive.service';
 import { EventService } from '../event.service';
-import { fillUndefinedProperties } from 'app/shared/utility/change-objects';
+import { fillUndefinedProperties, removeEmptyProperties, removeUnchangedProperties, isEmpty } from 'app/shared/utility/change-objects';
 
 @Component({
   selector: 'app-edit-event',
@@ -15,6 +15,7 @@ export class EditEventComponent implements OnInit {
   bMobile: boolean;
   eventId: number;
   eventForm: FormGroup;
+  oldEventData: Object;
   minDate = new Date();
   bEndDetail = false;
   bEndDetailControl = true;
@@ -58,6 +59,7 @@ export class EditEventComponent implements OnInit {
       // TODO store result as oldform, and remove matching terms
 
       result = fillUndefinedProperties(result);
+      this.oldEventData = result;
       if (result.date_start != '') {
         const dateStart = new Date(result.date_start);
         this.eventForm.patchValue({
@@ -93,7 +95,7 @@ export class EditEventComponent implements OnInit {
   }
 
   submitForm(): void {
-    const form = this.eventForm.value;
+    let form = this.eventForm.value;
     if (form.date_start_hour && form.date_start_minute) {
       form.date_start.setHours(form.date_start_hour, form.date_start_minute); 
     }
@@ -106,7 +108,7 @@ export class EditEventComponent implements OnInit {
         form.date_end.setHours(form.date_end.getHours() + Number(form.date_end_offset), 0);
       }
     } else {
-      if (form.date_end && form.date_end_hour) {
+      if (form.date_end instanceof Date && form.date_end_hour instanceof Date) {
         form.date_end.setHours(form.date_end_hour);
       }
     }
@@ -116,11 +118,18 @@ export class EditEventComponent implements OnInit {
     delete form.date_end_hour;
     delete form.date_end_offset;
 
-    this.m_eventService.update(this.eventId, form).subscribe(result => {
-      this.m_router.navigate(['/evenements/detail/' + this.eventId]);
-    }, error => {
+    form = removeEmptyProperties(form);
+    form = removeUnchangedProperties(this.oldEventData, form);
 
-    });
+    if (!isEmpty(form)) {
+      this.m_eventService.update(this.eventId, form).subscribe(result => {
+        this.m_router.navigate(['/evenements/detail/' + this.eventId]);
+      }, error => {
+  
+      });
+    } else {
+      this.m_router.navigate(['/evenements/detail/' + this.eventId]);
+    }
   }
 
   deleteEvent(): void {

@@ -28,13 +28,25 @@ export function fillUndefinedProperties(obj: Object): Object {
     return obj;
 }
 
-function isEmpty(obj: Object): boolean {
+export function removeUnchangedProperties(objOld: Object, objNew: Object): Object {
+    Object.keys(objNew).forEach(key => {
+        if (objOld[key] != undefined) {
+          if (objOld[key] === objNew[key]) {
+            delete objNew[key];
+          }
+        }
+    });
+    return objNew;
+}
+
+export function isEmpty(obj: Object): boolean {
     if (obj instanceof Date) {
         return false;
     } else {
         for (let key in obj) {
-            if(obj.hasOwnProperty(key))
+            if (obj.hasOwnProperty(key)) {
                 return false;
+            }
         }
     }
     return true;
