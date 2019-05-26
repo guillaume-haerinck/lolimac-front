@@ -58,6 +58,7 @@
 
       <!-- Step 3 -->
       <mat-step label="Zone de danger extrême">
+        <button mat-raised-button (click)="goTo('/profil/change-mdp')">Changer le mot de passe</button>
         <button mat-raised-button color="warn" (click)="deleteUser()">Supprimer le compte</button>
       </mat-step>
     </mat-vertical-stepper>
