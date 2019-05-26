@@ -345,7 +345,7 @@ export class IsSignedInGuard implements CanActivate {
     } else {
       // Store the attempted URL for redirecting after a successfull login
       this.m_authService.redirectUrl &#x3D; url;
-      this.m_router.navigate([&#x27;/login&#x27;]);
+      this.m_router.navigate([&#x27;/visiteur/login&#x27;]);
       return false;
     }
   }

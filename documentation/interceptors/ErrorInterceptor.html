@@ -96,12 +96,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(m_authService: <a href="../injectables/AuthService.html">AuthService</a>, m_router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(m_authService: <a href="../injectables/AuthService.html">AuthService</a>, m_router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, m_snackbar: <a href="../injectables/SnackBarService.html">SnackBarService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/core/interceptors/error.interceptor.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/core/interceptors/error.interceptor.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -135,6 +135,18 @@
                                                   
                                                         <td>
                                                                         <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>m_snackbar</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/SnackBarService.html" target="_self" >SnackBarService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -178,8 +190,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="18"
-                            class="link-to-prism">src/app/core/interceptors/error.interceptor.ts:18</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="19"
+                            class="link-to-prism">src/app/core/interceptors/error.interceptor.ts:19</a></div>
                 </td>
             </tr>
 
@@ -228,7 +240,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Observable&lt;HttpEvent&lt;any&gt;&gt;</code>
+                        <b>Returns : </b>        <code><a href="../interfaces/Event.html" target="_self" >Observable&lt;HttpEvent&lt;any&gt;&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -254,22 +266,52 @@ import { catchError } from &#x27;rxjs/operators&#x27;;
 
 // custom
 import { AuthService } from &#x27;../services/auth.service&#x27;;
+import { SnackBarService } from &#x27;../services/snack-bar.service&#x27;;
 
 @Injectable({
     providedIn: &#x27;root&#x27;,
 })
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private m_authService: AuthService, private m_router: Router) { }
+    constructor(private m_authService: AuthService, private m_router: Router, private m_snackbar: SnackBarService) { }
 
     intercept(request: HttpRequest&lt;any&gt;, next: HttpHandler): Observable&lt;HttpEvent&lt;any&gt;&gt; {
-        return next.handle(request).pipe(catchError(error &#x3D;&gt; {
-            if (error.status &#x3D;&#x3D;&#x3D; 401) {
-                // logout if token expired
-                this.m_authService.redirectUrl &#x3D; location.origin;
-                this.m_authService.logout();
-                this.m_router.navigate([&#x27;/login&#x27;]);
+        return next.handle(request).pipe(catchError(err &#x3D;&gt; {
+          console.error(err);
+          switch(err.status) {
+              case 0:
+                this.m_snackbar.open(&#x27;[Erreur] Le serveur est déconnecté !&#x27;, &#x27;Oh, zut alors&#x27;, 10000);
+                break;
+
+              case 400:
+                if (err.error.message) {
+                  this.m_snackbar.open(&#x27;[Erreur] &#x27; + err.error.message, &#x27;Oh, zut alors&#x27;, 10000);
+                } else {
+                  this.m_snackbar.open(&#x27;[Erreur] La requête envoyée au serveur est invalide !&#x27;, &#x27;Oh, zut alors&#x27;, 10000);
+                }
+                break;
+
+              case 401:
+                  // logout if token expired
+                  this.m_authService.redirectUrl &#x3D; location.origin; // FIXME wrong route ?
+                  this.m_authService.logout();
+                  this.m_router.navigate([&#x27;/visiteur/login&#x27;]);
+                  break;
+
+              case 500:
+                this.m_snackbar.open(&#x27;[Erreur] Problème interne coté serveur !&#x27;, &#x27;Oh, zut alors&#x27;, 10000);
+                break;
+
+              case 504:
+                this.m_snackbar.open(&#x27;[Erreur] Le serveur a mit trop de temps à répondre, veuillez réessayer plus tard !&#x27;, &#x27;Oh, zut alors&#x27;, 10000);
+                break;
+            
+              default:
+                if (err.message.search(&quot;Http failure during parsing&quot;) &#x3D;&#x3D; 0) {
+                  this.m_snackbar.open(&#x27;[Erreur] La réponse formulée par le serveur est incorrecte !&#x27;, &#x27;Oh, zut alors&#x27;, 10000);
+                }
+                break;
             }
-            return throwError(error);
+          return throwError(err);
         }));
     }
 }

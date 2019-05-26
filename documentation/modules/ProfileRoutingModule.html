@@ -74,12 +74,17 @@
 import { Routes, RouterModule } from &#x27;@angular/router&#x27;;
 
 import { ProfileComponent } from &#x27;./profile.component&#x27;;
+import { EditProfileComponent } from &#x27;./edit-profile/edit-profile.component&#x27;;
 
 const routes: Routes &#x3D; [
-    {
-        path: &#x27;&#x27;,
-        component: ProfileComponent
-    },
+  {
+    path: &#x27;&#x27;,
+    component: ProfileComponent
+  },
+  {
+    path: &#x27;edition&#x27;,
+    component: EditProfileComponent
+  }
 ];
 
 @NgModule({

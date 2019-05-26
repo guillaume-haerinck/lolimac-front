@@ -126,6 +126,9 @@
                             <li>
                                 <a href="#bMobile">bMobile</a>
                             </li>
+                            <li>
+                                <a href="#bVisitor">bVisitor</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -145,12 +148,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(updates: <a href="https://angular.io/api/service-worker/SwUpdate" target="_blank">SwUpdate</a>, push: <a href="https://angular.io/api/service-worker/SwPush" target="_blank">SwPush</a>, breakpointObserver: BreakpointObserver, m_authService: <a href="../injectables/AuthService.html">AuthService</a>)</code>
+<code>constructor(updates: <a href="https://angular.io/api/service-worker/SwUpdate" target="_blank">SwUpdate</a>, push: <a href="https://angular.io/api/service-worker/SwPush" target="_blank">SwPush</a>, authService: <a href="../injectables/AuthService.html">AuthService</a>, responsiveService: <a href="../injectables/ResponsiveService.html">ResponsiveService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/app.component.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/app.component.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -192,10 +195,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>breakpointObserver</td>
+                                                        <td>authService</td>
                                                   
                                                         <td>
-                                                                    <code>BreakpointObserver</code>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -204,10 +207,22 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>m_authService</td>
+                                                        <td>responsiveService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                                        <code><a href="../injectables/ResponsiveService.html" target="_self" >ResponsiveService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -253,7 +268,33 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/app.component.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/app.component.ts:15</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="bVisitor"></a>
+                        <span class="name">
+                            <b>
+                            bVisitor</b>
+                            <a href="#bVisitor"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>true</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/app.component.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -268,9 +309,11 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
 import { SwUpdate, SwPush } from &#x27;@angular/service-worker&#x27;;
-import { BreakpointObserver, Breakpoints } from &#x27;@angular/cdk/layout&#x27;;
+import { Router, RouterEvent } from &#x27;@angular/router&#x27;;
 
 import { AuthService } from &#x27;./core/services/auth.service&#x27;;
+import { ResponsiveService } from &#x27;./core/services/responsive.service&#x27;;
+
 
 @Component({
     selector: &#x27;app-root&#x27;,
@@ -279,31 +322,44 @@ import { AuthService } from &#x27;./core/services/auth.service&#x27;;
 })
 export class AppComponent {
     bMobile &#x3D; true;
+    bVisitor &#x3D; true;
 
-    constructor(updates: SwUpdate, push: SwPush, breakpointObserver: BreakpointObserver, private m_authService: AuthService) {
+    constructor(updates: SwUpdate, push: SwPush,
+        authService: AuthService,
+        responsiveService: ResponsiveService,
+        router: Router) 
+    {
         push.messages.subscribe(message &#x3D;&gt; {
             console.info(&quot;New push message recieved !&quot;);
             console.log(message);
         });
 
-        breakpointObserver.observe([
-            &#x27;(min-width: 800px)&#x27;
-          ]).subscribe(result &#x3D;&gt; {
+        responsiveService.isMobile().subscribe(result &#x3D;&gt; {
             if (result.matches) {
                 this.bMobile &#x3D; false;
             } else {
                 this.bMobile &#x3D; true;
             }
-          });
+        });
+
+        router.events.subscribe((event: RouterEvent) &#x3D;&gt; {
+            if (event.url) {
+                if (event.url.search(&quot;visiteur&quot;) !&#x3D; -1 || event.url.search(&quot;404&quot;) !&#x3D; -1) {
+                    this.bVisitor &#x3D; true;
+                } else {
+                    this.bVisitor &#x3D; false;
+                }
+            }
+        });
     }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;app-top-navigation *ngIf&#x3D;&quot;!bMobile&quot;&gt;&lt;/app-top-navigation&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;app-top-navigation *ngIf&#x3D;&quot;!bMobile &amp;&amp; !bVisitor&quot;&gt;&lt;/app-top-navigation&gt;
 &lt;router-outlet&gt;&lt;/router-outlet&gt;
-&lt;app-bottom-navigation *ngIf&#x3D;&quot;bMobile&quot;&gt;&lt;/app-bottom-navigation&gt;
+&lt;app-bottom-navigation *ngIf&#x3D;&quot;bMobile &amp;&amp; !bVisitor&quot;&gt;&lt;/app-bottom-navigation&gt;
 </code></pre>
     </div>
 
@@ -339,8 +395,8 @@ export class AppComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><app-top-navigation *ngIf="!bMobile"></app-top-navigation><router-outlet></router-outlet><app-bottom-navigation *ngIf="bMobile"></app-bottom-navigation></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BottomNavigationComponent', 'selector': 'app-bottom-navigation'},{'name': 'CreateEventComponent', 'selector': 'app-create-event'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'EditEventComponent', 'selector': 'app-edit-event'},{'name': 'EventDetailComponent', 'selector': 'app-event-detail'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'TopNavigationComponent', 'selector': 'app-top-navigation'}];
+        var COMPONENT_TEMPLATE = '<div><app-top-navigation *ngIf="!bMobile && !bVisitor"></app-top-navigation><router-outlet></router-outlet><app-bottom-navigation *ngIf="bMobile && !bVisitor"></app-bottom-navigation></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BottomNavigationComponent', 'selector': 'app-bottom-navigation'},{'name': 'ChangePasswordComponent', 'selector': 'app-change-password'},{'name': 'CommentListComponent', 'selector': 'app-comment-list'},{'name': 'CreateEventComponent', 'selector': 'app-create-event'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'EditEventComponent', 'selector': 'app-edit-event'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EventCardComponent', 'selector': 'app-event-card'},{'name': 'EventDetailComponent', 'selector': 'app-event-detail'},{'name': 'ForgotComponent', 'selector': 'app-forgot'},{'name': 'InscriptionComponent', 'selector': 'app-inscription'},{'name': 'InvitationComponent', 'selector': 'app-invitation'},{'name': 'LegalsComponent', 'selector': 'app-legals'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PostListComponent', 'selector': 'app-post-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'TopAppBarComponent', 'selector': 'app-top-app-bar'},{'name': 'TopNavigationComponent', 'selector': 'app-top-navigation'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
 </script>

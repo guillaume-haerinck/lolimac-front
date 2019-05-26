@@ -61,7 +61,7 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/modules/login/login.component.ts</code>
+    <code>src/app/modules/visitor/login/login.component.ts</code>
 </p>
 
 
@@ -96,7 +96,7 @@
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./login.component.sass</code></td>
+                <td class="col-md-9"><code>./login.component.scss</code></td>
             </tr>
 
 
@@ -176,7 +176,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/modules/login/login.component.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/modules/visitor/login/login.component.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -269,8 +269,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="27"
-                            class="link-to-prism">src/app/modules/login/login.component.ts:27</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="34"
+                            class="link-to-prism">src/app/modules/visitor/login/login.component.ts:34</a></div>
                 </td>
             </tr>
 
@@ -351,8 +351,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">src/app/modules/login/login.component.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="28"
+                            class="link-to-prism">src/app/modules/visitor/login/login.component.ts:28</a></div>
                 </td>
             </tr>
 
@@ -393,7 +393,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/modules/login/login.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/modules/visitor/login/login.component.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -420,7 +420,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/modules/login/login.component.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/modules/visitor/login/login.component.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -439,32 +439,40 @@ import { FormGroup, FormBuilder, Validators } from &#x27;@angular/forms&#x27;;
 
 // custom
 import { AuthService } from &#x27;app/core/services/auth.service&#x27;;
+import { HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
 
 @Component({
   selector: &#x27;app-login&#x27;,
   templateUrl: &#x27;./login.component.html&#x27;,
-  styleUrls: [&#x27;./login.component.sass&#x27;]
+  styleUrls: [&#x27;./login.component.scss&#x27;]
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   bInvalid &#x3D; false;
 
-  constructor(private m_formBuilder: FormBuilder, private m_authService: AuthService, private m_router: Router) {
+  constructor(private m_formBuilder: FormBuilder,
+    private m_authService: AuthService,
+    private m_router: Router) 
+  {
     this.loginForm &#x3D; this.m_formBuilder.group({
-      username: [&#x27;pseudo_test&#x27;, Validators.required],
-      password: [&#x27;mot_de_passe&#x27;, Validators.required]
+      username: [&#x27;&#x27;, Validators.required],
+      password: [&#x27;&#x27;, Validators.required]
     });
   }
 
   ngOnInit() {
+    if (this.m_authService.isLoggedIn()) {
+      this.m_router.navigate([&#x27;/tableau-de-bord&#x27;]);
+    }
   }
 
   login(username: string, password: string): void {
     this.m_authService.login(username, password)
       .subscribe(response &#x3D;&gt; {
         this.m_router.navigate([this.m_authService.redirectUrl]);
-      }, error &#x3D;&gt; {
+      }, (error: HttpErrorResponse) &#x3D;&gt; {
         // TODO display error with the form field
+        
       });
   }
 
@@ -473,35 +481,67 @@ export class LoginComponent implements OnInit {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div id&#x3D;&quot;form-container&quot;&gt;
-  &lt;h2&gt;Login&lt;/h2&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div id&#x3D;&quot;login-page&quot;&gt;
+  &lt;h2&gt;TODO LOLIMAC LOGO&lt;/h2&gt;
   &lt;form [formGroup]&#x3D;&quot;loginForm&quot;&gt;
-    &lt;mat-form-field&gt;
-      &lt;input matInput placeholder&#x3D;&quot;Pseudo&quot; formControlName&#x3D;&quot;username&quot;&gt;
+    &lt;mat-form-field appearance&#x3D;&quot;fill&quot;&gt;
+      &lt;mat-label&gt;Pseudo&lt;/mat-label&gt;
+      &lt;input matInput placeholder&#x3D;&quot;CrousMan89&quot; formControlName&#x3D;&quot;username&quot;&gt;
     &lt;/mat-form-field&gt;
 
-    &lt;mat-form-field&gt;
-      &lt;input matInput placeholder&#x3D;&quot;Mot de passe&quot; type&#x3D;&quot;password&quot; formControlName&#x3D;&quot;password&quot;
+    &lt;mat-form-field appearance&#x3D;&quot;fill&quot;&gt;
+      &lt;mat-label&gt;Mot de passe&lt;/mat-label&gt;
+      &lt;input matInput placeholder&#x3D;&quot;Blabla...&quot; type&#x3D;&quot;password&quot; formControlName&#x3D;&quot;password&quot;
         (keyup.enter)&#x3D;&quot;login(loginForm.value.username, loginForm.value.password)&quot;&gt;
-        &lt;mat-error&gt;erreur&lt;/mat-error&gt;
+      &lt;mat-hint align&#x3D;&quot;end&quot;&gt;
+        &lt;a&gt;
+          Mot de passe oublié
+        &lt;/a&gt;
+      &lt;/mat-hint&gt;
     &lt;/mat-form-field&gt;
+
+    &lt;button mat-raised-button color&#x3D;&quot;accent&quot;
+      aria-label&#x3D;&quot;Se connecter à lolimac&quot;
+      (click)&#x3D;&quot;login(loginForm.value.username, loginForm.value.password)&quot;
+      [disabled]&#x3D;&quot;!loginForm.valid&quot;&gt;
+      Se connecter
+    &lt;/button&gt;
   &lt;/form&gt;
 
-  &lt;button  mat-raised-button color&#x3D;&quot;primary&quot;
-    aria-label&#x3D;&quot;Se logger&quot;
-    (click)&#x3D;&quot;login(loginForm.value.username, loginForm.value.password)&quot;
-    [disabled]&#x3D;&quot;!loginForm.valid&quot;&gt;
-    Login
-  &lt;/button&gt;
+  &lt;a id&#x3D;&quot;subscribe&quot; routerLink&#x3D;&quot;/visiteur/inscription&quot;&gt;Pas de compte ? Inscrivez-vous dès maintenant&lt;/a&gt;
 &lt;/div&gt;
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
                 <p class="comment">
-                    <code>./login.component.sass</code>
+                    <code>./login.component.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss"></code></pre>
+                <pre class="line-numbers"><code class="language-scss">
+#login-page {
+    display: grid;
+    grid-auto-flow: row;
+    justify-content: center;
+    align-content: stretch;
+    min-height: 100vh;
+    grid-gap: 40px;
+    padding: 25px;
+
+    form {
+        display: inline-grid;
+        align-content: center;
+
+        button {
+            margin-top: 40px;
+            justify-self: end;
+        }
+    }
+
+    a {
+        text-align: center;
+    }
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -529,8 +569,8 @@ export class LoginComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div id="form-container">  <h2>Login</h2>  <form [formGroup]="loginForm">    <mat-form-field>      <input matInput placeholder="Pseudo" formControlName="username">    </mat-form-field>    <mat-form-field>      <input matInput placeholder="Mot de passe" type="password" formControlName="password"        (keyup.enter)="login(loginForm.value.username, loginForm.value.password)">        <mat-error>erreur</mat-error>    </mat-form-field>  </form>  <button  mat-raised-button color="primary"    aria-label="Se logger"    (click)="login(loginForm.value.username, loginForm.value.password)"    [disabled]="!loginForm.valid">    Login  </button></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BottomNavigationComponent', 'selector': 'app-bottom-navigation'},{'name': 'CreateEventComponent', 'selector': 'app-create-event'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'EditEventComponent', 'selector': 'app-edit-event'},{'name': 'EventDetailComponent', 'selector': 'app-event-detail'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'TopNavigationComponent', 'selector': 'app-top-navigation'}];
+        var COMPONENT_TEMPLATE = '<div><div id="login-page">  <h2>TODO LOLIMAC LOGO</h2>  <form [formGroup]="loginForm">    <mat-form-field appearance="fill">      <mat-label>Pseudo</mat-label>      <input matInput placeholder="CrousMan89" formControlName="username">    </mat-form-field>    <mat-form-field appearance="fill">      <mat-label>Mot de passe</mat-label>      <input matInput placeholder="Blabla..." type="password" formControlName="password"        (keyup.enter)="login(loginForm.value.username, loginForm.value.password)">      <mat-hint align="end">        <a>          Mot de passe oublié        </a>      </mat-hint>    </mat-form-field>    <button mat-raised-button color="accent"      aria-label="Se connecter à lolimac"      (click)="login(loginForm.value.username, loginForm.value.password)"      [disabled]="!loginForm.valid">      Se connecter    </button>  </form>  <a id="subscribe" routerLink="/visiteur/inscription">Pas de compte ? Inscrivez-vous dès maintenant</a></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BottomNavigationComponent', 'selector': 'app-bottom-navigation'},{'name': 'ChangePasswordComponent', 'selector': 'app-change-password'},{'name': 'CommentListComponent', 'selector': 'app-comment-list'},{'name': 'CreateEventComponent', 'selector': 'app-create-event'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'EditEventComponent', 'selector': 'app-edit-event'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EventCardComponent', 'selector': 'app-event-card'},{'name': 'EventDetailComponent', 'selector': 'app-event-detail'},{'name': 'ForgotComponent', 'selector': 'app-forgot'},{'name': 'InscriptionComponent', 'selector': 'app-inscription'},{'name': 'InvitationComponent', 'selector': 'app-invitation'},{'name': 'LegalsComponent', 'selector': 'app-legals'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PostListComponent', 'selector': 'app-post-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'TopAppBarComponent', 'selector': 'app-top-app-bar'},{'name': 'TopNavigationComponent', 'selector': 'app-top-navigation'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LoginComponent'};
 </script>

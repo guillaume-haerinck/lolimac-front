@@ -77,11 +77,11 @@ import { IsSignedInGuard } from &#x27;./core/guards/is-signed-in.guard&#x27;;
 const routes: Routes &#x3D; [
   {
     path: &#x27;&#x27;,
-    redirectTo: &#x27;dashboard&#x27;,
+    redirectTo: &#x27;tableau-de-bord&#x27;,
     pathMatch: &#x27;full&#x27;
   },
   {
-    path: &#x27;dashboard&#x27;,
+    path: &#x27;tableau-de-bord&#x27;,
     loadChildren: &#x27;./modules/dashboard/dashboard.module#DashboardModule&#x27;,
     canActivate: [IsSignedInGuard]
   },
@@ -91,22 +91,35 @@ const routes: Routes &#x3D; [
     canActivate: [IsSignedInGuard]
   },
   {
-    path: &#x27;profile&#x27;,
+    path: &#x27;evenements&#x27;,
+    loadChildren: &#x27;./modules/events/events.module#EventsModule&#x27;,
+    canActivate: [IsSignedInGuard]
+  },
+  {
+    path: &#x27;profil&#x27;,
     loadChildren: &#x27;./modules/profile/profile.module#ProfileModule&#x27;,
     canActivate: [IsSignedInGuard]
   },
   {
-    path: &#x27;search&#x27;,
+    path: &#x27;recherche&#x27;,
     loadChildren: &#x27;./modules/search/search.module#SearchModule&#x27;,
     canActivate: [IsSignedInGuard]
   },
   {
-    path: &#x27;login&#x27;,
-    loadChildren: &#x27;./modules/login/login.module#LoginModule&#x27;
+    path: &#x27;visiteur&#x27;,
+    loadChildren: &#x27;./modules/visitor/visitor.module#VisitorModule&#x27;
+  },
+  {
+    path: &#x27;mentions-legales&#x27;,
+    loadChildren: &#x27;./modules/legals/legals.module#LegalsModule&#x27;
+  },
+  {
+    path: &#x27;404&#x27;,
+    loadChildren: &#x27;./modules/page-not-found/page-not-found.module#PageNotFoundModule&#x27;
   },
   {
     path: &#x27;**&#x27;,
-    redirectTo: &#x27;dashboard&#x27;,
+    redirectTo: &#x27;404&#x27;,
     pathMatch: &#x27;full&#x27;
   },
 ];

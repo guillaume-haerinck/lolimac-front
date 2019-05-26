@@ -63,29 +63,57 @@
 <text text-anchor="start" x="429.7258" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Exports</text>
 <g id="clust1" class="cluster">
 <title>cluster_EditEventModule</title>
-<polygon fill="none" stroke="#000000" stroke-dasharray="1,5" points="163,-70 163,-195 333,-195 333,-70 163,-70"/>
+<polygon fill="none" stroke="#000000" stroke-dasharray="1,5" points="12.5,-70 12.5,-195 483.5,-195 483.5,-70 12.5,-70"/>
 </g>
 <g id="clust2" class="cluster">
 <title>cluster_EditEventModule_declarations</title>
-<polygon fill="none" stroke="#000000" points="171,-78 171,-130 325,-130 325,-78 171,-78"/>
+<polygon fill="none" stroke="#000000" points="321.5,-78 321.5,-130 475.5,-130 475.5,-78 321.5,-78"/>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_EditEventModule_imports</title>
+<polygon fill="none" stroke="#000000" points="20.5,-78 20.5,-130 313.5,-130 313.5,-78 20.5,-78"/>
 </g>
 <!-- EditEventComponent -->
 <g id="node1" class="node">
 <title>EditEventComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="316.8244,-122 179.1756,-122 179.1756,-86 316.8244,-86 316.8244,-122"/>
-<text text-anchor="middle" x="248" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">EditEventComponent</text>
+<polygon fill="#ffffb3" stroke="#000000" points="467.3244,-122 329.6756,-122 329.6756,-86 467.3244,-86 467.3244,-122"/>
+<text text-anchor="middle" x="398.5" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">EditEventComponent</text>
 </g>
 <!-- EditEventModule -->
 <g id="node2" class="node">
 <title>EditEventModule</title>
-<polygon fill="#8dd3c7" stroke="#000000" points="305.5423,-187 302.5423,-191 281.5423,-191 278.5423,-187 190.4577,-187 190.4577,-151 305.5423,-151 305.5423,-187"/>
-<text text-anchor="middle" x="248" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">EditEventModule</text>
+<polygon fill="#8dd3c7" stroke="#000000" points="283.0423,-187 280.0423,-191 259.0423,-191 256.0423,-187 167.9577,-187 167.9577,-151 283.0423,-151 283.0423,-187"/>
+<text text-anchor="middle" x="225.5" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">EditEventModule</text>
 </g>
 <!-- EditEventComponent&#45;&gt;EditEventModule -->
 <g id="edge1" class="edge">
 <title>EditEventComponent&#45;&gt;EditEventModule</title>
-<path fill="none" stroke="#000000" d="M248,-122.1061C248,-122.1061 248,-140.991 248,-140.991"/>
-<polygon fill="#000000" stroke="#000000" points="244.5001,-140.9909 248,-150.991 251.5001,-140.991 244.5001,-140.9909"/>
+<path fill="none" stroke="#000000" d="M398.5,-122.1061C398.5,-141.3391 398.5,-169 398.5,-169 398.5,-169 293.1065,-169 293.1065,-169"/>
+<polygon fill="#000000" stroke="#000000" points="293.1065,-165.5001 283.1065,-169 293.1065,-172.5001 293.1065,-165.5001"/>
+</g>
+<!-- EditEventRoutingModule -->
+<g id="node3" class="node">
+<title>EditEventRoutingModule</title>
+<polygon fill="#8dd3c7" stroke="#000000" points="305.6596,-122 302.6596,-126 281.6596,-126 278.6596,-122 145.3404,-122 145.3404,-86 305.6596,-86 305.6596,-122"/>
+<text text-anchor="middle" x="225.5" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">EditEventRoutingModule</text>
+</g>
+<!-- EditEventRoutingModule&#45;&gt;EditEventModule -->
+<g id="edge2" class="edge">
+<title>EditEventRoutingModule&#45;&gt;EditEventModule</title>
+<path fill="none" stroke="#000000" d="M225.5,-122.1061C225.5,-122.1061 225.5,-140.991 225.5,-140.991"/>
+<polygon fill="#000000" stroke="#000000" points="222.0001,-140.9909 225.5,-150.991 229.0001,-140.991 222.0001,-140.9909"/>
+</g>
+<!-- SharedModule -->
+<g id="node4" class="node">
+<title>SharedModule</title>
+<polygon fill="#8dd3c7" stroke="#000000" points="126.9231,-122 123.9231,-126 102.9231,-126 99.9231,-122 28.0769,-122 28.0769,-86 126.9231,-86 126.9231,-122"/>
+<text text-anchor="middle" x="77.5" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">SharedModule</text>
+</g>
+<!-- SharedModule&#45;&gt;EditEventModule -->
+<g id="edge3" class="edge">
+<title>SharedModule&#45;&gt;EditEventModule</title>
+<path fill="none" stroke="#000000" d="M77.5,-122.1061C77.5,-141.3391 77.5,-169 77.5,-169 77.5,-169 157.8555,-169 157.8555,-169"/>
+<polygon fill="#000000" stroke="#000000" points="157.8556,-172.5001 167.8555,-169 157.8555,-165.5001 157.8556,-172.5001"/>
 </g>
 </g>
 </svg>
@@ -117,7 +145,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/modules/event/edit-event/edit-event.module.ts</code>
+            <code>src/app/modules/events/edit-event/edit-event.module.ts</code>
         </p>
 
 
@@ -134,6 +162,18 @@
                         </li>
                     </ul>
                 </div>
+                <div class="col-sm-3">
+                    <h3>Imports<a href="https://angular.io/api/core/NgModule#imports" target="_blank" title="Official documentation about module imports"><span
+                                class="icon ion-ios-information-circle-outline"></a></h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="../modules/EditEventRoutingModule.html">EditEventRoutingModule</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="../modules/SharedModule.html">SharedModule</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -144,12 +184,17 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
+
 import { EditEventComponent } from &#x27;./edit-event.component&#x27;;
+import { SharedModule } from &#x27;app/shared/shared.module&#x27;;
+import { EditEventRoutingModule } from &#x27;./edit-event-routing.module&#x27;;
 
 @NgModule({
   declarations: [EditEventComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule,
+    EditEventRoutingModule
   ]
 })
 export class EditEventModule { }

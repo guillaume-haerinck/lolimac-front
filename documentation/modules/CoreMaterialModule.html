@@ -54,7 +54,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/core/core-material.module.ts</code>
+            <code>src/app/core/modules/core-material.module.ts</code>
         </p>
 
 
@@ -72,16 +72,24 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
-import { MatSnackBarModule } from &#x27;@angular/material&#x27;;
+import { MatSnackBarModule, MatIconModule, MatButtonModule, MatRippleModule, MatNativeDateModule } from &#x27;@angular/material&#x27;;
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    MatSnackBarModule
+    MatButtonModule,
+    MatSnackBarModule,
+    MatIconModule,
+    MatRippleModule,
+    MatNativeDateModule
   ],
   exports: [
-    MatSnackBarModule
+    MatButtonModule,
+    MatSnackBarModule,
+    MatIconModule,
+    MatRippleModule,
+    MatNativeDateModule
   ]
 })
 export class CoreMaterialModule { }

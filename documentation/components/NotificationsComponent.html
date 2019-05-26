@@ -96,7 +96,7 @@
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./notifications.component.sass</code></td>
+                <td class="col-md-9"><code>./notifications.component.scss</code></td>
             </tr>
 
 
@@ -121,6 +121,23 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#bMobile">bMobile</a>
+                            </li>
+                            <li>
+                                <a href="#notification$">notification$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -151,15 +168,57 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(responsiveService: <a href="../injectables/ResponsiveService.html">ResponsiveService</a>, m_notificationService: <a href="../injectables/NotificationsService.html">NotificationsService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/modules/notifications/notifications.component.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/modules/notifications/notifications.component.ts:16</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>responsiveService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ResponsiveService.html" target="_self" >ResponsiveService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>m_notificationService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/NotificationsService.html" target="_self" >NotificationsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -195,8 +254,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="12"
-                            class="link-to-prism">src/app/modules/notifications/notifications.component.ts:12</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="31"
+                            class="link-to-prism">src/app/modules/notifications/notifications.component.ts:31</a></div>
                 </td>
             </tr>
 
@@ -213,6 +272,65 @@
         </tbody>
     </table>
 </section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="bMobile"></a>
+                        <span class="name">
+                            <b>
+                            bMobile</b>
+                            <a href="#bMobile"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>true</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/modules/notifications/notifications.component.ts:15</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="notification$"></a>
+                        <span class="name">
+                            <b>
+                            notification$</b>
+                            <a href="#notification$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/Notification.html" target="_self" >Observable&lt;Notification&gt;</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/modules/notifications/notifications.component.ts:16</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
 
 </div>
 
@@ -220,14 +338,33 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 
+import { Observable } from &#x27;rxjs&#x27;;
+
+import { Notification } from &#x27;app/shared/models/notification&#x27;;
+import { ResponsiveService } from &#x27;app/core/services/responsive.service&#x27;;
+import { NotificationsService } from &#x27;./notifications.service&#x27;;
+
 @Component({
   selector: &#x27;app-notifications&#x27;,
   templateUrl: &#x27;./notifications.component.html&#x27;,
-  styleUrls: [&#x27;./notifications.component.sass&#x27;]
+  styleUrls: [&#x27;./notifications.component.scss&#x27;]
 })
 export class NotificationsComponent implements OnInit {
+  bMobile &#x3D; true;
+  notification$: Observable&lt;Notification&gt;;
 
-  constructor() { }
+  constructor(responsiveService: ResponsiveService,
+    private m_notificationService: NotificationsService) {
+    responsiveService.isMobile().subscribe(result &#x3D;&gt; {
+      if (result.matches) {
+          this.bMobile &#x3D; false;
+      } else {
+          this.bMobile &#x3D; true;
+      }
+    });
+
+    this.notification$ &#x3D; this.m_notificationService.getAll();
+  }
 
   ngOnInit() {
   }
@@ -237,15 +374,25 @@ export class NotificationsComponent implements OnInit {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;p&gt;
-  notifications works!
-&lt;/p&gt;
-</code></pre>
+        <pre class="line-numbers"><code class="language-html">&lt;app-top-app-bar *ngIf&#x3D;&quot;bMobile&quot; [title]&#x3D;&quot;&#x27;Notifications&#x27;&quot;&gt;
+&lt;/app-top-app-bar&gt;
+
+&lt;div id&#x3D;&quot;notification-page&quot; class&#x3D;&quot;full-page&quot;&gt;
+  &lt;ng-container *ngIf&#x3D;&quot;notification$ | async as notification; else empty&quot;&gt;
+    &lt;div *ngFor&#x3D;&quot;let event of notification.events&quot;&gt;
+        &lt;p&gt;{{ event.title }}&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/ng-container&gt;
+&lt;/div&gt;
+
+&lt;ng-template #empty&gt;
+    &lt;p&gt;Pas de notification !&lt;/p&gt;
+&lt;/ng-template&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
                 <p class="comment">
-                    <code>./notifications.component.sass</code>
+                    <code>./notifications.component.scss</code>
                 </p>
                 <pre class="line-numbers"><code class="language-scss"></code></pre>
     </div>
@@ -275,8 +422,8 @@ export class NotificationsComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><p>  notifications works!</p></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BottomNavigationComponent', 'selector': 'app-bottom-navigation'},{'name': 'CreateEventComponent', 'selector': 'app-create-event'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'EditEventComponent', 'selector': 'app-edit-event'},{'name': 'EventDetailComponent', 'selector': 'app-event-detail'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'TopNavigationComponent', 'selector': 'app-top-navigation'}];
+        var COMPONENT_TEMPLATE = '<div><app-top-app-bar *ngIf="bMobile" [title]="\'Notifications\'"></app-top-app-bar><div id="notification-page" class="full-page">  <ng-container *ngIf="notification$ | async as notification; else empty">    <div *ngFor="let event of notification.events">        <p>{{ event.title }}</p>    </div>  </ng-container></div><ng-template #empty>    <p>Pas de notification !</p></ng-template></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BottomNavigationComponent', 'selector': 'app-bottom-navigation'},{'name': 'ChangePasswordComponent', 'selector': 'app-change-password'},{'name': 'CommentListComponent', 'selector': 'app-comment-list'},{'name': 'CreateEventComponent', 'selector': 'app-create-event'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'EditEventComponent', 'selector': 'app-edit-event'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'EventCardComponent', 'selector': 'app-event-card'},{'name': 'EventDetailComponent', 'selector': 'app-event-detail'},{'name': 'ForgotComponent', 'selector': 'app-forgot'},{'name': 'InscriptionComponent', 'selector': 'app-inscription'},{'name': 'InvitationComponent', 'selector': 'app-invitation'},{'name': 'LegalsComponent', 'selector': 'app-legals'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NotificationsComponent', 'selector': 'app-notifications'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PostListComponent', 'selector': 'app-post-list'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'TopAppBarComponent', 'selector': 'app-top-app-bar'},{'name': 'TopNavigationComponent', 'selector': 'app-top-navigation'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'NotificationsComponent'};
 </script>
