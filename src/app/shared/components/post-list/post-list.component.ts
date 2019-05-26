@@ -3,6 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Post } from 'app/shared/models/post';
 import { PostService } from 'app/modules/events/post.service';
+import { AuthService } from 'app/core/services/auth.service';
+
+enum PostState {
+  Read,
+  Create,
+  Update
+}
 
 @Component({
   selector: 'app-post-list',
@@ -15,15 +22,20 @@ export class PostListComponent implements OnInit {
   @Output() updated = new EventEmitter<any>();
   
   postForm: FormGroup;
-  bCreate = false;
-  bEdit = false;
+  postState = PostState;
+  currentState = PostState.Read;
+  userId: number;
+  postIdToUpdate: number;
 
   constructor(private m_postService: PostService,
-    private m_formBuilder: FormBuilder) {
+    private m_formBuilder: FormBuilder,
+    authService: AuthService) {
     this.postForm = this.m_formBuilder.group({
       title: ['', Validators.required],
       content: ['', Validators.required]
     });
+
+    this.userId = authService.getUserId();
   }
 
   ngOnInit() {
@@ -31,16 +43,17 @@ export class PostListComponent implements OnInit {
 
   submitCreateForm(): void {
     this.m_postService.createPost(this.eventId, this.postForm.value).subscribe(result => {
-      this.bCreate = false;
+      this.currentState = PostState.Read;
       this.updated.emit(undefined);
     }, error => {
 
     });
   }
 
-  submitEditForm(postId: number): void {
-    this.m_postService.updatePost(this.eventId, postId, this.postForm.value).subscribe(result => {
-      this.bCreate = false;
+  submitEditForm(): void {
+    this.m_postService.updatePost(this.eventId, this.postIdToUpdate, this.postForm.value).subscribe(result => {
+      this.currentState = PostState.Read;
+      this.postIdToUpdate = undefined;
       this.updated.emit(undefined);
     }, error => {
 
@@ -57,6 +70,13 @@ export class PostListComponent implements OnInit {
 
   reloadComments(): void {
     this.updated.emit(undefined);
+  }
+
+  patchForm(post: Post): void {
+    this.postForm.patchValue({
+      title: post.title,
+      content: post.content
+    });
   }
 
 }

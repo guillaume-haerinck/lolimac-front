@@ -1,31 +1,53 @@
 <div *ngFor="let post of posts">
-    <div class="post">
-        <h3>{{ post.title }}</h3>
+    <div class="post" *ngIf="postIdToUpdate != post.id">
+        <div class="top-bar">
+            <h3>{{ post.title }}</h3>
+            <button mat-button *ngIf="post.id_user == userId"
+                (click)="currentState = postState.Update; postIdToUpdate = post.id; patchForm(post)">Modifier</button>
+        </div>
+
         <p>{{ post.content }}</p>
     </div>
-    
-    <app-comment-list [comments]="post.comments" [eventId]="eventId" [postId]="post.id" (updated)="reloadComments()"></app-comment-list>
+
+    <div class="post" *ngIf="postIdToUpdate == post.id">
+        <ng-container *ngTemplateOutlet="form"></ng-container>
+    </div>
+
+    <app-comment-list [comments]="post.comments" [eventId]="eventId" [postId]="post.id" (updated)="reloadComments()">
+    </app-comment-list>
 </div>
 
-<a *ngIf="bCreate == false" (click)="bCreate = true">Ajouter un post</a>
+<a *ngIf="currentState == postState.Read" (click)="currentState = postState.Create">Ajouter un post</a>
 
-<form [formGroup]="postForm" id="postForm" *ngIf="bCreate == true">
-    <mat-form-field appearance="fill">
-    <mat-label>Titre du post</mat-label>
-    <input matInput placeholder="Concert au Crous" formControlName="title">
-    </mat-form-field>
+<ng-container *ngIf="currentState == postState.Create">
+    <ng-container *ngTemplateOutlet="form"></ng-container>
+</ng-container>
 
-    <mat-form-field appearance="fill">
-    <mat-label>Contenu du post</mat-label>
-    <input matInput placeholder="Concert au Crous" formControlName="content">
-    </mat-form-field>
 
-    <button mat-raised-button color="accent" (click)="submitCreateForm()"
-    [disabled]="!postForm.valid">
-    Poster
-    </button>
+<ng-template #form>
+    <form [formGroup]="postForm" id="postForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Titre du post</mat-label>
+            <input matInput placeholder="Concert au Crous" formControlName="title">
+        </mat-form-field>
 
-    <button mat-button (click)="bCreate = false">
-    Annuler
-    </button>
-</form>
+        <mat-form-field appearance="fill">
+            <mat-label>Contenu du post</mat-label>
+            <input matInput placeholder="Concert au Crous" formControlName="content">
+        </mat-form-field>
+
+        <ng-container [ngSwitch]="currentState">
+            <button *ngSwitchCase="postState.Create" mat-raised-button color="accent" (click)="submitCreateForm()" [disabled]="!postForm.valid">
+                Créer
+            </button>
+
+            <button *ngSwitchCase="postState.Update" mat-raised-button color="accent" (click)="submitEditForm()">
+                Modifier
+            </button>
+        </ng-container>
+
+        <button mat-button (click)="currentState = postState.Read; postIdToUpdate = undefined">
+            Annuler
+        </button>
+    </form>
+</ng-template>
