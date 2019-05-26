@@ -2,4 +2,19 @@
     background-color: var(--color-primary-lighter);
     padding: 1px 10px;
     border-radius: var(--border-radius);
+
+    .top-bar {
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: space-between;
+
+        button {
+            align-self: center;
+        }
+    }
+}
+
+form {
+    display: grid;
+    grid-auto-flow: row;
 }

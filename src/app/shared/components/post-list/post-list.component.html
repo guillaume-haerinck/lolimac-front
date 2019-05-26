@@ -2,8 +2,9 @@
     <div class="post" *ngIf="postIdToUpdate != post.id">
         <div class="top-bar">
             <h3>{{ post.title }}</h3>
-            <button mat-button *ngIf="post.id_user == userId"
-                (click)="currentState = postState.Update; postIdToUpdate = post.id; patchForm(post)">Modifier</button>
+            <button mat-raised-button *ngIf="post.id_user == userId" (click)="currentState = postState.Update; postIdToUpdate = post.id; patchForm(post)">
+                Modifier
+            </button>
         </div>
 
         <p>{{ post.content }}</p>
@@ -37,16 +38,22 @@
         </mat-form-field>
 
         <ng-container [ngSwitch]="currentState">
-            <button *ngSwitchCase="postState.Create" mat-raised-button color="accent" (click)="submitCreateForm()" [disabled]="!postForm.valid">
+            <button *ngSwitchCase="postState.Create" mat-raised-button color="accent" (click)="submitCreateForm()"
+                [disabled]="!postForm.valid">
                 Créer
             </button>
 
-            <button *ngSwitchCase="postState.Update" mat-raised-button color="accent" (click)="submitEditForm()">
-                Modifier
-            </button>
+            <ng-container *ngSwitchCase="postState.Update">
+                <button mat-raised-button color="accent" (click)="submitEditForm()" [disabled]="!postForm.valid">
+                    Modifier
+                </button>
+                <button mat-raised-button color="warn" (click)="deletePost()">
+                    Supprimer
+                </button>
+            </ng-container>
         </ng-container>
 
-        <button mat-button (click)="currentState = postState.Read; postIdToUpdate = undefined">
+        <button mat-button (click)="currentState = postState.Read; postIdToUpdate = undefined; patchForm(undefined)">
             Annuler
         </button>
     </form>

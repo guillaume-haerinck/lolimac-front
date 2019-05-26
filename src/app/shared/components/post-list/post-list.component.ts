@@ -54,14 +54,17 @@ export class PostListComponent implements OnInit {
     this.m_postService.updatePost(this.eventId, this.postIdToUpdate, this.postForm.value).subscribe(result => {
       this.currentState = PostState.Read;
       this.postIdToUpdate = undefined;
+      this.patchForm(undefined);
       this.updated.emit(undefined);
     }, error => {
 
     });
   }
 
-  deletePost(postId: number): void {
-    this.m_postService.deletePost(this.eventId, postId).subscribe(result => {
+  deletePost(): void {
+    this.m_postService.deletePost(this.eventId, this.postIdToUpdate).subscribe(result => {
+      this.currentState = PostState.Read;
+      this.postIdToUpdate = undefined;
       this.updated.emit(undefined);
     }, error => {
 
@@ -72,11 +75,17 @@ export class PostListComponent implements OnInit {
     this.updated.emit(undefined);
   }
 
-  patchForm(post: Post): void {
-    this.postForm.patchValue({
-      title: post.title,
-      content: post.content
-    });
+  patchForm(post: Post | undefined): void {
+    if (post == undefined) {
+      this.postForm.patchValue({
+        title: '',
+        content: ''
+      });
+    } else {
+      this.postForm.patchValue({
+        title: post.title,
+        content: post.content
+      });
+    }
   }
-
 }

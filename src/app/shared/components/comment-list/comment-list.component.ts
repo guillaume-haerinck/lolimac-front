@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Comment } from 'app/shared/models/comment';
 import { PostService } from 'app/modules/events/post.service';
+import { AuthService } from 'app/core/services/auth.service';
 
 @Component({
   selector: 'app-comment-list',
@@ -17,13 +18,17 @@ export class CommentListComponent implements OnInit {
 
   commentForm: FormGroup;
   bEdit = false;
-  bCreate = false;
+  userId: number;
+  commentIdToUpdate: number;
 
   constructor(private m_postService: PostService,
-    private m_formBuilder: FormBuilder) { 
+    private m_formBuilder: FormBuilder,
+    authService: AuthService) { 
     this.commentForm = this.m_formBuilder.group({
       content: ['', Validators.required]
     });
+
+    this.userId = authService.getUserId();
   }
 
   ngOnInit() {
@@ -31,7 +36,6 @@ export class CommentListComponent implements OnInit {
 
   submitCreateForm(): void {
     this.m_postService.createComment(this.eventId, this.postId, this.commentForm.value).subscribe(result => {
-      this.bCreate = false;
       this.updated.emit(undefined);
     }, error => {
 
@@ -53,6 +57,18 @@ export class CommentListComponent implements OnInit {
     }, error => {
 
     });
+  }
+
+  patchForm(comment: Comment | undefined): void {
+    if (comment == undefined) {
+      this.commentForm.patchValue({
+        content: ''
+      });
+    } else {
+      this.commentForm.patchValue({
+        content: comment.content
+      });
+    }
   }
 
 }

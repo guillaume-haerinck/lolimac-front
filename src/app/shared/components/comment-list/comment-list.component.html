@@ -1,21 +1,43 @@
+<ng-container *ngIf="!bEdit">
+  <ng-container *ngTemplateOutlet="form"></ng-container>
+</ng-container>
+
 <div *ngFor="let comment of comments">
-  <p>{{ comment.content }}</p>
+  <ng-container *ngIf="commentIdToUpdate != comment.id">
+    <p>{{ comment.content }}</p>
+    <button mat-raised-button *ngIf="comment.id_user == userId"
+      (click)="bEdit = true; commentIdToUpdate = comment.id; patchForm(comment)">
+      Modifier
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="commentIdToUpdate == comment.id">
+    <ng-container *ngTemplateOutlet="form"></ng-container>
+  </ng-container>
 </div>
 
-<a *ngIf="bCreate == false" (click)="bCreate = true">Ajouter un commentaire</a>
-
-<form [formGroup]="commentForm" id="commentForm" *ngIf="bCreate == true">
+<ng-template #form>
+  <form [formGroup]="commentForm" id="commentForm">
     <mat-form-field appearance="fill">
-    <mat-label>Commentaire</mat-label>
-    <input matInput placeholder="Concert au Crous" formControlName="content">
+      <mat-label>Commentaire</mat-label>
+      <input matInput placeholder="Concert au Crous" formControlName="content">
     </mat-form-field>
 
-    <button mat-raised-button color="accent" (click)="submitCreateForm()"
-    [disabled]="!commentForm.valid">
-    Poster
-    </button>
+    <ng-container [ngSwitch]="bEdit">
+      <button *ngSwitchCase="false" mat-raised-button color="accent" (click)="submitCreateForm()"
+        [disabled]="!commentForm.valid">
+        Poster
+      </button>
 
-    <button mat-button (click)="bCreate = false">
-    Annuler
-    </button>
-</form>
+      <ng-container *ngSwitchCase="true">
+        <button mat-raised-button color="accent" (click)="submitCreateForm()" [disabled]="!commentForm.valid">
+          Valider
+        </button>
+        <button mat-raised-button (click)="commentIdToUpdate = undefined; bEdit = false; patchForm(undefined)">
+          Annuler
+        </button>
+      </ng-container>
+    </ng-container>
+
+  </form>
+</ng-template>
