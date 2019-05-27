@@ -7,76 +7,92 @@
   </div>
 
   <div id="event-detail-page">
-    <h2>{{ event.title }}</h2>
-    <div id="bloc-accroche">
-      <div id="bloc-createur" *ngIf="event.participation != 1">
-        <ng-container *ngFor="let user of event.participants">
-          <ng-container *ngIf="user.participation == 1">
-            <div class="avatar">
-              <img src="{{ user.photo_url }}" alt="avatar">
-            </div>
-            <div>
-              <p>Organisé par</p>
-              <p>{{ user.pseudo }}</p>
-            </div>
+    <div id="event-detail-page-content">
+      <h2>{{ event.title }}</h2>
+      <div id="bloc-accroche">
+        <div id="bloc-createur" *ngIf="event.participation != 1">
+          <ng-container *ngFor="let user of event.participants">
+            <ng-container *ngIf="user.participation == 1">
+              <div class="avatar">
+                <img src="{{ user.photo_url }}" alt="avatar">
+              </div>
+              <div>
+                <p>Organisé par</p>
+                <b>{{ user.firstmane }} {{ user.lastname}}</b>
+              </div>
+            </ng-container>
           </ng-container>
+        </div>
+
+        <div *ngIf="event.participation == 1">
+          <div>
+            <p>Vous avez organisé cet évènement</p>
+          </div>
+        </div>
+
+        <ng-container [ngSwitch]="event.participation">
+          <button *ngSwitchCase="0" mat-raised-button color="accent"
+            (click)="joinEvent(); event.participation = 2">Participer</button>
+          <button *ngSwitchCase="1" mat-raised-button
+            (click)="goTo('/evenements/edition/' + event.id_event)">Modifier</button>
+          <button *ngSwitchCase="2" mat-stroked-button (click)="leaveEvent(); event.participation = 0">Ne plus
+            participer</button>
         </ng-container>
       </div>
 
-      <div *ngIf="event.participation == 1">
+      <div class="separator"></div>
+
+      <div class="detail-line">
+        <mat-icon>access_time</mat-icon>
+        <div *ngIf="event.date_start; else noDate" class="flex-horizontal-space">
           <div>
-            <p>Organisé par Moi</p>
+            <p *ngIf="!bNoHour">Le {{ event.date_start | date:'d MMMM yyyy à HH:mm' }}</p>
+            <p *ngIf="bNoHour">Le {{ event.date_start | date:'d MMMM yyyy' }}</p>
           </div>
+
+          <a (click)="getIcsLink()" class="mat-icon-text">Exporter le calendrier<mat-icon>keyboard_arrow_right
+            </mat-icon></a>
+        </div>
+
+        <ng-template #noDate>
+          <p>Jour à définir</p>
+        </ng-template>
       </div>
-
-      <ng-container [ngSwitch]="event.participation">
-        <button *ngSwitchCase="0" mat-raised-button color="accent" (click)="joinEvent(); event.participation = 2">Participer</button>
-        <button *ngSwitchCase="1" mat-raised-button (click)="goTo('/evenements/edition/' + event.id_event)">Modifier</button>
-        <button *ngSwitchCase="2" mat-stroked-button (click)="leaveEvent(); event.participation = 0">Ne plus participer</button>
-      </ng-container>
-    </div>
-
-    <div class="separator"></div>
-
-    <div class="detail-line">
-      <mat-icon>access_time</mat-icon>
-      <div *ngIf="event.date_start; else noDate">
-        <p *ngIf="!bNoHour">Le {{ event.date_start | date:'d MMMM yyyy à HH:mm' }}</p>
-        <p *ngIf="bNoHour">Le {{ event.date_start | date:'d MMMM yyyy' }}</p>
-        <a (click)="getIcsLink()">Exporter le calendrier ></a>
-        <a *ngIf="ics != ''" href="{{ics}}">{{ics}}</a>
-      </div>
-      
-      <ng-template #noDate><p>Jour à définir</p></ng-template>
-    </div>
-    <div class="detail-line">
-      <mat-icon>location_on</mat-icon>
-      <ng-container *ngIf="event.place; else noPlace">
+      <div class="detail-line">
+        <mat-icon>location_on</mat-icon>
+        <div *ngIf="event.place; else noPlace" class="flex-horizontal-space">
           <p *ngIf="event.place.name">{{ event.place.name }}</p>
-      </ng-container>
-      <ng-template #noPlace><p>Lieu à définir</p></ng-template>
-    </div>
-
-    <h3>Description</h3>
-    <ng-container *ngIf="event.description; else noDescription">
-      <p>{{ event.description }}</p>
-    </ng-container>
-    <ng-template #noDescription>
-      <p>Pas de description pour le moment !</p>
-    </ng-template>
-
-    <h3>Participants ({{ event.participants.length }})</h3>
-    <div class="participants-container" *ngIf="event.participants.length != 0; else noParticipants">
-      <div *ngFor="let user of event.participants">
-        <p>{{ user.firstmane }} {{ user.lastname }}</p>
+          <a class="mat-icon-text">Voir sur la carte<mat-icon>keyboard_arrow_right</mat-icon></a>
+        </div>
+        <ng-template #noPlace>
+          <p>Lieu à définir</p>
+        </ng-template>
       </div>
+
+      <h3>Description</h3>
+      <ng-container *ngIf="event.description; else noDescription">
+        <p>{{ event.description }}</p>
+      </ng-container>
+      <ng-template #noDescription>
+        <p>Pas de description pour le moment !</p>
+      </ng-template>
+
+      <h3>Participants ({{ event.participants.length }})</h3>
+      <div class="participants-container" *ngIf="event.participants.length != 0; else noParticipants">
+        <div *ngFor="let user of event.participants" class="participant-card">
+          <div class="avatar-medium">
+            <img src="{{ user.photo_url }}" alt="avatar">
+          </div>
+          <b>{{ user.firstmane }} {{ user.lastname[0] }}.</b>
+        </div>
+      </div>
+      <ng-template #noParticipants>
+        <p>Pas de participants pour le moment !</p>
+      </ng-template>
+
+      <app-post-list [posts]="event.posts" [eventId]="eventId" (updated)="reloadPosts()"></app-post-list>
+
     </div>
-    <ng-template #noParticipants>
-      <p>Pas de participants pour le moment !</p>
-    </ng-template>
-
-    <app-post-list [posts]="event.posts" [eventId]="eventId" (updated)="reloadPosts()"></app-post-list>
-
   </div>
 </ng-container>
 

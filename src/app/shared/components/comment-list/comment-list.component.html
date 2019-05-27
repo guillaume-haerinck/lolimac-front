@@ -8,13 +8,13 @@
         <b *ngIf="comment.user.firstname != ''">{{comment.user.firstname}} {{comment.user.lastname}}</b>
         <b *ngIf="comment.user.firstname == ''">[Utilisateur supprimé]</b>
 
-        <p *ngIf="comment.id_user != userId">{{ comment.date_edited | date }}</p>
+        <p *ngIf="comment.id_user != userId">le {{ comment.date_edited | date:'dd MMMM' }}</p>
         <button mat-raised-button *ngIf="comment.id_user == userId"
           (click)="bEdit = true; commentIdToUpdate = comment.id; patchForm(comment)">
           Modifier
         </button>
       </div>
-      <div>
+      <div class="comment">
         <p>{{ comment.content }}</p>
       </div>
     </div>
