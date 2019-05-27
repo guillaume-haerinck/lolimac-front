@@ -6,7 +6,32 @@
     align-content: stretch;
     min-height: 100vh;
     grid-gap: 40px;
-    padding: 25px;
+    padding: 0px 15px;
+
+    background: linear-gradient(59deg, #f3aad3, #b6b2f2);
+    background-size: 600% 600%;
+
+    animation: Gradiant 30s ease infinite;
+
+    @keyframes Gradiant { 
+        0%{background-position:91% 0%}
+        50%{background-position:10% 100%}
+        100%{background-position:91% 0%}
+    }
+
+    .presentation-container {
+        display: grid;
+        align-self: end;
+
+        .logo {
+            display: grid;
+            justify-items: center;
+        }
+    
+        .presentation {
+            text-align: center;
+        }
+    }
 
     form {
         display: inline-grid;
@@ -20,5 +45,7 @@
 
     a {
         text-align: center;
+        align-self: start;
+        justify-self: center;
     }
 }
