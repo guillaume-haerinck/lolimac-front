@@ -77,10 +77,8 @@ export class EditProfileComponent implements OnInit {
   deleteUser(): void {
     this.m_userService.delete(this.m_authService.getUserId()).subscribe(result => {
       this.bUserDeleted = true;
-
-      setTimeout(() => {
-        this.m_router.navigate(['/visiteur/login]']);
-      }, 2500);
+      this.m_authService.logout();
+      this.m_router.navigate(['/visiteur/login]']);
     }, error => {
 
     });

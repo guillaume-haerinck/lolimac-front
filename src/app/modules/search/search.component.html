@@ -6,7 +6,13 @@
 </form>
 
 <div id="search-page">
-  <ng-container *ngFor="let event of searchResults$ | async">
-    <app-event-card [event]="event" class="item"></app-event-card>
+  <ng-container *ngIf="searchResults$ | async as events">
+    <ng-container *ngIf="events.length > 0; else noResult">
+      <app-event-card *ngFor="let event of events" [event]="event" class="item"></app-event-card>
+    </ng-container>
+
+    <ng-template #noResult>
+      <p>Aucun résultat de recherche !</p>
+    </ng-template>
   </ng-container>
 </div>

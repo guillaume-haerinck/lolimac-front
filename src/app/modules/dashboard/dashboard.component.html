@@ -2,11 +2,14 @@
 </app-top-app-bar>
 
 <div id="dashboard-page">
-  <div *ngIf="events.length > 0; else loading" class="events-container">
+  <div *ngIf="events.length > 0; else loadingOrEmpty" class="events-container">
     <app-event-card *ngFor="let event of events" [event]="event"></app-event-card>
   </div>
 
+  <ng-template #loadingOrEmpty>
+    <p class="center" *ngIf="events.length == 0; else loading">Aucun évènement !</p>
+  </ng-template>
   <ng-template #loading>
-    <p>Chargement des évènements...</p>
+    <p class="center">Chargement des évènements...</p>
   </ng-template>
 </div>
