@@ -3,6 +3,10 @@
     align-content: stretch;
     grid-gap: 10px;
 
+    h2 {
+        text-align: center;
+    }
+
     mat-horizontal-stepper, .success {
         border-radius: var(--border-radius);
         align-self: center;
@@ -42,5 +46,6 @@
 
     a {
         text-align: center;
+        justify-self: center;
     }
 }
