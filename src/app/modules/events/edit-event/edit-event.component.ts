@@ -97,12 +97,13 @@ export class EditEventComponent implements OnInit {
   submitForm(): void {
     let form = this.eventForm.value;
     if (form.date_start_hour && form.date_start_minute) {
-      form.date_start.setHours(form.date_start_hour, form.date_start_minute); 
+      if (form.date_start instanceof Date) {
+        form.date_start.setHours(form.date_start_hour, form.date_start_minute); 
+      }
     }
     if (!this.bEndDetail) {
       form.date_end = new Date(form.date_start);
       if (form.date_end_offset === 24) {
-        form.date_end = form.date_start;
         form.date_end.setHours(23);
       } else {
         form.date_end.setHours(form.date_end.getHours() + Number(form.date_end_offset), 0);
