@@ -8,6 +8,7 @@ import { EventCardComponent } from './components/event-card/event-card.component
 import { PostListComponent } from './components/post-list/post-list.component';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { EventCardSmallComponent } from './components/event-card-small/event-card-small.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
     EventCardComponent,
     PostListComponent,
     CommentListComponent,
-    DialogComponent
+    DialogComponent,
+    EventCardSmallComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
     EventCardComponent,
     PostListComponent,
     CommentListComponent,
-    DialogComponent
+    DialogComponent,
+    EventCardSmallComponent
   ]
 })
 export class SharedModule { }
