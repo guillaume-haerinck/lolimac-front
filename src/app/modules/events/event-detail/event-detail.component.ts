@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 import { Event } from 'app/shared/models/event';
 import { EventService } from '../event.service';
 import { ResponsiveService } from 'app/core/services/responsive.service';
+import { MatDialog } from '@angular/material';
+import { DialogComponent } from 'app/shared/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-event-detail',
@@ -17,12 +18,12 @@ export class EventDetailComponent implements OnInit {
   bMobile = true;
   bNoHour = true;
   eventId: number;
-  ics = '';
 
   constructor(private m_eventService: EventService,
     route: ActivatedRoute,
     private m_router: Router,
-    responsiveService: ResponsiveService) {
+    responsiveService: ResponsiveService,
+    private m_dialog: MatDialog) {
     this.eventId = Number(route.snapshot.paramMap.get('id'));
 
     responsiveService.isMobile().subscribe(result => {
@@ -74,8 +75,10 @@ export class EventDetailComponent implements OnInit {
 
   getIcsLink(): void {
     this.m_eventService.getIcsLink(this.eventId).subscribe(result => {
-      console.log(result);
-      this.ics = result.url;
+      const dialogRef = this.m_dialog.open(DialogComponent, {
+        width: "500px",
+        data: {title: `Export de l'évènement`, text: `Copiez ce lien dans votre application de calendrier: ${result.url} `}
+      });
     }, error => {
 
     });

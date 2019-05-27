@@ -1,0 +1,16 @@
+
+:host {
+    display: grid;
+    grid-auto-flow: row;
+    justify-items: center;
+    grid-gap: 20px;
+
+    h1 {
+        justify-self: start;
+        margin: 0;
+    }
+
+    p {
+        margin: 0;
+    }
+}
