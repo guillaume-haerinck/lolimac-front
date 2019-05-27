@@ -16,7 +16,7 @@
       </ng-template>
 
       <ng-container *ngIf="event.date_start; else noTime">
-        <p>{{ event.date_start | date:'medium' }}</p>
+        <p>{{ event.date_start | date:'mediumDate' }}</p>
       </ng-container>
       <ng-template #noTime>
         <p>Jour à déterminer</p>

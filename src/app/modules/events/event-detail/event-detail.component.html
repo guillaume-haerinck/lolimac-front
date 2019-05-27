@@ -9,7 +9,7 @@
   <div id="event-detail-page">
     <h2>{{ event.title }}</h2>
     <div id="bloc-accroche">
-      <div id="bloc-createur">
+      <div id="bloc-createur" *ngIf="event.participation != 1">
         <ng-container *ngFor="let user of event.participants">
           <ng-container *ngIf="user.participation == 1">
             <div class="avatar">
@@ -21,6 +21,12 @@
             </div>
           </ng-container>
         </ng-container>
+      </div>
+
+      <div *ngIf="event.participation == 1">
+          <div>
+            <p>Organisé par Moi</p>
+          </div>
       </div>
 
       <ng-container [ngSwitch]="event.participation">
@@ -55,7 +61,17 @@
       <p>{{ event.description }}</p>
     </ng-container>
     <ng-template #noDescription>
-      <p>Pas de description pour le moment.</p>
+      <p>Pas de description pour le moment !</p>
+    </ng-template>
+
+    <h3>Participants ({{ event.participants.length }})</h3>
+    <div class="participants-container" *ngIf="event.participants.length != 0; else noParticipants">
+      <div *ngFor="let user of event.participants">
+        <p>{{ user.firstmane }} {{ user.lastname }}</p>
+      </div>
+    </div>
+    <ng-template #noParticipants>
+      <p>Pas de participants pour le moment !</p>
     </ng-template>
 
     <app-post-list [posts]="event.posts" [eventId]="eventId" (updated)="reloadPosts()"></app-post-list>

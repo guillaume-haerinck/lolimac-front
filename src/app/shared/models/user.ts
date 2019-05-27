@@ -7,4 +7,5 @@ export interface User {
     phone?: string;
     year_promotion?: number;
     status?: number;
+    participation?: number;
 }

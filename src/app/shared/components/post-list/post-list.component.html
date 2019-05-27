@@ -36,12 +36,12 @@
     <form [formGroup]="postForm" id="postForm">
         <mat-form-field appearance="fill">
             <mat-label>Titre du post</mat-label>
-            <input matInput placeholder="Concert au Crous" formControlName="title">
+            <input matInput placeholder="Qui ramène les binouz ?" formControlName="title">
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Contenu du post</mat-label>
-            <input matInput placeholder="Concert au Crous" formControlName="content">
+            <textarea matInput rows="10" placeholder="..." formControlName="content"></textarea>
         </mat-form-field>
 
         <ng-container [ngSwitch]="currentState">

@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { registerLocaleData } from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
+import localeFr from '@angular/common/locales/fr';
 
 import { BottomNavigationComponent } from './components/bottom-navigation/bottom-navigation.component';
 import { TopNavigationComponent } from './components/top-navigation/top-navigation.component';
@@ -11,6 +14,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { CoreMaterialModule } from './modules/core-material.module';
 import { ResponsiveService } from './services/responsive.service';
+
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
   declarations: [
@@ -40,6 +45,10 @@ import { ResponsiveService } from './services/responsive.service';
     },
     {
       provide: MAT_DATE_LOCALE,
+      useValue: 'fr-FR'
+    },
+    {
+      provide: LOCALE_ID,
       useValue: 'fr-FR'
     }
   ],
