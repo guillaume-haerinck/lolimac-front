@@ -50,7 +50,7 @@
             <p *ngIf="bNoHour">Le {{ event.date_start | date:'d MMMM yyyy' }}</p>
           </div>
 
-          <a (click)="getIcsLink()" class="mat-icon-text">Exporter le calendrier<mat-icon>keyboard_arrow_right
+          <a (click)="getIcsLink()" class="mat-icon-text link">Exporter le calendrier<mat-icon>keyboard_arrow_right
             </mat-icon></a>
         </div>
 
@@ -62,7 +62,7 @@
         <mat-icon>location_on</mat-icon>
         <div *ngIf="event.place; else noPlace" class="flex-horizontal-space">
           <p *ngIf="event.place.name">{{ event.place.name }}</p>
-          <a class="mat-icon-text">Voir sur la carte<mat-icon>keyboard_arrow_right</mat-icon></a>
+          <a (click)="scrollToPlace()" class="mat-icon-text link">Plus de détails<mat-icon>keyboard_arrow_right</mat-icon></a>
         </div>
         <ng-template #noPlace>
           <p>Lieu à définir</p>
@@ -91,6 +91,14 @@
       </ng-template>
 
       <app-post-list [posts]="event.posts" [eventId]="eventId" (updated)="reloadPosts()"></app-post-list>
+
+      <ng-container *ngIf="event.place">
+        <h3 #place>Lieu</h3>
+        <div id="place">
+          <b>{{ event.place.name }}</b>
+          <p *ngIf="event.place.street">{{ event.place.number }} {{ event.place.street }} <span *ngIf="event.place.city">- {{ event.place.city }}</span></p>
+        </div>
+      </ng-container>
 
     </div>
   </div>

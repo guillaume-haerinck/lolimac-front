@@ -12,14 +12,14 @@
         <p *ngIf="event.place.name">{{ event.place.name }}</p>
       </ng-container>
       <ng-template #noPlace>
-        <p>Lieu non indiqué</p>
+        <p>Lieu à définir</p>
       </ng-template>
 
       <ng-container *ngIf="event.date_start; else noTime">
         <p>Le {{ event.date_start | date:'mediumDate' }}</p>
       </ng-container>
       <ng-template #noTime>
-        <p>Jour non indiqué</p>
+        <p>Jour à définir</p>
       </ng-template>
     </div>
 

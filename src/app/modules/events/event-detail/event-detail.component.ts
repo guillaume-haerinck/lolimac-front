@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -12,6 +12,7 @@ import { ResponsiveService } from 'app/core/services/responsive.service';
   styleUrls: ['./event-detail.component.scss']
 })
 export class EventDetailComponent implements OnInit {
+  @ViewChild('place') place: ElementRef;
   event: Event;
   bMobile = true;
   bNoHour = true;
@@ -78,5 +79,10 @@ export class EventDetailComponent implements OnInit {
     }, error => {
 
     });
+  }
+
+  scrollToPlace(): void {
+    const target = this.place.nativeElement;
+    target.scrollIntoView({behavior: 'smooth'});
   }
 }

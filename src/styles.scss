@@ -51,10 +51,6 @@ body {
 a {
     text-decoration: none;
     color: unset;
-
-    &:hover {
-        text-decoration: underline;
-    }
 }
 
 /* ---------------------- Angular Material Overrides --------------- */
@@ -82,6 +78,13 @@ a {
 }
 
 /* -------------------- Common Objects ----------------------- */
+
+.link {
+    &:hover {
+        border-bottom: 2px solid var(--color-accent);
+        cursor: pointer;
+    }
+}
 
 .avatar,
 .avatar-medium,

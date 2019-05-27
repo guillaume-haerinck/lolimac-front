@@ -12,7 +12,8 @@ import {
   MatButtonModule,
   MatIconModule,
   MatSelectModule,
-  MatStepperModule
+  MatStepperModule,
+  MatDialogModule,
 } from '@angular/material';
 
 @NgModule({
@@ -30,7 +31,8 @@ import {
     MatButtonModule,
     MatIconModule,
     MatSelectModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogModule
   ],
   exports: [
     MatFormFieldModule,
@@ -44,7 +46,8 @@ import {
     MatButtonModule,
     MatIconModule,
     MatSelectModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogModule
   ]
 })
 export class SharedMaterialModule { }
