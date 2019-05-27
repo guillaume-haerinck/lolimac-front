@@ -1,6 +1,9 @@
 <div class="grid-horizontal-between">
-    <h3 *ngIf="posts; else noPost">Posts ({{ posts.length }})</h3>
-    <ng-template #noPost><h3>Posts</h3></ng-template>
+    <ng-container *ngIf="posts; else noPost">
+        <h3 *ngIf="posts.length == 1">Post</h3>
+        <h3 *ngIf="posts.length > 1">Posts ({{ posts.length }})</h3>
+    </ng-container>
+    <ng-template #noPost><h3>Post</h3></ng-template>
     <button mat-raised-button *ngIf="currentState == postState.Read" color="accent" (click)="currentState = postState.Create">Ajouter un post</button>
 </div>
 
@@ -9,25 +12,21 @@
 </ng-container>
 
 <div *ngFor="let post of posts" class="post">
-    <div *ngIf="postIdToUpdate != post.id">
+    <div *ngIf="postIdToUpdate != post.id" class="post-content">
         <div class="top-bar">
             <h3>{{ post.title }}</h3>
-            <button mat-raised-button *ngIf="post.id_user == userId" (click)="currentState = postState.Update; postIdToUpdate = post.id; patchForm(post)">
+            <a class="link" *ngIf="post.id_user == userId" (click)="currentState = postState.Update; postIdToUpdate = post.id; patchForm(post)">
                 Modifier
-            </button>
+            </a>
         </div>
 
         <p>{{ post.content }}</p>
-        <p *ngIf="post.user">par {{ post.user.firstname }}</p>
     </div>
 
-    <div *ngIf="postIdToUpdate == post.id">
+    <div *ngIf="postIdToUpdate == post.id" class="post-content">
         <ng-container *ngTemplateOutlet="form"></ng-container>
     </div>
 
-    <div class="separator"></div>
-
-    <h4>Commentaires</h4>
     <app-comment-list [comments]="post.comments" [eventId]="eventId" [postId]="post.id" (updated)="reloadComments()">
     </app-comment-list>
 </div>

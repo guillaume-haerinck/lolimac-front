@@ -71,13 +71,14 @@
 
       <h3>Description</h3>
       <ng-container *ngIf="event.description; else noDescription">
-        <p>{{ event.description }}</p>
+        <p class="description">{{ event.description }}</p>
       </ng-container>
       <ng-template #noDescription>
-        <p>Pas de description pour le moment !</p>
+        <p class="description">Pas de description pour le moment !</p>
       </ng-template>
 
-      <h3>Participants ({{ event.participants.length }})</h3>
+      <h3 *ngIf="event.participants.length > 1">Participants ({{ event.participants.length }})</h3>
+      <h3 *ngIf="event.participants.length == 1">Participant</h3>
       <div class="participants-container" *ngIf="event.participants.length != 0; else noParticipants">
         <div *ngFor="let user of event.participants" class="participant-card">
           <div class="avatar-medium">
