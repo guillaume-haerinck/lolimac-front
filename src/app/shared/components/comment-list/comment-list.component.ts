@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comment } from 'app/shared/models/comment';
 import { PostService } from 'app/modules/events/post.service';
 import { AuthService } from 'app/core/services/auth.service';
+import { Router } from '@angular/router';
+import { UserService } from 'app/modules/visitor/user.service';
 
 @Component({
   selector: 'app-comment-list',
@@ -19,11 +21,14 @@ export class CommentListComponent implements OnInit {
   commentForm: FormGroup;
   bEdit = false;
   userId: number;
+  userPhotoUrl: string;
   commentIdToUpdate: number;
 
   constructor(private m_postService: PostService,
     private m_formBuilder: FormBuilder,
-    authService: AuthService) { 
+    authService: AuthService,
+    private m_router: Router,
+    private m_userService: UserService) { 
     this.commentForm = this.m_formBuilder.group({
       content: ['', Validators.required]
     });
@@ -32,6 +37,9 @@ export class CommentListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.m_userService.get(this.userId).subscribe(result => {
+      this.userPhotoUrl = result.photo_url;
+    });
   }
 
   submitCreateForm(): void {
@@ -72,6 +80,10 @@ export class CommentListComponent implements OnInit {
         content: comment.content
       });
     }
+  }
+
+  goTo(url: string) {
+    this.m_router.navigateByUrl(url);
   }
 
 }

@@ -58,8 +58,6 @@
       <p>Pas de description pour le moment.</p>
     </ng-template>
 
-    <h3 *ngIf="event.posts; else noPost">Posts ({{ event.posts.length }})</h3>
-    <ng-template #noPost><h3>Posts</h3></ng-template>
     <app-post-list [posts]="event.posts" [eventId]="eventId" (updated)="reloadPosts()"></app-post-list>
 
   </div>

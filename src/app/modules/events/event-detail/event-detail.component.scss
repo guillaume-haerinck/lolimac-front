@@ -12,8 +12,8 @@
     padding: var(--padding-page);
 
     #bloc-accroche {
-        display: grid;
-        grid-auto-flow: column;
+        display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
         

@@ -1,0 +1,19 @@
+
+.comments-container {
+    margin-bottom: 10px;
+}
+
+.comment-container, .form-container {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    grid-gap: 15px;
+
+    p, b, a {
+        margin-top: 0;
+    }
+}
+
+form {
+    display: grid;
+    grid-auto-flow: row;
+}
