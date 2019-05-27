@@ -14,6 +14,7 @@ import { ResponsiveService } from 'app/core/services/responsive.service';
 export class EventDetailComponent implements OnInit {
   event: Event;
   bMobile = true;
+  bNoHour = true;
   eventId: number;
   ics = '';
 
@@ -35,6 +36,12 @@ export class EventDetailComponent implements OnInit {
   ngOnInit() {
     this.m_eventService.getEventById(this.eventId).subscribe(result => {
       this.event = result;
+      if (result.date_start != '') {
+        const date = new Date(result.date_start);
+        if (date.getHours() != 0) {
+          this.bNoHour = false;
+        };
+      }
     }, error => {
 
     });

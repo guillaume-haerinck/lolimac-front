@@ -41,7 +41,8 @@
     <div class="detail-line">
       <mat-icon>access_time</mat-icon>
       <div *ngIf="event.date_start; else noDate">
-        <p>{{ event.date_start | date:'medium' }}</p>
+        <p *ngIf="!bNoHour">Le {{ event.date_start | date:'d MMMM yyyy à HH:mm' }}</p>
+        <p *ngIf="bNoHour">Le {{ event.date_start | date:'d MMMM yyyy' }}</p>
         <a (click)="getIcsLink()">Exporter le calendrier ></a>
         <a *ngIf="ics != ''" href="{{ics}}">{{ics}}</a>
       </div>
