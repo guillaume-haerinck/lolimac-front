@@ -88,13 +88,13 @@
         </div>
       </div>
       <ng-template #noParticipants>
-        <p>Pas de participants pour le moment !</p>
+        <p>Pas de participant pour le moment !</p>
       </ng-template>
 
       <app-post-list [posts]="event.posts" [eventId]="eventId" (updated)="reloadPosts()"></app-post-list>
 
       <ng-container *ngIf="event.place">
-        <h3 #place>Lieu</h3>
+        <h3 #place >Lieu</h3>
         <div id="place">
           <b>{{ event.place.name }}</b>
           <p *ngIf="event.place.street">{{ event.place.number }} {{ event.place.street }} <span *ngIf="event.place.city">- {{ event.place.city }}</span></p>

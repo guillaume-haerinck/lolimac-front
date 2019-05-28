@@ -10,6 +10,7 @@ import { CommentListComponent } from './components/comment-list/comment-list.com
 import { DialogComponent } from './components/dialog/dialog.component';
 import { EventCardSmallComponent } from './components/event-card-small/event-card-small.component';
 import { EventCardNotificationComponent } from './components/event-card-notification/event-card-notification.component';
+import { DeferLoadDirective } from './directives/defer-load.directive';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { EventCardNotificationComponent } from './components/event-card-notifica
     CommentListComponent,
     DialogComponent,
     EventCardSmallComponent,
-    EventCardNotificationComponent
+    EventCardNotificationComponent,
+    DeferLoadDirective
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import { EventCardNotificationComponent } from './components/event-card-notifica
     CommentListComponent,
     DialogComponent,
     EventCardSmallComponent,
-    EventCardNotificationComponent
+    EventCardNotificationComponent,
+    DeferLoadDirective
   ]
 })
 export class SharedModule { }

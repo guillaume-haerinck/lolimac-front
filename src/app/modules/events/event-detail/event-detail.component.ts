@@ -88,4 +88,8 @@ export class EventDetailComponent implements OnInit {
     const target = this.place.nativeElement;
     target.scrollIntoView({behavior: 'smooth'});
   }
+
+  log(text: string): void {
+    console.log(text);
+  }
 }
