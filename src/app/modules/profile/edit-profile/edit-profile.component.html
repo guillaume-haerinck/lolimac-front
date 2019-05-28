@@ -1,7 +1,7 @@
 <app-top-app-bar *ngIf="bMobile" [title]="'Édition du profil'" [bReturn]="true" (return)="goTo('/profil')">
 </app-top-app-bar>
 
-<div id="edit-profile-page">
+<div class="has-mobile-nav" id="edit-profile-page">
   <form [formGroup]="userForm">
     <mat-vertical-stepper [linear]="false">
       <!-- Step 1 -->

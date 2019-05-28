@@ -1,7 +1,7 @@
 <app-top-app-bar *ngIf="bMobile" [title]="'Tableau de bord'">
 </app-top-app-bar>
 
-<div id="dashboard-page">
+<div class="has-mobile-nav" id="dashboard-page">
   <div *ngIf="events.length > 0" class="events-container">
     <ng-container *ngFor="let event of events; let i = index">
       <app-event-card [event]="event" *ngIf="i != (events.length - 1)"></app-event-card>

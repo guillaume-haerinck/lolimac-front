@@ -2,7 +2,7 @@
   (return)="previousStep(); updateTitle()">
 </app-top-app-bar>
 
-<div class="full-page" id="create-page" [style.background-image]="'url(' + eventForm.value.photo_url + ')'">
+<div class="full-page has-mobile-nav" id="create-page" [style.background-image]="'url(' + eventForm.value.photo_url + ')'">
   <form [formGroup]="eventForm">
     <!-- Page 1 -->
     <ng-container *ngIf="currentStep == formStep.Page1">

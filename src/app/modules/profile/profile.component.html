@@ -1,7 +1,7 @@
 <app-top-app-bar *ngIf="bMobile" [title]="'Profil'">
 </app-top-app-bar>
 
-<div id="profile-page" class="full-page">
+<div id="profile-page" class="full-page has-mobile-nav">
   <div *ngIf="user$ | async as user; else loading" class="profile">
     <div class="avatar">
       <img src="{{ user.photo_url }}" alt="avatar">
@@ -10,14 +10,14 @@
   </div>
 
   <ng-container *ngIf="events$ | async as events; else loading">
-    <div>
+    <div class="events-container">
       <h2>Mes évènements</h2>
       <ng-container *ngFor="let event of events">
           <app-event-card-small *ngIf="event.participation == 1" [event]="event"></app-event-card-small>
       </ng-container>
     </div>
 
-    <div>
+    <div class="events-container">
       <h2>Mes participations</h2>
       <ng-container *ngFor="let event of events">
         <app-event-card-small *ngIf="event.participation == 2" [event]="event"></app-event-card-small>

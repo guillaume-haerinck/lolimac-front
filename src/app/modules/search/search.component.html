@@ -5,7 +5,7 @@
   </mat-form-field>
 </form>
 
-<div id="search-page">
+<div class="has-mobile-nav" id="search-page">
   <ng-container *ngIf="searchResults$ | async as events">
     <ng-container *ngIf="events.length > 0; else noResult">
       <app-event-card *ngFor="let event of events" [event]="event" class="item"></app-event-card>
