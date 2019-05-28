@@ -50,7 +50,7 @@
             <p *ngIf="bNoHour">Le {{ event.date_start | date:'d MMMM yyyy' }}</p>
           </div>
 
-          <a (click)="getIcsLink()" class="mat-icon-text link">Exporter le calendrier<mat-icon>keyboard_arrow_right
+          <a (click)="getIcsLink()" class="mat-icon-text pointer">Exporter le calendrier<mat-icon>keyboard_arrow_right
             </mat-icon></a>
         </div>
 
@@ -62,7 +62,7 @@
         <mat-icon>location_on</mat-icon>
         <div *ngIf="event.place; else noPlace" class="flex-horizontal-space">
           <p *ngIf="event.place.name">{{ event.place.name }}</p>
-          <a (click)="scrollToPlace()" class="mat-icon-text link">Plus de détails<mat-icon>keyboard_arrow_right</mat-icon></a>
+          <a (click)="scrollToPlace()" class="mat-icon-text pointer">Plus de détails<mat-icon>keyboard_arrow_right</mat-icon></a>
         </div>
         <ng-template #noPlace>
           <p>Lieu à définir</p>

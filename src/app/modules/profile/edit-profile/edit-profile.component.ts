@@ -7,6 +7,8 @@ import { UserService } from 'app/modules/visitor/user.service';
 import { ImageUrl } from 'app/shared/validators/image-url';
 import { AuthService } from 'app/core/services/auth.service';
 import { fillUndefinedProperties } from 'app/shared/utility/change-objects';
+import { MatDialog } from '@angular/material';
+import { DialogComponent } from 'app/shared/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-edit-profile',
@@ -22,7 +24,8 @@ export class EditProfileComponent implements OnInit {
     private m_router: Router,
     private m_formBuilder: FormBuilder,
     private m_userService: UserService,
-    private m_authService: AuthService) {
+    private m_authService: AuthService,
+    private m_dialog: MatDialog) {
       responsiveService.isMobile().subscribe(result => {
         if (result.matches) {
           this.bMobile = false;
@@ -75,12 +78,21 @@ export class EditProfileComponent implements OnInit {
   }
 
   deleteUser(): void {
-    this.m_userService.delete(this.m_authService.getUserId()).subscribe(result => {
-      this.bUserDeleted = true;
-      this.m_authService.logout();
-      this.m_router.navigate(['/visiteur/login]']);
-    }, error => {
+    const dialogRef = this.m_dialog.open(DialogComponent, {
+      width: "500px",
+      data: {title: `Suppression de votre compte`, text: `On est triste de vous voir partir ! En êtes-vous sûr de sûr ?`, bValBtn: true}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.validated) {
+        this.m_userService.delete(this.m_authService.getUserId()).subscribe(result => {
+          this.bUserDeleted = true;
+          this.m_authService.logout();
+          this.m_router.navigate(['/visiteur/login]']);
+        }, error => {
+
+        });
+      }
     });
   }
 

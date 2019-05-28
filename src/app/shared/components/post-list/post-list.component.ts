@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Post } from 'app/shared/models/post';
 import { PostService } from 'app/modules/events/post.service';
 import { AuthService } from 'app/core/services/auth.service';
+import { MatDialog } from '@angular/material';
+import { DialogComponent } from '../dialog/dialog.component';
 
 enum PostState {
   Read,
@@ -29,7 +31,8 @@ export class PostListComponent implements OnInit {
 
   constructor(private m_postService: PostService,
     private m_formBuilder: FormBuilder,
-    authService: AuthService) {
+    authService: AuthService,
+    private m_dialog: MatDialog) {
     this.postForm = this.m_formBuilder.group({
       title: ['', Validators.required],
       content: ['', Validators.required]
@@ -62,12 +65,21 @@ export class PostListComponent implements OnInit {
   }
 
   deletePost(): void {
-    this.m_postService.deletePost(this.eventId, this.postIdToUpdate).subscribe(result => {
-      this.currentState = PostState.Read;
-      this.postIdToUpdate = undefined;
-      this.updated.emit(undefined);
-    }, error => {
+    const dialogRef = this.m_dialog.open(DialogComponent, {
+      width: "500px",
+      data: {title: `Suppression d'un post`, text: `En êtes-vous bien sûr ?`, bValBtn: true}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.validated) {
+        this.m_postService.deletePost(this.eventId, this.postIdToUpdate).subscribe(result => {
+          this.currentState = PostState.Read;
+          this.postIdToUpdate = undefined;
+          this.updated.emit(undefined);
+        }, error => {
+
+        });
+      }
     });
   }
 

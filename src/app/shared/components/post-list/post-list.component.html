@@ -32,7 +32,7 @@
 </div>
 
 <ng-template #form>
-    <form [formGroup]="postForm" id="postForm">
+    <form [formGroup]="postForm" id="postForm" [class.form-no-shadow]="currentState == postState.Update">
         <mat-form-field appearance="fill">
             <mat-label>Titre du post</mat-label>
             <input matInput placeholder="Qui ramène les binouz ?" formControlName="title">

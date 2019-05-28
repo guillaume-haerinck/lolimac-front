@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ResponsiveService } from 'app/core/services/responsive.service';
 import { EventService } from '../event.service';
 import { fillUndefinedProperties, removeEmptyProperties, removeUnchangedProperties, isEmpty } from 'app/shared/utility/change-objects';
+import { MatDialog } from '@angular/material';
+import { DialogComponent } from 'app/shared/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-edit-event',
@@ -24,7 +26,8 @@ export class EditEventComponent implements OnInit {
     private m_router: Router,
     private m_formBuilder: FormBuilder,
     route: ActivatedRoute,
-    private m_eventService: EventService) {
+    private m_eventService: EventService,
+    private m_dialog: MatDialog) {
     this.eventId = Number(route.snapshot.paramMap.get('id'));
 
     responsiveService.isMobile().subscribe(result => {
@@ -134,10 +137,19 @@ export class EditEventComponent implements OnInit {
   }
 
   deleteEvent(): void {
-    this.m_eventService.delete(this.eventId).subscribe(result => {
-      this.m_router.navigate(['/tableau-de-bord']);
-    }, error => {
+    const dialogRef = this.m_dialog.open(DialogComponent, {
+      width: "500px",
+      data: {title: `Suppression d'un évènement`, text: `En êtes-vous bien sûr ?`, bValBtn: true}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.validated) {
+        this.m_eventService.delete(this.eventId).subscribe(result => {
+          this.m_router.navigate(['/tableau-de-bord']);
+        }, error => {
+    
+        });
+      }
     });
   }
 

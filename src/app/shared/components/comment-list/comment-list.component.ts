@@ -6,6 +6,8 @@ import { PostService } from 'app/modules/events/post.service';
 import { AuthService } from 'app/core/services/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from 'app/modules/visitor/user.service';
+import { MatDialog } from '@angular/material';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-comment-list',
@@ -28,7 +30,8 @@ export class CommentListComponent implements OnInit {
     private m_formBuilder: FormBuilder,
     authService: AuthService,
     private m_router: Router,
-    private m_userService: UserService) { 
+    private m_userService: UserService,
+    private m_dialog: MatDialog) { 
     this.commentForm = this.m_formBuilder.group({
       content: ['', Validators.required]
     });
@@ -61,12 +64,21 @@ export class CommentListComponent implements OnInit {
   }
 
   deleteComment(): void {
-    this.m_postService.deleteComment(this.eventId, this.postId, this.commentIdToUpdate).subscribe(result => {
-      this.bEdit = false;
-      this.commentIdToUpdate = undefined;
-      this.updated.emit(undefined);
-    }, error => {
+    const dialogRef = this.m_dialog.open(DialogComponent, {
+      width: "500px",
+      data: {title: `Suppression d'un commentaire`, text: `En êtes-vous bien sûr ?`, bValBtn: true}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.validated) {
+        this.m_postService.deleteComment(this.eventId, this.postId, this.commentIdToUpdate).subscribe(result => {
+          this.bEdit = false;
+          this.commentIdToUpdate = undefined;
+          this.updated.emit(undefined);
+        }, error => {
+
+        });
+      }
     });
   }
 
