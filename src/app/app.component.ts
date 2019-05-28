@@ -41,15 +41,14 @@ export class AppComponent {
                     this.bVisitor = true;
                 } else {
                     this.bVisitor = false;
+                    notificationsService.getCount().subscribe(result => {
+                        this.notificationCount = Number(result.notifications);
+                    });
                 }
 
                 if (event.url.search("notifications") != -1) {
                     this.notificationCount = 0;
                 }
-
-                notificationsService.getCount().subscribe(result => {
-                    this.notificationCount = Number(result.notifications);
-                });
             }
         });
     }
