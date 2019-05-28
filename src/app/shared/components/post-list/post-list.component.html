@@ -18,9 +18,13 @@
             <a class="link" *ngIf="post.id_user == userId" (click)="currentState = postState.Update; postIdToUpdate = post.id; patchForm(post)">
                 Modifier
             </a>
+            <p *ngIf="post.id_user != userId">
+                Le {{ post.date_edited | date:'dd MMMM' }}
+            </p>
         </div>
 
         <p>{{ post.content }}</p>
+        <small *ngIf="post.user">Posté par {{post.user.firstname}} {{post.user.lastname}}</small>
     </div>
 
     <div *ngIf="postIdToUpdate == post.id" class="post-content">
