@@ -6,7 +6,6 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 import { Event } from 'app/shared/models/event';
 import { EventService } from '../events/event.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -20,11 +19,7 @@ export class SearchComponent implements OnInit {
   private m_searchTerms = new Subject<string>();
 
   constructor(private m_eventService: EventService,
-    private m_formBuilder: FormBuilder,
-    private m_route: ActivatedRoute)
-  {
-    // const urlSearch = this.m_route.snapshot.queryParamMap.get('q');
-
+    private m_formBuilder: FormBuilder) {
     this.searchForm = this.m_formBuilder.group({
       terms: ['']
     });

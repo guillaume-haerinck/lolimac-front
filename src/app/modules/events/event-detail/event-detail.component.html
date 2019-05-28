@@ -3,7 +3,7 @@
 
 <ng-container *ngIf="event; else loading">
   <div id="banner">
-    <img alt="Photo d'illustration de l'évènement" src="{{ event.photo_url }}">
+    <img alt="Photo d'illustration de l'évènement" [lazyLoad]="event.photo_url">
   </div>
 
   <div id="event-detail-page">
@@ -14,7 +14,7 @@
           <ng-container *ngFor="let user of event.participants">
             <ng-container *ngIf="user.participation == 1">
               <div class="avatar">
-                <img src="{{ user.photo_url }}" alt="avatar">
+                <img [lazyLoad]="user.photo_url" alt="avatar">
               </div>
               <div>
                 <p>Organisé par</p>
@@ -82,7 +82,7 @@
       <div class="participants-container" *ngIf="event.participants.length != 0; else noParticipants">
         <div *ngFor="let user of event.participants" class="participant-card">
           <div class="avatar-medium">
-            <img src="{{ user.photo_url }}" alt="avatar">
+            <img [lazyLoad]="user.photo_url" alt="avatar">
           </div>
           <b>{{ user.firstmane }} {{ user.lastname[0] }}.</b>
         </div>

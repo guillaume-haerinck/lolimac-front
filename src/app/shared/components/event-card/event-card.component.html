@@ -1,6 +1,6 @@
 <div class="event-card">
   <div class="banner">
-    <img alt="photo d'illustration de l'évènement" src="{{ event.photo_url }}"
+    <img alt="photo d'illustration de l'évènement" [lazyLoad]="event.photo_url"
       (click)="goTo('/evenements/detail/' + event.id_event)">
   </div>
 
