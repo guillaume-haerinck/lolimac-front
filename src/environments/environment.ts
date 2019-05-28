@@ -6,8 +6,8 @@ export const environment = {
   production: false,
 
   backend: {
-    // serverUrl: 'http://localhost/lolimac-back/api/'
-    serverUrl: 'http://localhost:3000/api/v1/'
+    serverUrl: 'http://localhost/lolimac-back/api/'
+    // serverUrl: 'http://localhost:3000/api/v1/'
   }
 };
 

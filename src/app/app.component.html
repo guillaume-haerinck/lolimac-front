@@ -1,3 +1,5 @@
 <app-top-navigation *ngIf="!bMobile && !bVisitor"></app-top-navigation>
-<router-outlet></router-outlet>
+<div [class.has-mobile-nav]="!bVisitor" class="has-mobile-nav">
+    <router-outlet></router-outlet>
+</div>
 <app-bottom-navigation *ngIf="bMobile && !bVisitor"></app-bottom-navigation>
