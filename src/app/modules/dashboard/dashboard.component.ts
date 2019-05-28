@@ -45,6 +45,7 @@ export class DashboardComponent implements OnInit {
     this.m_eventService.getEventList(this.m_offset, this.m_sizeToGet).subscribe(result => {
       this.currentState = DashBoardState.Done;
       this.events = result;
+      this.m_offset += this.m_sizeToGet;
     }, error => {
       this.currentState = DashBoardState.Error;
     });
