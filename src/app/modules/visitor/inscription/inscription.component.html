@@ -8,8 +8,9 @@
     <mat-step label="Identifiants" [stepControl]="inscriptionForm.get('page1')">
       <form [formGroup]="inscriptionForm.get('page1')">
         <mat-form-field appearance="fill">
-          <mat-label>Pseudo</mat-label>
+          <mat-label>Identifiant</mat-label>
           <input matInput placeholder="CrousMan" formControlName="pseudo" required>
+          <mat-error>Identifiant invalide !</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">

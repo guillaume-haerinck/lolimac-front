@@ -8,15 +8,14 @@
     grid-gap: 40px;
     padding: 0px 15px;
 
-    background: linear-gradient(59deg, #f3aad3, #b6b2f2);
+    background: linear-gradient(193deg, #e9bff0, #a88df2, #bce8f4);
     background-size: 600% 600%;
-
-    animation: Gradiant 30s ease infinite;
+    animation: Gradiant 28s ease infinite;
 
     @keyframes Gradiant { 
-        0%{background-position:91% 0%}
-        50%{background-position:10% 100%}
-        100%{background-position:91% 0%}
+        0%{background-position:0% 87%}
+        50%{background-position:100% 14%}
+        100%{background-position:0% 87%}
     }
 
     .presentation-container {
