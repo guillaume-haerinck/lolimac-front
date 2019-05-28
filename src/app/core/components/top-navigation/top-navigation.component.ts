@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-top-navigation',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./top-navigation.component.scss']
 })
 export class TopNavigationComponent implements OnInit {
+  @Input() notifCount: number;
 
   constructor() { }
 

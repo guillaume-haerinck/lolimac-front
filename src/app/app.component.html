@@ -1,5 +1,5 @@
-<app-top-navigation *ngIf="!bMobile && !bVisitor"></app-top-navigation>
+<app-top-navigation *ngIf="!bMobile && !bVisitor" [notifCount]="notificationCount"></app-top-navigation>
 <div [class.has-mobile-nav]="!bVisitor" class="has-mobile-nav">
     <router-outlet></router-outlet>
 </div>
-<app-bottom-navigation *ngIf="bMobile && !bVisitor"></app-bottom-navigation>
+<app-bottom-navigation *ngIf="bMobile && !bVisitor" [notifCount]="notificationCount"></app-bottom-navigation>

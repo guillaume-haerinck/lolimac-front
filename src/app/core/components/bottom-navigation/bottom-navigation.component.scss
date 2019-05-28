@@ -39,3 +39,26 @@
         }
     }
 }
+
+.badge,
+.badge-large {
+    position: absolute;
+    bottom: 27px;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    border-radius: 15px;
+    font-weight: 500;
+    color: wheat;
+    background-color: var(--color-accent-darker);
+    font-size: 0.9em;
+    left: calc(50% + 2px);
+    border: 2px solid var(--color-primary);
+}
+
+.badge-large {
+    width: 20px;
+    height: 20px;
+    font-size: 0.8em;
+    line-height: 20px;
+}

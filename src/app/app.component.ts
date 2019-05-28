@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { SwUpdate, SwPush } from '@angular/service-worker';
-import { Router, RouterEvent } from '@angular/router';
+import { Router, RouterEvent, NavigationEnd } from '@angular/router';
 
 import { AuthService } from './core/services/auth.service';
 import { ResponsiveService } from './core/services/responsive.service';
-
+import { NotificationsService } from './modules/notifications/notifications.service';
 
 @Component({
     selector: 'app-root',
@@ -14,11 +14,13 @@ import { ResponsiveService } from './core/services/responsive.service';
 export class AppComponent {
     bMobile = true;
     bVisitor = true;
+    notificationCount = 0;
 
     constructor(updates: SwUpdate, push: SwPush,
         authService: AuthService,
         responsiveService: ResponsiveService,
-        router: Router) 
+        router: Router,
+        notificationsService: NotificationsService) 
     {
         push.messages.subscribe(message => {
             console.info("New push message recieved !");
@@ -34,12 +36,20 @@ export class AppComponent {
         });
 
         router.events.subscribe((event: RouterEvent) => {
-            if (event.url) {
+            if (event instanceof NavigationEnd) {
                 if (event.url.search("visiteur") != -1 || event.url.search("404") != -1) {
                     this.bVisitor = true;
                 } else {
                     this.bVisitor = false;
                 }
+
+                if (event.url.search("notifications") != -1) {
+                    this.notificationCount = 0;
+                }
+
+                notificationsService.getCount().subscribe(result => {
+                    this.notificationCount = Number(result.notifications);
+                });
             }
         });
     }

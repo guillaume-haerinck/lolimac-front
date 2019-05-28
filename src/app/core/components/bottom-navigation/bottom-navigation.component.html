@@ -7,6 +7,8 @@
   <div matRipple routerLink="/notifications" routerLinkActive="nav-active" class="nav-btn">
     <a>
       <mat-icon>notifications</mat-icon>
+      <span *ngIf="notifCount > 0 && notifCount < 10" class="badge">{{ notifCount }}</span>
+      <span *ngIf="notifCount >= 10" class="badge-large">{{ notifCount }}</span>
     </a>
   </div>
   <div matRipple routerLink="/evenements/creation">
