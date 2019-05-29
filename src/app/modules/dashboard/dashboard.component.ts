@@ -53,22 +53,18 @@ export class DashboardComponent implements OnInit {
   }
 
   increaseEventList() {
-    if (this.events.length >= this.m_sizeToGet + this.m_offset) {
-      this.currentState = DashBoardState.Loading;
-      this.m_eventService.getEventList(this.m_offset, this.m_sizeToGet).subscribe(result => {
-        if (isEmpty(result)) {
-          this.currentState = DashBoardState.NoMore;
-        } else {
-          this.events = this.events.concat(result);
-          this.m_offset += this.m_sizeToGet;
-          this.currentState = DashBoardState.Done;
-        }
-      }, error => {
-        this.currentState = DashBoardState.Error;
-      });
-    } else {
-      this.currentState = DashBoardState.NoMore;
-    }
+    this.currentState = DashBoardState.Loading;
+    this.m_eventService.getEventList(this.m_offset, this.m_sizeToGet).subscribe(result => {
+      if (isEmpty(result)) {
+        this.currentState = DashBoardState.NoMore;
+      } else {
+        this.events = this.events.concat(result);
+        this.m_offset += this.m_sizeToGet;
+        this.currentState = DashBoardState.Done;
+      }
+    }, error => {
+      this.currentState = DashBoardState.Error;
+    });
   }
 
 }
