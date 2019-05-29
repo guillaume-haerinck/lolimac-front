@@ -85,6 +85,18 @@ a {
 
 /* -------------------- Common Objects ----------------------- */
 
+.ng-lazy {
+    width: 100%;
+    transition: opacity 1s;
+    opacity: 0;
+    background-color: var(--color-primary);
+    height: 100%;
+}
+
+.ng-lazyloaded {
+    opacity: 1 !important;
+}
+
 .link {
     &:hover {
         cursor: pointer;
