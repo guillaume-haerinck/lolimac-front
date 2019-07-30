@@ -1,0 +1,11 @@
+# VIM files
+*.swp
+
+# Private files
+dbID.php
+configVar.php
+
+# Other stuff
+.tags
+.tags1
+tags
